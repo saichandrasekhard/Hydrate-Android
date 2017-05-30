@@ -1,8 +1,7 @@
 package com.underdog.hydrate.adapter;
 
-import java.util.HashMap;
-
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,8 @@ import android.widget.TextView;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.util.Log;
+
+import java.util.HashMap;
 
 public class SummaryArrayAdapter extends ArrayAdapter<Object> {
 
@@ -80,11 +81,9 @@ public class SummaryArrayAdapter extends ArrayAdapter<Object> {
 		regularity /= 10;
 		textView.setText(String.valueOf((int) regularity));
 		if (regularity < 70) {
-			textView.setTextColor(context.getResources().getColor(
-					android.R.color.holo_red_dark));
+			textView.setTextColor(ContextCompat.getColor(context, R.color.danger));
 		} else if (regularity < 100) {
-			textView.setTextColor(context.getResources().getColor(
-					android.R.color.holo_orange_dark));
+			textView.setTextColor(ContextCompat.getColor(context, R.color.safe));
 		}
 
 		return rowView;

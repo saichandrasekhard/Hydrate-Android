@@ -2,6 +2,7 @@ package com.underdog.hydrate;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -20,7 +21,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.app.AlertDialog;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -237,7 +238,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
      *
      * @param view
      */
-    public void increaseWater(View view) {
+    public void increaseWater(final View view) {
         SharedPreferences sharedPreferences;
         boolean reminderStatus;
         String quantity;
@@ -284,6 +285,26 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                                 String.valueOf(250));
                 break;
         }
+
+//        TranslateAnimation translateAnimation=new TranslateAnimation(0,0,20f,40f);
+//        view.setAnimation(translateAnimation);
+//        translateAnimation.start();
+//        view.getAnimation().setAnimationListener(new Animation.AnimationListener() {
+//            @Override
+//            public void onAnimationStart(Animation animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animation animation) {
+//                view.animate().setDuration(500).translationYBy(20f);
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animation animation) {
+//
+//            }
+//        });
         // check if target is achieved
         targetAchieved = getUtility().isTargetAchieved(
                 (TextView) findViewById(R.id.water_quantity_status),
@@ -944,14 +965,11 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         private void setWaterStatusColor(TextView textView, double consumed,
                                          double target) {
             if (consumed < (target * .75)) {
-                textView.setTextColor(getActivity().getResources().getColor(
-                        android.R.color.holo_red_dark));
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.danger));
             } else if (consumed < target) {
-                textView.setTextColor(getActivity().getResources().getColor(
-                        android.R.color.holo_orange_dark));
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.safe));
             } else {
-                textView.setTextColor(getActivity().getResources().getColor(
-                        android.R.color.holo_green_dark));
+                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.success));
             }
         }
 

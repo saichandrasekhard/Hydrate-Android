@@ -101,7 +101,7 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="mute_reminders">Mute reminders</string>
-    <string name="mute_lunch_dinner">Don\'t remind before 30mins and up to 30 mins after a meal</string>
+    <string name="mute_lunch_dinner">Don\'t remind within 30mins before/after a meal</string>
     <string name="auto_adjust_interval">Adjusted Reminder Interval</string>
     <string name="auto_adjust_target">Adjusted Target</string>
     <string name="notification_sound">Notification Tone</string>

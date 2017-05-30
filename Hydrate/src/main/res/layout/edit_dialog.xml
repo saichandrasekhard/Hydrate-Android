@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:text="250"
-                    android:textColor="@color/blue2"
+                    android:textColor="@color/primary"
                     android:textStyle="bold">
 
                     <requestFocus />

@@ -88,7 +88,7 @@ public class NotificationService extends IntentService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this)
                 .setSmallIcon(R.drawable.ic_stat_notify_glass)
-                .setColor(getResources().getColor(R.color.blue2))
+                .setColor(getResources().getColor(R.color.primary))
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(notificationMessage)
                 .setAutoCancel(true)

@@ -16,7 +16,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="0dp"
         android:text="@string/lastWeek"
-        android:textColor="@color/blue2"
+        android:textColor="@color/primary"
         android:textStyle="bold"
         android:elevation="@dimen/elevate" />
 
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/summary_values_left_margin"
                 android:text="@string/water_status"
-                android:textColor="@color/blue2"
+                android:textColor="@color/primary"
                 android:textStyle="bold" />
         </RelativeLayout>
 
@@ -79,7 +79,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="@dimen/summary_values_left_margin"
                 android:text="@string/water_quantity_status"
-                android:textColor="@color/blue2"
+                android:textColor="@color/primary"
                 android:textStyle="bold" />
 
             <TextView

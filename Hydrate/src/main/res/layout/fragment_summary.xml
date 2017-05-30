@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#F2F2F2"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.underdog.hydrate.SummaryFragment" >
+    tools:context="com.underdog.hydrate.SummaryActivity$SummaryFragment">
 
     <LinearLayout
         android:id="@+id/adLayoutSummary"
@@ -25,7 +25,7 @@
         android:background="@color/white"
         android:gravity="center_horizontal"
         android:text="@string/averageConsumption"
-        android:textColor="@color/blue2"
+        android:textColor="@color/primary"
         android:textSize="@dimen/today_label_size"
         android:textStyle="bold"
         android:elevation="@dimen/elevate" />

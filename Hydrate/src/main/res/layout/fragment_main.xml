@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#F2F2F2"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.underdog.hydrate.HomeScreenFragment"
+    tools:context="com.underdog.hydrate.MainActivity$HomeScreenFragment"
     android:elevation="@dimen/elevate">
 
     <LinearLayout
@@ -195,6 +195,14 @@
                 android:textColor="@android:color/primary_text_light"
                 android:textSize="@dimen/add_water_button_dim"
                 android:visibility="gone" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="Sample"
+                android:background="@drawable/button_drink_water"
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -233,8 +241,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="left"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="0dp"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingEnd="0dp"
                 android:src="@drawable/ic_prev"
                 android:elevation="@dimen/elevate" />
 
@@ -304,7 +312,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/water_status"
-                    android:textColor="@color/blue2"
+                    android:textColor="@color/primary"
                     android:textSize="@dimen/water_status"
                     android:textStyle="bold" />
 
@@ -334,7 +342,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/water_quantity_status"
-                    android:textColor="@android:color/holo_green_dark"
+                    android:textColor="@color/success"
                     android:textSize="@dimen/water_status"
                     android:textStyle="bold" />
 
@@ -355,7 +363,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/water_quantity_status"
-                    android:textColor="@color/blue2"
+                    android:textColor="@color/primary"
                     android:textSize="@dimen/water_status"
                     android:textStyle="bold" />
 

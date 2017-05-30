@@ -37,7 +37,7 @@
         android:gravity="center"
         android:text="8:00"
         android:textSize="@dimen/day_dimen"
-        android:textColor="@color/blue2"
+        android:textColor="@color/primary"
         android:textStyle="bold" />
 
 </GridLayout>
