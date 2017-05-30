@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/blue2</item>
+        <item name="android:colorAccent">@color/blue2</item>
+        <item name="android:navigationBarColor">@color/blue2</item>
+        <item name="android:colorPrimaryDark">@color/blue3</item>
+        <item name="android:textColorSecondary">@color/blue2</item>
+    </style>
+
+    <style name="customAlert" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:colorAccent">@color/blue2</item>
+        <item name="android:colorPrimary">@color/blue2</item>
+        <item name="android:textColor">@color/blue2</item>
+    </style>
+
+    <style name="settingsScreen" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="android:colorPrimary">@color/blue2</item>
+        <item name="android:colorPrimaryDark">@color/blue3</item>
+        <item name="android:navigationBarColor">@color/blue2</item>
+        <item name="android:colorAccent">@color/blue2</item>
+        <item name="android:textColorSecondary">@color/blue2</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
+        <item name="android:background">@color/blue2</item>
+    </style>
+
+    <color name="blue">#045FB4</color>
+    <color name="grey">#F2F2F2</color>
+    <color name="white">#ffff</color>
+    <!--<color name="blue2">#0a8eba</color>-->
+    <color name="blue2">#0a8eba</color>
+    <color name="blue3">#07759a</color>
+
+</resources>

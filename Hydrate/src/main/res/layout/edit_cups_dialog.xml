@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <EditText
+        android:id="@+id/editCupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editCupDialogMetric"
+        android:layout_alignBottom="@+id/editCupDialogMetric"
+        android:layout_centerHorizontal="true"
+        android:text="Sample"
+        android:textColor="@color/blue2"
+        android:textStyle="bold">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/editCupDialogMetric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="45dp"
+        android:layout_toEndOf="@id/editCupText"
+        android:layout_toRightOf="@id/editCupText"
+        android:text="metric" />
+
+    <TextView
+        android:id="@+id/editCupQuantityMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editCupText"
+        android:layout_alignBottom="@+id/editCupText"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/editCupText"
+        android:layout_toStartOf="@+id/editCupText"
+        android:paddingEnd="0dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="0dp"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:text="@string/capacity" />
+
+</RelativeLayout>
