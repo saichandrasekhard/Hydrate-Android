@@ -48,7 +48,7 @@ public class EditCupsDialog extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.customAlert);
         View view = getActivity().getLayoutInflater().inflate(
-                R.layout.edit_cups_dialog, null);
+                R.layout.dialog_edit_cups, null);
 
         // Set values and metric in the view
         textView = (TextView) view.findViewById(R.id.editCupDialogMetric);
@@ -85,7 +85,7 @@ public class EditCupsDialog extends DialogFragment {
                 AlertDialog cupsDialog = (AlertDialog) dialogInterface;
                 editCupText = ((TextView) cupsDialog
                         .findViewById(R.id.editCupText)).getText().toString();
-                if (editCupText == null || editCupText.equals("")) {
+                if (editCupText.equals("")) {
                     Toast.makeText(getActivity(),
                             getActivity().getString(R.string.validQuantity),
                             Toast.LENGTH_SHORT).show();
