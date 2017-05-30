@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\391ad54f1e7525693f1c8cbd7c29924df8c374b7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5002772c87860d2188232ef9a9108f2db32a9034\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\bc988b3a26982e0d23975a59de0aa6cd434be15f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0fc48513474545019d00e504a46831ea05bae306\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\352037ce57ff3eb2224d269b0b16ce2c4dd3ed2f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2bd4a12ea26d353ab212a2c0e78b5e0577f47792\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_52e4a26bf6d192947af419110209133b01297800\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.3.1_1cfa26afb69bfc463de7c8ade588f076532c31dd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\d224587121972805fe2748e129325bf504249e2e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_66caee610325ef86b0dfa458e04cd798a4819c2e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\4dbf665c5098fbcaa784edf992544fb547f4993f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1cf392ba531f38d58a612f8cd6aeab785c00e4d3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\eae01c7ba16c1d55fc0bdf266f8737657579eb10\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8292e5e5857855911fa9f6c04bf86916f1524aa1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\52b1514f82404c4773babc4a583ebee9197b3423\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3015ef97b975cee125b4995f3f1e88d48b900de1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\c0fe8f42f3d84ce20f69037debdc05f7164556d3\output\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.0_cbbf9b7096b9efdc229292cd91d29c08b75aa9eb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\bdc20baa75a127d94813b6ce35dba298e3dbe657\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6e5dbc542f780cf4af5860f447b7ce44cf42ff95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\aa8ab2b9e79cae8f50f9fd3fbe2c9e2c7c749b27\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9758be0dec14cd57b9a540d509c51662b0aebce4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\5887cbd2610111b2b6f9a7ca6b61a7228e76d070\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6331980ad1492a7b3ee6f10a791af2431f5548b0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\c0fe8f42f3d84ce20f69037debdc05f7164556d3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7974fbf8c3198ebd6586cf0ad675264bd2d3bbfa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\455ded3d151f9b580409eccb790cf2918a2de6ac\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2ef3b29a7bcd1cd9d15535853c462cad3c0b0cd3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\0b90a74d1c057d97236748e80ce5ac1f83848ac3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_653182e7987070a5da5cec5cdc2e72a968e0754b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\b504571ab87f14265a9b0a79b1078884ca7dbf3e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_98c4aa09d56ffffecbc7d92d9381d40ea82f960d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\fbc5c40ac11d925cd9caa2dc6998d12bf32279b2\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_9fed5b1f22ac070e140c61d18c225282160165d3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\0be64535ccf81771b372eff216cfdd151e3afc02\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_68a2d35378ea1ab437bc66466fc91a8404c3a7b6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\9384bd59f868869c4f39cc10c5f854756c17303f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_def65ded030ba7540f4041adad423252e2234f4e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\70b4f0bcded33f173bcaa13324d33482c826d3ad\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c2c3e61fda80a36c72f3d7487794dc1b1d48695f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\6e607e88f27e0a476f3cc12aac1035c434d37638\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_758cdfa4e7031f854cce431a384ce877cf706243\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\2881703f74fb8bdc0883c39594ed84bfd0f7f768\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2c6c9c2ced08bbd3deb919b5ecf8cfc89acecb6d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\0d3381d84c440e5659391eefff84c8b71c5bf2af\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ba7c90796f0a6be6e4e40c1538458bd6fa75f835\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\075bd594afffafdfafded3e1028ed24dc873ff38\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_555c4e8df785ec553db21310c170a38e1c7fd968\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\70a8db32b86df32e928d189be4d5a5b6fddb6f60\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1da2830372bd33985ee45671145706fb5507fdb6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\5b45156f9e1fcdfe4056c16ed7b3774f190d805b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1f9477299a537f8375f4becc35df16e3b7cf0ced\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\04cfcd33f60e92d943d7caa2be352f97ac1fad7f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_da59120d693d6cab075d18464e731382cde54f84\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\5fe540bbb5952fa2a6adb2d475a49af4fae08c48\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d4e841dd42c4403fd0492a9fa9f96c15897e8173\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\c3206c2e9c028f212a1483c290436e861506ce6b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0108540e59d6cb718a703815b081283262fe2ee7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\6fbbf4bf34200a92d7a1ac13d5e861898258746a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_792d54e75ee254797a1f680f45fc5e09bc65c5a1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\97c46382d74809ced313b38316666b40f44237d6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5b95659bf6e508fc2c0c86e02a676b2808313208\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\50e6a72db38dccd3c1bf47feeb82b15caa9c9677\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_228f72b9a23de04eadacdbd571d145acdd250d34\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\ef46767415d1f7518b0d78ba8aeba3c8f98fa684\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8facb69e75dd2b4de027cf9ef926d153f91f816a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\533a8149a195a583b3eff4b6773c464671835b3f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a1ed636f6fe49c92f27e6103e922f12330c985ce\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2a0e8f50e1c862a3a402624519b727f572ff5bb1">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\c7b8010ad8651195665b75d42e89cd791e0b65e9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ace32e373ac48a394203f4ed5f406de7ec95e2ac\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_ea2aef7d7f8d74a9aa55280be0f3b28f664121ca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\83aa329e9fb7ff294df271b08d9d873b7d67086a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_547c022bf2165992b485153f3e93ca6bda586a75\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="eef3e7d9aeacd7e75fce66a7035224da1a4455bb">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_f661bb0cfbfecbfc5962c146eff5b6770cfb2737\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\87227b6efa609aba63397853dd8bbd0da3d156e1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_80e78e52b826e291ac2d5a7adbc2604c67b51565\classes.dex" />
+    </item>
+
+</items>
