@@ -65,10 +65,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     AlarmReceiver alarmReceiver;
     private HydrateDAO dao;
     private Utility utility;
-    /**
-     * Root of the layout of this Activity.
-     */
-    private View mLayout;
 
     public Utility getUtility() {
         if (utility == null) {
@@ -101,7 +97,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLayout = findViewById(R.id.main_container);
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -120,7 +115,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         SharedPreferences.Editor editor;
         String ml = this.getString(R.string.milliliter);
 
-        Log.i(tag, "Called");
+        Log.d(tag, "Activity - onStart()");
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -163,7 +158,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 if (getUtility().isBackupAvailable()) {
                     // Show dialog asking to restore
                     RestoreDialog restoreDialog = new RestoreDialog();
-                    restoreDialog.show(getFragmentManager().beginTransaction(),
+                    restoreDialog.show(getFragmentManager(),
                             "Restore dialog");
                 }
             }
@@ -221,7 +216,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             startActivity(intent);
         } else if (id == R.id.instant_mute) {
             InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
-            instantMuteDialog.show(getFragmentManager().beginTransaction(),
+            instantMuteDialog.show(getFragmentManager(),
                     "Instant Mute");
         } else if (id == R.id.rate_hydrate) {
             intent = new Intent(Intent.ACTION_VIEW, Uri
@@ -244,6 +239,14 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         String quantity;
         boolean targetAchieved;
         TargetAchievedDialog targetAchievedDialog;
+
+        view.animate().alpha(0.5f).setDuration(150).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                view.animate().alpha(1f).setDuration(250);
+            }
+        }).start();
+
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -286,25 +289,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 break;
         }
 
-//        TranslateAnimation translateAnimation=new TranslateAnimation(0,0,20f,40f);
-//        view.setAnimation(translateAnimation);
-//        translateAnimation.start();
-//        view.getAnimation().setAnimationListener(new Animation.AnimationListener() {
-//            @Override
-//            public void onAnimationStart(Animation animation) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation animation) {
-//                view.animate().setDuration(500).translationYBy(20f);
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation animation) {
-//
-//            }
-//        });
         // check if target is achieved
         targetAchieved = getUtility().isTargetAchieved(
                 (TextView) findViewById(R.id.water_quantity_status),
@@ -318,7 +302,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         if (targetAchieved) {
             // Show dialog
             targetAchievedDialog = new TargetAchievedDialog();
-            targetAchievedDialog.show(getFragmentManager().beginTransaction(),
+            targetAchievedDialog.show(getFragmentManager(),
                     "targetAchievedFragmentation");
         }
 
@@ -365,7 +349,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             Bundle args = new Bundle();
             args.putInt("code", code);
             requestPermissionDialog.setArguments(args);
-            requestPermissionDialog.show(getFragmentManager().beginTransaction(), "Request Permission");
+            requestPermissionDialog.show(getFragmentManager(), "Request Permission");
         } else {
             Log.i(tag, "No need to display rationale. Asking for permission");
             // Storage permission has not been granted yet. Request it directly.
@@ -391,8 +375,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // storage permission has been granted, preview can be displayed
                 Log.i(tag, "external storage permission has now been granted. Showing preview.");
-//                Snackbar.make(mLayout, R.string.permission_storage_available,
-//                        Snackbar.LENGTH_SHORT).show();
                 Toast.makeText(this, R.string.permission_storage_available, Toast.LENGTH_SHORT).show();
 
                 //Show restore dialog
@@ -407,8 +389,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 }
             } else {
                 Log.i(tag, "external storage permission was NOT granted.");
-//                Snackbar.make(mLayout, ,
-//                        Snackbar.LENGTH_SHORT).show();
                 Toast.makeText(this, R.string.permission_storage_not_granted, Toast.LENGTH_SHORT).show();
 
             }
@@ -438,6 +418,8 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
          */
         private AdView adView;
         private DatePickerDialog datePickerDialog;
+        private TextView dateView;
+        private ListView listView;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -474,16 +456,9 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             Log.i(tag, "On ActivityCreated - " + getActivity().getExternalFilesDir(null));
-            ImageButton previous;
-            ImageButton next;
             String date;
-            final SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    Constants.DATE_FORMAT);
-            final TextView dateView = (TextView) getActivity().findViewById(
+            dateView = (TextView) getActivity().findViewById(
                     R.id.dateView);
-            final ImageButton calendarButton = (ImageButton) getActivity()
-                    .findViewById(R.id.calenderButton);
-
             if (savedInstanceState != null) {
                 date = savedInstanceState.getString(Constants.DATE);
             } else {
@@ -491,6 +466,15 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                         System.currentTimeMillis());
             }
             dateView.setText(date);
+
+            ImageButton previous;
+            ImageButton next;
+            final SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    Constants.DATE_FORMAT);
+            final ImageButton calendarButton = (ImageButton) getActivity()
+                    .findViewById(R.id.calenderButton);
+            listView = (ListView) getActivity().findViewById(R.id.dayLog);
+            final float listViewX = listView.getX();
 
             calendarButton.setOnClickListener(new View.OnClickListener() {
 
@@ -513,8 +497,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                                     String dateText;
                                     TextView dateView = (TextView) getActivity()
                                             .findViewById(R.id.dateView);
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat(
-                                            Constants.DATE_FORMAT);
                                     Calendar calendar = Calendar.getInstance();
                                     calendar.set(datePicker.getYear(),
                                             datePicker.getMonth(),
@@ -550,6 +532,19 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 public void onClick(View v) {
                     long timestamp = 0;
                     String dateText;
+
+                    listView.animate().translationX(listViewX + 1000f).scaleX(0.5f).scaleY(0.5f).setDuration(100).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            listView.animate().translationX(listViewX - 1000f).setDuration(0).withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listView.animate().translationX(listViewX).scaleX(1f).scaleY(1f).setDuration(300);
+                                }
+                            }).start();
+                        }
+                    }).start();
+
                     try {
                         timestamp = dateFormat.parse(
                                 dateView.getText().toString()).getTime();
@@ -572,6 +567,18 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 public void onClick(View v) {
                     long timestamp = 0;
                     String dateText;
+
+                    listView.animate().translationX(listViewX - 1000f).scaleX(0.5f).scaleY(0.5f).setDuration(100).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            listView.animate().translationX(listViewX + 1000f).setDuration(0).withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    listView.animate().translationX(listViewX).scaleX(1f).scaleY(1f).setDuration(300);
+                                }
+                            }).start();
+                        }
+                    }).start();
 
                     try {
                         timestamp = dateFormat.parse(
@@ -634,6 +641,12 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             // Start loading the ad in the background.
             adView.loadAd(adRequest);
 
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            Log.d(tag, "HomeScreenFragment - onStart()");
         }
 
         @Override
@@ -781,8 +794,6 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             Uri uri = HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS;
             String[] selectionArgs = null;
-            TextView dateView = (TextView) getActivity().findViewById(
-                    R.id.dateView);
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     Constants.DATE_FORMAT);
 

@@ -30,12 +30,10 @@
 
     <color name="grey">#F2F2F2</color>
     <color name="white">#ffff</color>
-    <!--<color name="blue2">#0a8eba</color>-->
-    <!--<color name="blue2">#4286f4</color>-->
     <color name="primary">#0e8bd3</color>
-
-    <!--<color name="blue3">#07759a</color>-->
+    <!--<color name="primary">#3684e2</color>-->
     <color name="secondary">#0e8bd3</color>
+    <!--<color name="secondary">#3684e2</color>-->
 
     <color name="success">#74c90d</color>
     <color name="safe">#f78025</color>

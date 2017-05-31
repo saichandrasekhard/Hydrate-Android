@@ -18,20 +18,20 @@
             android:key="@string/key_backup_sd"
             android:summary="@string/to_sd_message"
             android:title="@string/to_sd" />
-        <com.underdog.hydrate.preference.BackupPreference
-            android:key="@string/key_backup_gdrive"
-            android:summary="@string/to_gdrive_message"
-            android:title="@string/to_gdrive" />
+        <!--<com.underdog.hydrate.preference.BackupPreference-->
+        <!--android:key="@string/key_backup_gdrive"-->
+        <!--android:summary="@string/to_gdrive_message"-->
+        <!--android:title="@string/to_gdrive" />-->
     </PreferenceCategory>
     <PreferenceCategory android:title="Restore">
         <com.underdog.hydrate.preference.BackupPreference
             android:key="@string/key_restore_sd"
             android:summary="@string/from_sd_message"
             android:title="@string/from_sd" />
-        <com.underdog.hydrate.preference.BackupPreference
-            android:key="@string/key_restore_gdrive"
-            android:summary="@string/from_gdrive_message"
-            android:title="@string/from_gdrive" />
+        <!--<com.underdog.hydrate.preference.BackupPreference-->
+        <!--android:key="@string/key_restore_gdrive"-->
+        <!--android:summary="@string/from_gdrive_message"-->
+        <!--android:title="@string/from_gdrive" />-->
     </PreferenceCategory>
 
 </PreferenceScreen>

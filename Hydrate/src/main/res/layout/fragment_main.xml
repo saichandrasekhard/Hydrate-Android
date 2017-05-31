@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2"
+    android:elevation="@dimen/elevate"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.underdog.hydrate.MainActivity$HomeScreenFragment"
-    android:elevation="@dimen/elevate">
+    tools:context="com.underdog.hydrate.MainActivity$HomeScreenFragment">
 
     <LinearLayout
         android:id="@+id/mainLinearHello"
@@ -15,13 +15,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingRight="0dp"
-        android:paddingEnd="0dp"
         android:elevation="@dimen/elevate"
-        android:focusable="false">
+        android:focusable="false"
+        android:orientation="vertical"
+        android:paddingEnd="0dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="0dp"
+        android:paddingStart="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/hello_user"
@@ -36,146 +36,155 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainLinearHello"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_centerHorizontal="true"
-        android:scrollbars="none" >
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/addSub"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="13dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/addWater1Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/add_water1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/ic_menu_home_glass_1"
+                    android:clickable="true"
                     android:onClick="increaseWater"
                     android:textAlignment="center"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/add_water_button_dim"
-                    android:clickable="true" />
+                    android:textSize="@dimen/add_water_button_dim" />
 
                 <TextView
                     android:id="@+id/addWaterText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sample"
-                    android:elevation="@dimen/elevate" />
+                    android:elevation="@dimen/elevate"
+                    android:text="Sample" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/addWater2Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/add_water2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/ic_menu_home_glass_2"
+                    android:clickable="true"
                     android:onClick="increaseWater"
                     android:textAlignment="center"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/add_water_button_dim"
-                    android:clickable="true" />
+                    android:textSize="@dimen/add_water_button_dim" />
 
                 <TextView
                     android:id="@+id/addWaterText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sample"
-                    android:elevation="@dimen/elevate" />
+                    android:elevation="@dimen/elevate"
+                    android:text="Sample" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/addWater3Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/add_water3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/ic_menu_home_glass_3"
+                    android:clickable="true"
                     android:onClick="increaseWater"
                     android:textAlignment="center"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/add_water_button_dim"
-                    android:clickable="true" />
+                    android:textSize="@dimen/add_water_button_dim" />
 
                 <TextView
                     android:id="@+id/addWaterText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sample"
-                    android:elevation="@dimen/elevate" />
+                    android:elevation="@dimen/elevate"
+                    android:text="Sample" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/addWater4Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="bottom"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/add_water4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/ic_menu_home_glass_4"
+                    android:clickable="true"
                     android:onClick="increaseWater"
                     android:textAlignment="center"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/add_water_button_dim"
-                    android:clickable="true" />
+                    android:textSize="@dimen/add_water_button_dim" />
 
                 <TextView
                     android:id="@+id/addWaterText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sample"
-                    android:elevation="@dimen/elevate" />
+                    android:elevation="@dimen/elevate"
+                    android:text="Sample" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/addWater5Layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/add_water5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_menu_home_glass_5"
+                    android:layout_width="65dp"
+                    android:layout_height="62dp"
+                    android:background="@drawable/ic_menu_home_glass_6"
+                    android:clickable="true"
                     android:onClick="increaseWater"
                     android:textAlignment="center"
                     android:textColor="@android:color/primary_text_light"
-                    android:textSize="@dimen/add_water_button_dim"
-                    android:clickable="true" />
+
+                    android:textSize="@dimen/add_water_button_dim" />
 
                 <TextView
                     android:id="@+id/addWaterText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sample"
-                    android:elevation="@dimen/elevate" />
+                    android:elevation="@dimen/elevate"
+                    android:text="Sample" />
             </LinearLayout>
 
             <ImageButton
@@ -199,8 +208,8 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="Sample"
                 android:background="@drawable/button_drink_water"
+                android:text="Sample"
                 android:textColor="@color/white"
                 android:visibility="gone" />
         </LinearLayout>
@@ -212,8 +221,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/dayEvents"
@@ -222,7 +230,7 @@
         android:layout_above="@id/adLayoutMain"
         android:layout_alignParentRight="true"
         android:layout_below="@id/addSubScroll"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/dateViewLayout"
@@ -231,8 +239,8 @@
             android:layout_marginBottom="@dimen/list_view_margin"
             android:layout_marginTop="@dimen/list_view_margin"
             android:background="@color/white"
-            android:orientation="horizontal"
-            android:elevation="@dimen/elevate">
+            android:elevation="@dimen/elevate"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/prev"
@@ -241,10 +249,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="left"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:elevation="@dimen/elevate"
                 android:paddingEnd="0dp"
-                android:src="@drawable/ic_prev"
-                android:elevation="@dimen/elevate" />
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_prev" />
 
             <ImageButton
                 android:id="@+id/next"
@@ -255,23 +263,23 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
+                android:elevation="@dimen/elevate"
                 android:paddingLeft="0dp"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingStart="0dp"
-                android:src="@drawable/ic_next"
-                android:elevation="@dimen/elevate" />
+                android:src="@drawable/ic_next" />
 
             <RelativeLayout
                 android:id="@+id/calender_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
+                android:layout_centerVertical="true">
 
                 <ImageButton
                     android:id="@+id/calenderButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -295,7 +303,7 @@
             android:id="@+id/mainRelativeWater"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/water_status_layout"
@@ -305,7 +313,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="61dp"
                 android:gravity="left"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/water_status"
@@ -335,7 +343,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="50dp"
                 android:gravity="left"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/water_quantity_status"
@@ -385,17 +393,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_view_margin"
             android:background="@color/white"
+            android:elevation="@dimen/elevate"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="0dp"
-            android:text="Drink Log"
-            android:elevation="@dimen/elevate" />
+            android:text="Drink Log" />
 
         <ListView
             android:id="@+id/dayLog"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/mainRelativeWater" >
-        </ListView>
+            android:layout_below="@id/mainRelativeWater"></ListView>
     </LinearLayout>
 
 </RelativeLayout>
