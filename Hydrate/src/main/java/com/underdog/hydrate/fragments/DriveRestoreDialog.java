@@ -54,6 +54,7 @@ public class DriveRestoreDialog extends DialogFragment implements
     private int filesRestored = 0;
     private Utility utility;
     private GoogleApiClient googleApiClient;
+    private boolean mClearDefaultAccount = false;
 
     public Utility getUtility() {
         if (utility == null) {
@@ -69,6 +70,9 @@ public class DriveRestoreDialog extends DialogFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        Log.d(TAG, "onResume()");
+
         filesRestored = 0;
         if (googleApiClient == null) {
             // Create the API client and bind it to an instance variable.
@@ -91,6 +95,8 @@ public class DriveRestoreDialog extends DialogFragment implements
             googleApiClient.disconnect();
         }
         super.onPause();
+
+//        getFragmentManager().beginTransaction().remove(this).commit();
     }
 
     @Override
@@ -105,6 +111,7 @@ public class DriveRestoreDialog extends DialogFragment implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.d(TAG, "onConnectionFailed");
         if (connectionResult.hasResolution()) {
             try {
                 connectionResult.startResolutionForResult(getActivity(),
@@ -122,6 +129,11 @@ public class DriveRestoreDialog extends DialogFragment implements
     @Override
     public void onConnected(Bundle arg0) {
         Log.d(TAG, "GoogleApiClient connected");
+        if (mClearDefaultAccount) {
+            mClearDefaultAccount = false;
+            googleApiClient.clearDefaultAccountAndReconnect();
+            return;
+        }
         DriveFolder driveFolder = Drive.DriveApi
                 .getAppFolder(getGoogleApiClient());
         Query query = new Query.Builder()
@@ -248,8 +260,9 @@ public class DriveRestoreDialog extends DialogFragment implements
 
         @Override
         protected Boolean doInBackgroundConnected(DriveId... params) {
-            DriveFile file = Drive.DriveApi.getFile(getGoogleApiClient(),
-                    params[0]);
+//            DriveFile file = Drive.DriveApi.getFile(getGoogleApiClient(),
+//                    params[0]);
+            DriveFile file = params[0].asDriveFile();
             DriveApi.DriveContentsResult contentsResult = file.open(
                     getGoogleApiClient(), DriveFile.MODE_READ_ONLY, null)
                     .await();

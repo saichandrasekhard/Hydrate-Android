@@ -141,6 +141,7 @@ public class DriveBackupDialog extends DialogFragment implements
     private int filesBackedUp = 0;
     private Utility utility;
     private GoogleApiClient googleApiClient;
+    private boolean mClearDefaultAccount = false;
 
     public Utility getUtility() {
         if (utility == null) {
@@ -156,6 +157,9 @@ public class DriveBackupDialog extends DialogFragment implements
     @Override
     public void onResume() {
         super.onResume();
+
+        Log.d(TAG, "onResume()");
+
         filesBackedUp = 0;
         if (googleApiClient == null) {
             // Create the API client and bind it to an instance variable.
@@ -178,11 +182,12 @@ public class DriveBackupDialog extends DialogFragment implements
             googleApiClient.disconnect();
         }
         super.onPause();
+        //getFragmentManager().beginTransaction().remove(this).commit();
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new Builder(getActivity(),R.style.customAlert);
+        AlertDialog.Builder builder = new Builder(getActivity(), R.style.customAlert);
         View view = getActivity().getLayoutInflater().inflate(
                 R.layout.progress_layout, null);
         builder.setView(view);
@@ -192,6 +197,11 @@ public class DriveBackupDialog extends DialogFragment implements
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.d(TAG, "GoogleApiClient connected");
+        if (mClearDefaultAccount) {
+            mClearDefaultAccount = false;
+            googleApiClient.clearDefaultAccountAndReconnect();
+            return;
+        }
         DriveFolder driveFolder = Drive.DriveApi
                 .getAppFolder(getGoogleApiClient());
         Query query = new Query.Builder()
@@ -219,8 +229,7 @@ public class DriveBackupDialog extends DialogFragment implements
                                             .iterator();
                                     Metadata metadata = iterator.next();
                                     driveId = metadata.getDriveId();
-                                    DriveFile file = Drive.DriveApi.getFile(
-                                            getGoogleApiClient(), driveId);
+                                    DriveFile file = driveId.asDriveFile();
                                     file.open(getGoogleApiClient(),
                                             DriveFile.MODE_WRITE_ONLY, null);
                                     new EditContentsAsyncTask(getActivity(),
@@ -261,8 +270,7 @@ public class DriveBackupDialog extends DialogFragment implements
                                             .iterator();
                                     Metadata metadata = iterator.next();
                                     driveId = metadata.getDriveId();
-                                    DriveFile file = Drive.DriveApi.getFile(
-                                            getGoogleApiClient(), driveId);
+                                    DriveFile file = driveId.asDriveFile();
                                     file.open(getGoogleApiClient(),
                                             DriveFile.MODE_WRITE_ONLY, null);
                                     new EditContentsAsyncTask(getActivity(),
