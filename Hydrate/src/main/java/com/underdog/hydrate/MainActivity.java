@@ -136,6 +136,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         }
 
         if (!preferences.contains(Constants.FIRST_RUN)) {
+            //Means first run
             editor = preferences.edit();
 
             // Make first run as false

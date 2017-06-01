@@ -11,6 +11,9 @@ import com.underdog.hydrate.R;
 import com.underdog.hydrate.util.Log;
 import com.underdog.hydrate.util.Utility;
 
+import java.util.List;
+import java.util.Map;
+
 public class HydrateDAO {
     private Context context;
 
@@ -199,5 +202,12 @@ public class HydrateDAO {
         targetCursor.moveToFirst();
         target = targetCursor.getDouble(0);
         return target;
+    }
+
+    public List<Map<String, String>> getTargetStatus(int noOfDays) {
+        List<Map<String, String>> targets = null;
+
+
+        return targets;
     }
 }

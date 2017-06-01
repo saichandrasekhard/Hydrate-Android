@@ -6,16 +6,16 @@
 
 
     <!-- Normal permissions -->
-    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- Normal permissions -->
     <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
 
     <!-- Dangerous permissions -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Dangerous permissions -->
 
     <supports-screens android:xlargeScreens="false" />
@@ -136,7 +136,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.underdog.hydrate.MainActivity" />
         </activity>
-        <activity android:name=".BlankShareActivity"></activity>
+        <activity android:name=".BlankShareActivity" />
 
         <provider
             android:name=".database.HydrateContentProvider"
@@ -145,27 +145,28 @@
 
         <receiver
             android:name=".receiver.AlarmReceiver"
-            android:enabled="true"></receiver>
+            android:enabled="true" />
         <receiver
             android:name=".receiver.BootReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.REBOOT" />
             </intent-filter>
         </receiver>
 
         <service
             android:name=".service.SchedulerService"
-            android:enabled="true"></service>
+            android:enabled="true" />
         <service
             android:name=".service.NotificationActionService"
-            android:enabled="true"></service>
+            android:enabled="true" />
         <service
             android:name=".service.NotificationService"
-            android:enabled="true"></service>
+            android:enabled="true" />
         <service
             android:name=".service.OtherNotificationService"
-            android:enabled="true"></service>
+            android:enabled="true" />
 
         <activity
             android:name=".DndActivity"
