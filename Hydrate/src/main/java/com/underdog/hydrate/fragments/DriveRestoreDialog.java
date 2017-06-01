@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
@@ -95,13 +95,11 @@ public class DriveRestoreDialog extends DialogFragment implements
             googleApiClient.disconnect();
         }
         super.onPause();
-
-//        getFragmentManager().beginTransaction().remove(this).commit();
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new Builder(getActivity(),R.style.customAlert);
+        AlertDialog.Builder builder = new Builder(getActivity(), R.style.customAlert);
         View view = getActivity().getLayoutInflater().inflate(
                 R.layout.progress_layout, null);
         builder.setView(view);
@@ -120,8 +118,10 @@ public class DriveRestoreDialog extends DialogFragment implements
                 Log.e(TAG, "Exception while starting resolution activity", e);
             }
         } else {
-            GooglePlayServicesUtil.getErrorDialog(
-                    connectionResult.getErrorCode(), getActivity(), 0).show();
+            GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+            apiAvailability.getErrorDialog(getActivity(), connectionResult.getErrorCode(), 0).show();
+//            GooglePlayServicesUtil.getErrorDialog(
+//                    connectionResult.getErrorCode(), getActivity(), 0).show();
             this.dismiss();
         }
     }
