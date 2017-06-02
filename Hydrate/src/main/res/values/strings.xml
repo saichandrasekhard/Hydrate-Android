@@ -232,7 +232,7 @@
     <string name="title_activity_summary">Trends</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_edit_cups">Edit Cup Capacities</string>
-    <string name="title_activity_backup">Backup And Restore</string>
+    <string name="title_activity_backup">Backup &amp; Restore</string>
     <string name="title_activity_drive">DriveActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_dnd">Do Not Disturb</string>
@@ -251,5 +251,9 @@
     <!-- Default values independent of language -->
     <string name="default_instant_mute">0</string>
     <string name="version_name">1.4.3</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

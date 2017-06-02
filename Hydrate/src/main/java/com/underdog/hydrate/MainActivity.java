@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,14 +23,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
@@ -60,7 +64,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String tag = "MainActivity";
     AlarmReceiver alarmReceiver;
@@ -97,13 +102,29 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_container, new HomeScreenFragment())
-                    .commit();
-        }
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, new HomeScreenFragment()).commit();
     }
 
     protected void onStart() {
@@ -167,40 +188,62 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
             getAlarmReceiver().resetAlarms(this.getApplicationContext());
 
-        } /*else if (Constants.googlePlay) {
-            // Monitor launch times and interval from installation
-            RateThisApp.onStart(this);
-            // If the criteria is satisfied, "Rate this app" dialog will be
-            // shown
-            RateThisApp.showRateDialogIfNeeded(this);
-        }*/
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Log.i(tag, "Settings button clicked");
-            intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.summary) {
-            Log.i(tag, "Summary menu button clicked");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Intent intent = null;
+        if (id == R.id.nav_trends) {
+            // Handle the camera action
             intent = new Intent(this, SummaryActivity.class);
             startActivity(intent);
-        } else if (id == R.id.backup) {
+        } else if (id == R.id.nav_silent_mode) {
+            InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
+            instantMuteDialog.show(getSupportFragmentManager(), "Instant Mute");
+        } else if (id == R.id.nav_edit_cups) {
+            intent = new Intent(this, EditCupsActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_backup) {
             //Ask for write external permission
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -213,22 +256,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 intent = new Intent(this, BackupActivity.class);
                 startActivity(intent);
             }
-        } else if (id == R.id.customizeCups) {
-            intent = new Intent(this, EditCupsActivity.class);
+        } else if (id == R.id.nav_settings) {
+            intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.instant_mute) {
-            InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
-            instantMuteDialog.show(getSupportFragmentManager(),
-                    "Instant Mute");
-        } else if (id == R.id.rate_hydrate) {
-            intent = new Intent(Intent.ACTION_VIEW, Uri
-                    .parse("https://play.google.com/store/apps/details?id="
-                            + getPackageName()));
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+        } else if (id == R.id.nav_share) {
 
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        return true;
+    }
 
     /**
      * Increase the count of water based on button click
@@ -347,7 +385,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             Log.i(tag,
                     "Displaying storage permission rationale to provide additional context.");
 
-            RequestPermissionDialog requestPermissionDialog = new RequestPermissionDialog();
+            MainActivity.RequestPermissionDialog requestPermissionDialog = new MainActivity.RequestPermissionDialog();
             Bundle args = new Bundle();
             args.putInt("code", code);
             requestPermissionDialog.setArguments(args);
@@ -689,9 +727,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
          */
         private void restartLoaders() {
             getLoaderManager().restartLoader(LIST_VIEW_LOADER_ID, null,
-                    HomeScreenFragment.this);
+                    MainActivity.HomeScreenFragment.this);
             getLoaderManager().restartLoader(DRINK_SUMMARY_LOADER_ID, null,
-                    HomeScreenFragment.this);
+                    MainActivity.HomeScreenFragment.this);
         }
 
         /**
@@ -755,7 +793,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             listView.setAdapter(cursorAdapter);
 
             // Set listView dialog
-            listView.setOnItemClickListener(new OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
@@ -1070,5 +1108,4 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             return builder.create();
         }
     }
-
 }
