@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Key strings.Not to be used in views for display -->
+    <string name="key_reminders_status">Reminders</string>
+    <string name="key_reminder_start_time">Reminder start time</string>
+    <string name="key_reminder_end_time">Reminder end time</string>
+    <string name="key_reminder_interval">Reminder Interval(in mins)</string>
+    <string name="key_reminder_snooze_interval">Reminder snooze Interval(in mins)</string>
+    <string name="key_glass_quantity">Default Cup Quantity</string>
+    <string name="key_user_name">User Name</string>
+    <string name="key_metric">Unit of measurement</string>
+    <string name="key_target">Daily target quantity</string>
+    <string name="key_backup_sd">To sd card</string>
+    <string name="key_restore_sd">From sd card</string>
+    <string name="key_backup_gdrive">To Google Drive</string>
+    <string name="key_restore_gdrive">From Google Drive</string>
+    <string name="key_clear_db">clear database</string>
+    <string name="key_auto_backup">Auto backup</string>
+    <string name="key_feedback">Feedback</string>
+    <string name="key_share_hydrate">share hydrate</string>
+    <string name="key_bugreport">Bug report</string>
+    <string name="key_instant_mute">Instant mute</string>
+    <string name="key_lunch">lunch</string>
+    <string name="key_dinner">dinner</string>
+    <string name="key_lunch_dinner">Lunch and Dinner</string>
+    <string name="key_mute_lunch_dinner">Mute during Lunch and Dinner</string>
+    <string name="key_notification_sound">Notification Sound</string>
+
+    <!-- Key strings.Not to be used in views for display -->
+
+
+
+
+</resources>

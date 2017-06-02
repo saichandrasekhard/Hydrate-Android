@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.underdog.hydrate.preference.BackupPreference
+        android:key="@string/key_clear_db"
+        android:summary="@string/clear_db_summary"
+        android:title="@string/clear_db" />
+
+    <PreferenceCategory android:title="Backup">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_auto_backup"
+            android:summaryOff="@string/auto_backup_summary_off"
+            android:summaryOn="@string/auto_backup_summary_on"
+            android:title="@string/auto_backup_title" />
+
+        <com.underdog.hydrate.preference.BackupPreference
+            android:key="@string/key_backup_sd"
+            android:summary="@string/to_sd_message"
+            android:title="@string/to_sd" />
+        <com.underdog.hydrate.preference.BackupPreference
+            android:key="@string/key_backup_gdrive"
+            android:summary="@string/to_gdrive_message"
+            android:title="@string/to_gdrive" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Restore">
+        <com.underdog.hydrate.preference.BackupPreference
+            android:key="@string/key_restore_sd"
+            android:summary="@string/from_sd_message"
+            android:title="@string/from_sd" />
+        <com.underdog.hydrate.preference.BackupPreference
+            android:key="@string/key_restore_gdrive"
+            android:summary="@string/from_gdrive_message"
+            android:title="@string/from_gdrive" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

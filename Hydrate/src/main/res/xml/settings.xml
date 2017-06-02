@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Reminders">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:disableDependentsState="false"
+            android:key="@string/key_reminders_status"
+            android:summaryOff="@string/reminders_disabled"
+            android:summaryOn="@string/reminders_enabled"
+            android:title="@string/reminders_status" />
+
+        <com.underdog.hydrate.preference.TimePreference
+            android:enabled="false"
+            android:key="@string/key_reminder_start_time"
+            android:title="@string/reminder_start_time" />
+        <com.underdog.hydrate.preference.TimePreference
+            android:enabled="false"
+            android:key="@string/key_reminder_end_time"
+            android:title="@string/reminder_end_time" />
+        <PreferenceScreen
+            android:dependency="@string/key_reminders_status"
+            android:key="@string/key_lunch_dinner"
+            android:summary="@string/mute_lunch_dinner"
+            android:title="@string/lunch_dinner">
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/key_mute_lunch_dinner"
+                android:summary="@string/mute_lunch_dinner"
+                android:title="@string/mute_reminders" />
+
+            <com.underdog.hydrate.preference.TimePreference
+                android:dependency="@string/key_reminders_status"
+                android:enabled="true"
+                android:key="@string/key_lunch"
+                android:title="@string/lunch" />
+            <com.underdog.hydrate.preference.TimePreference
+                android:dependency="@string/key_reminders_status"
+                android:enabled="true"
+                android:key="@string/key_dinner"
+                android:title="@string/dinner" />
+        </PreferenceScreen>
+        <com.underdog.hydrate.preference.TimePreference
+            android:enabled="false"
+            android:key="@string/key_reminder_interval"
+            android:title="@string/reminder_interval" />
+
+        <com.underdog.hydrate.preference.SummaryListPreference
+            android:defaultValue="15"
+            android:enabled="false"
+            android:entries="@array/snooze_options"
+            android:entryValues="@array/snooze_options"
+            android:key="@string/key_reminder_snooze_interval"
+            android:summary="15"
+            android:title="@string/reminder_snooze_interval" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Quantity and Measurement">
+        <com.underdog.hydrate.preference.SummaryListPreference
+            android:defaultValue="@string/milliliter"
+            android:entries="@array/metric_entries"
+            android:entryValues="@array/metric_values"
+            android:key="@string/key_metric"
+            android:summary="Milliliter"
+            android:title="@string/metric" />
+        <com.underdog.hydrate.preference.TargetQuantityEditTextPreference
+            android:defaultValue="@string/defaultTarget"
+            android:key="@string/key_target"
+            android:title="@string/targetQuantityTitleMl" />
+        <com.underdog.hydrate.preference.CupQuantityPreference
+            android:defaultValue="@string/default_glass_ml"
+            android:entries="@array/glass_options_ml"
+            android:entryValues="@array/glass_options_ml"
+            android:key="@string/key_glass_quantity"
+            android:summary="@string/default_glass_ml"
+            android:title="@string/glass_quantity" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Other">
+        <com.underdog.hydrate.preference.SummaryEditTextPreference
+            android:defaultValue="@string/user_name_default"
+            android:key="@string/key_user_name"
+            android:summary="@string/user_name_default"
+            android:title="@string/user_name" />
+        <com.underdog.hydrate.preference.NotificationSoundPreference
+            android:defaultValue="@string/default_notification_sound"
+            android:key="@string/key_notification_sound"
+            android:ringtoneType="notification"
+            android:showSilent="false"
+            android:summary="Sample"
+            android:title="@string/notification_sound" />
+    </PreferenceCategory>
+    <PreferenceScreen android:title="@string/about">
+        <com.underdog.hydrate.preference.RateUsPreference
+            android:summary="@string/give_5"
+            android:title="@string/rate_us" />
+        <com.underdog.hydrate.preference.SharePreference
+            android:summary="@string/share_hydrate_message"
+            android:title="@string/share_hydrate" />
+
+        <com.underdog.hydrate.preference.FeedBackAndBugReportPreference
+            android:key="@string/key_feedback"
+            android:summary="@string/feedback_message"
+            android:title="@string/feedback" />
+        <com.underdog.hydrate.preference.FeedBackAndBugReportPreference
+            android:key="@string/key_bugreport"
+            android:summary="@string/bugreport_message"
+            android:title="@string/bugreport" />
+
+        <Preference
+            android:summary="@string/version_name"
+            android:title="@string/version" />
+        <com.underdog.hydrate.preference.DeveloperPreference
+            android:summary="@string/developer_name"
+            android:title="@string/developer" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

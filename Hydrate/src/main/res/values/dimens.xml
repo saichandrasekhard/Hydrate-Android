@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_view_margin">15dp</dimen>
+    <dimen name="hello_user_label_size">20sp</dimen>
+    <dimen name="today_label_size">20sp</dimen>
+    <dimen name="add_water_button_dim">40sp</dimen>
+    <dimen name="water_status">20sp</dimen>
+    <dimen name="water_unit">15sp</dimen>
+    <dimen name="day_dimen">17dp</dimen>
+    <dimen name="reminder_label_size">20sp</dimen>
+    <dimen name="summary_values_left_margin">245dp</dimen>
+    <dimen name="drink_summary_horizontal_dim_units">3dp</dimen>
+    <dimen name="water_status_layout_padding_horizontal">10dp</dimen>
+    <dimen name="water_status_layout_padding_vertical">5dp</dimen>
+    <dimen name="elevate">1dp</dimen>
+
+</resources>
