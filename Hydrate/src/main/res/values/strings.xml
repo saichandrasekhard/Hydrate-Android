@@ -89,6 +89,7 @@
     <string name="give_5">please give 5 stars</string>
     <string name="share_hydrate">Share Hydrate</string>
     <string name="share_hydrate_message">Share hydrate with your friends</string>
+    <string name="communicate">Communicate</string>
     <string name="feedback">Feedback</string>
     <string name="feedback_message">feature request/suggestions on Hydrate via email</string>
     <string name="bugreport">Bug report</string>

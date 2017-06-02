@@ -4,7 +4,7 @@
     <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_trends"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_graph"
             android:title="@string/title_activity_summary" />
         <item
             android:id="@+id/nav_silent_mode"
@@ -12,28 +12,32 @@
             android:title="@string/instant_mute" />
         <item
             android:id="@+id/nav_edit_cups"
-            android:icon="@drawable/ic_action_edit"
+            android:icon="@drawable/ic_menu_edit"
             android:title="@string/customize_cups_title" />
         <item
             android:id="@+id/nav_backup"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_backup"
             android:title="@string/title_activity_backup" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_settings"
             android:title="@string/title_activity_settings" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
+            <item
+                android:id="@+id/nav_love"
+                android:icon="@drawable/ic_menu_love"
+                android:title="@string/rate_us" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share_hydrate" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/feedback" />
         </menu>
     </item>
 

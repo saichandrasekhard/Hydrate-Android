@@ -227,9 +227,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Intent intent = null;
@@ -259,12 +256,18 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_love) {
+            intent = new Intent(Intent.ACTION_VIEW, Uri
+                    .parse("https://play.google.com/store/apps/details?id="
+                            + getPackageName()));
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
-
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
