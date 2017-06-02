@@ -1,14 +1,10 @@
 package com.underdog.hydrate.fragments;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +16,10 @@ import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Dialog Fragment that pops up when user clicks on item in the all events list

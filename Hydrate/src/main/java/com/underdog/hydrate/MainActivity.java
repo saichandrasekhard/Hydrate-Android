@@ -1,18 +1,13 @@
 package com.underdog.hydrate;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.app.NotificationManager;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -21,7 +16,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,7 +60,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String tag = "MainActivity";
     AlarmReceiver alarmReceiver;
@@ -99,7 +100,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_container, new HomeScreenFragment())
                     .commit();
         }
@@ -159,7 +160,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 if (getUtility().isBackupAvailable()) {
                     // Show dialog asking to restore
                     RestoreDialog restoreDialog = new RestoreDialog();
-                    restoreDialog.show(getFragmentManager(),
+                    restoreDialog.show(getSupportFragmentManager(),
                             "Restore dialog");
                 }
             }
@@ -217,7 +218,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             startActivity(intent);
         } else if (id == R.id.instant_mute) {
             InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
-            instantMuteDialog.show(getFragmentManager(),
+            instantMuteDialog.show(getSupportFragmentManager(),
                     "Instant Mute");
         } else if (id == R.id.rate_hydrate) {
             intent = new Intent(Intent.ACTION_VIEW, Uri
@@ -303,7 +304,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         if (targetAchieved) {
             // Show dialog
             targetAchievedDialog = new TargetAchievedDialog();
-            targetAchievedDialog.show(getFragmentManager(),
+            targetAchievedDialog.show(getSupportFragmentManager(),
                     "targetAchievedFragmentation");
         }
 
@@ -382,7 +383,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                 if (requestCode == Constants.REQUEST_WRITE_EXTERNAL_STARTUP && getUtility().isBackupAvailable()) {
                     // Show dialog asking to restore
                     RestoreDialog restoreDialog = new RestoreDialog();
-                    restoreDialog.show(getFragmentManager().beginTransaction(),
+                    restoreDialog.show(getSupportFragmentManager(),
                             "Restore dialog");
                 } else if (requestCode == Constants.REQUEST_WRITE_EXTERNAL_OVERFLOW) {
                     Intent intent = new Intent(this, BackupActivity.class);
@@ -404,7 +405,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
      * @author Sekhar
      */
     public static class HomeScreenFragment extends Fragment implements
-            LoaderCallbacks<Cursor> {
+            LoaderManager.LoaderCallbacks<Cursor> {
 
         // Loader for List View loader
         private static final int LIST_VIEW_LOADER_ID = 1;
@@ -702,6 +703,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             int[] to = {R.id._id, R.id.quantityConsumed, R.id.time};
 
             MainActivity activity = (MainActivity) getActivity();
+            final FragmentManager fragmentManager = activity.getSupportFragmentManager();
 
             listView = (ListView) activity.findViewById(R.id.dayLog);
             cursorAdapter = new SimpleCursorAdapter(activity,
@@ -785,7 +787,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
                     ListViewEditDialog dialogFragment = new ListViewEditDialog();
                     dialogFragment.setArguments(inputExtras);
                     dialogFragment.show(
-                            getFragmentManager().beginTransaction(),
+                            fragmentManager,
                             "allEventsEditDialog");
                 }
             });

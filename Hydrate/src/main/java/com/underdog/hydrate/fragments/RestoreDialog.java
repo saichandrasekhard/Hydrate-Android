@@ -1,16 +1,16 @@
 package com.underdog.hydrate.fragments;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.receiver.AlarmReceiver;
 import com.underdog.hydrate.util.BackupAndRestore;
-
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.os.Bundle;
 
 public class RestoreDialog extends DialogFragment {
 

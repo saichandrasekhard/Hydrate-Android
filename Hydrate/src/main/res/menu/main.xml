@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.underdog.hydrate.MainActivity" >
 
@@ -6,35 +7,35 @@
         android:id="@+id/instant_mute"
         android:icon="@drawable/ic_action_bell"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:title="@string/instant_mute"/>
     <item
         android:id="@+id/customizeCups"
         android:icon="@drawable/ic_action_edit"
         android:orderInCategory="100"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:title="@string/customize_cups_title">
     </item>
     <item
         android:id="@+id/summary"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/title_activity_summary"/>
     <item
         android:id="@+id/backup"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/backup"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/title_activity_settings"/>
 
     <item
         android:id="@+id/rate_hydrate"
         android:orderInCategory="100"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/rate_us"/>
 
 </menu>

@@ -2,18 +2,17 @@ package com.underdog.hydrate.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.underdog.hydrate.R;
@@ -82,7 +81,7 @@ public class TargetQuantityEditDialog extends DialogFragment {
                             args.putIntegerArrayList(Constants.DAYS_SELECTED,
                                     daysSelected);
                             FragmentManager fragmentManager = getActivity()
-                                    .getFragmentManager();
+                                    .getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager
                                     .beginTransaction();
                             fragmentTransaction.remove(fragmentManager
