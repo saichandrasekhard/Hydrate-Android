@@ -250,6 +250,6 @@
 
     <!-- Default values independent of language -->
     <string name="default_instant_mute">0</string>
-    <string name="version_name">1.4.3</string>
+    <string name="version_name">1.5</string>
 
 </resources>
