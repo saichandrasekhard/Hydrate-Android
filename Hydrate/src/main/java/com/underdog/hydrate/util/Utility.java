@@ -3,6 +3,7 @@ package com.underdog.hydrate.util;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
@@ -220,5 +221,15 @@ public class Utility {
         } catch (android.content.ActivityNotFoundException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void launchFeedbackActivity(Context context, String subject) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                Uri.fromParts("mailto", Constants.DEV_EMAIL, null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(
+                Intent.createChooser(emailIntent, context
+                        .getString(R.string.select_app)));
     }
 }

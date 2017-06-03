@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -198,9 +199,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -252,7 +253,7 @@ public class MainActivity extends AppCompatActivity
                 } else if (id == R.id.nav_share) {
                     Utility.getInstance().launchShareActivity(getApplicationContext());
                 } else if (id == R.id.nav_send) {
-
+                    Utility.getInstance().launchFeedbackActivity(getApplicationContext(), getResources().getString(R.string.key_feedback));
                 }
             }
         }, 200);
@@ -278,6 +279,9 @@ public class MainActivity extends AppCompatActivity
                 view.animate().alpha(1f).setDuration(250);
             }
         }).start();
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.waterdrop);
+        mediaPlayer.start();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
