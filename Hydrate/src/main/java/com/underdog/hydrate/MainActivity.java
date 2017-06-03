@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -69,15 +70,6 @@ public class MainActivity extends AppCompatActivity
 
     private static final String tag = "MainActivity";
     AlarmReceiver alarmReceiver;
-    private HydrateDAO dao;
-    private Utility utility;
-
-    public Utility getUtility() {
-        if (utility == null) {
-            utility = Utility.getInstance();
-        }
-        return utility;
-    }
 
     /**
      * @return the alarmReceiver
@@ -87,16 +79,6 @@ public class MainActivity extends AppCompatActivity
             alarmReceiver = new AlarmReceiver();
         }
         return alarmReceiver;
-    }
-
-    /**
-     * @return the dao
-     */
-    public HydrateDAO getDao() {
-        if (dao == null) {
-            dao = new HydrateDAO(getApplicationContext());
-        }
-        return dao;
     }
 
     @Override
@@ -178,7 +160,7 @@ public class MainActivity extends AppCompatActivity
                 Log.i(tag,
                         "External storage permission has already been granted.");
                 //Show restore dialog
-                if (getUtility().isBackupAvailable()) {
+                if (Utility.getInstance().isBackupAvailable()) {
                     // Show dialog asking to restore
                     RestoreDialog restoreDialog = new RestoreDialog();
                     restoreDialog.show(getSupportFragmentManager(),
@@ -225,49 +207,56 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(final MenuItem item) {
 
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Intent intent = null;
-        if (id == R.id.nav_trends) {
-            // Handle the camera action
-            intent = new Intent(this, SummaryActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_silent_mode) {
-            InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
-            instantMuteDialog.show(getSupportFragmentManager(), "Instant Mute");
-        } else if (id == R.id.nav_edit_cups) {
-            intent = new Intent(this, EditCupsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_backup) {
-            //Ask for write external permission
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                // External storage permission has not been granted.
-                requestStoragePermission(Constants.REQUEST_WRITE_EXTERNAL_OVERFLOW);
-
-            } else {
-                //Already have storage permission
-                intent = new Intent(this, BackupActivity.class);
-                startActivity(intent);
-            }
-        } else if (id == R.id.nav_settings) {
-            intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_love) {
-            intent = new Intent(Intent.ACTION_VIEW, Uri
-                    .parse("https://play.google.com/store/apps/details?id="
-                            + getPackageName()));
-            startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Handle navigation view item clicks here.
+                int id = item.getItemId();
+                Intent intent = null;
+                if (id == R.id.nav_trends) {
+                    // Handle the camera action
+                    intent = new Intent(getApplicationContext(), SummaryActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_silent_mode) {
+                    InstantMuteDialog instantMuteDialog = new InstantMuteDialog();
+                    instantMuteDialog.show(getSupportFragmentManager(), "Instant Mute");
+                } else if (id == R.id.nav_edit_cups) {
+                    intent = new Intent(getApplicationContext(), EditCupsActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_backup) {
+                    //Ask for write external permission
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+
+                        // External storage permission has not been granted.
+                        requestStoragePermission(Constants.REQUEST_WRITE_EXTERNAL_OVERFLOW);
+
+                    } else {
+                        //Already have storage permission
+                        intent = new Intent(getApplicationContext(), BackupActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (id == R.id.nav_settings) {
+                    intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                    startActivity(intent);
+                } else if (id == R.id.nav_love) {
+                    intent = new Intent(Intent.ACTION_VIEW, Uri
+                            .parse("https://play.google.com/store/apps/details?id="
+                                    + getPackageName()));
+                    startActivity(intent);
+                } else if (id == R.id.nav_share) {
+                    Utility.getInstance().launchShareActivity(getApplicationContext());
+                } else if (id == R.id.nav_send) {
+
+                }
+            }
+        }, 200);
+
         return true;
     }
 
@@ -333,13 +322,13 @@ public class MainActivity extends AppCompatActivity
         }
 
         // check if target is achieved
-        targetAchieved = getUtility().isTargetAchieved(
+        targetAchieved = Utility.getInstance().isTargetAchieved(
                 (TextView) findViewById(R.id.water_quantity_status),
                 (TextView) findViewById(R.id.water_target), quantity,
                 getApplicationContext());
 
         // Save the water in DB
-        getDao().addWater(System.currentTimeMillis(), quantity);
+        HydrateDAO.getHydrateDAO().addWater(System.currentTimeMillis(), quantity, this);
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {
@@ -367,7 +356,7 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void decreaseWater(View view) {
-        getDao().deleteWater();
+        HydrateDAO.getHydrateDAO().deleteWater(this);
     }
 
 
@@ -421,7 +410,7 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, R.string.permission_storage_available, Toast.LENGTH_SHORT).show();
 
                 //Show restore dialog
-                if (requestCode == Constants.REQUEST_WRITE_EXTERNAL_STARTUP && getUtility().isBackupAvailable()) {
+                if (requestCode == Constants.REQUEST_WRITE_EXTERNAL_STARTUP && Utility.getInstance().isBackupAvailable()) {
                     // Show dialog asking to restore
                     RestoreDialog restoreDialog = new RestoreDialog();
                     restoreDialog.show(getSupportFragmentManager(),
@@ -505,7 +494,7 @@ public class MainActivity extends AppCompatActivity
             if (savedInstanceState != null) {
                 date = savedInstanceState.getString(Constants.DATE);
             } else {
-                date = ((MainActivity) getActivity()).getUtility().getDate(
+                date = Utility.getInstance().getDate(
                         System.currentTimeMillis());
             }
             dateView.setText(date);
@@ -947,12 +936,12 @@ public class MainActivity extends AppCompatActivity
                     R.id.water_target);
 
             // Get today's date
-            String currentDate = ((MainActivity) getActivity()).getUtility()
+            String currentDate = Utility.getInstance()
                     .getDate(System.currentTimeMillis());
             if (date.equals(currentDate)) {
                 targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                         new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                        new String[]{((MainActivity) getActivity()).getUtility().getToday() + ""}, null);
+                        new String[]{Utility.getInstance().getToday() + ""}, null);
                 targetCursor.moveToFirst();
                 target = targetCursor.getDouble(0);
                 targetCursor.close();
@@ -963,10 +952,8 @@ public class MainActivity extends AppCompatActivity
                         .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
                                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
                                 HydrateDatabase.COLUMN_DATE + "=?",
-                                new String[]{((MainActivity) getActivity())
-                                        .getUtility().getSqliteDate(
-                                        ((MainActivity) getActivity())
-                                                .getUtility()
+                                new String[]{Utility.getInstance().getSqliteDate(
+                                        Utility.getInstance()
                                                 .getTimeInMillis(date))},
                                 null);
                 if (targetCursor.getCount() > 0) {
@@ -976,7 +963,7 @@ public class MainActivity extends AppCompatActivity
                 } else {
                     targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                             new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                            new String[]{((MainActivity) getActivity()).getUtility().getToday() + ""}, null);
+                            new String[]{Utility.getInstance().getToday() + ""}, null);
                     targetCursor.moveToFirst();
                     target = targetCursor.getDouble(0);
                 }
