@@ -3,13 +3,13 @@ package com.underdog.hydrate.fragments;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
@@ -22,8 +22,6 @@ import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.util.Log;
-
-import java.util.prefs.PreferenceChangeEvent;
 
 public class DayScheduleDialog extends DialogFragment {
 
@@ -44,7 +42,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.REMINDER_START_TIME);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction
@@ -75,7 +73,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.REMINDER_END_TIME);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction.addToBackStack("myBack");
@@ -112,7 +110,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.LUNCH_START);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction.addToBackStack("myBack");
@@ -149,7 +147,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.DINNER_START);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction.addToBackStack("myBack");
@@ -181,7 +179,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.REMINDER_INTERVAL);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction.addToBackStack("myBack");
@@ -211,7 +209,7 @@ public class DayScheduleDialog extends DialogFragment {
                     HydrateDatabase.COLUMN_TARGET_QUANTITY);
 
             FragmentManager fragmentManager = getActivity()
-                    .getFragmentManager();
+                    .getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager
                     .beginTransaction();
             fragmentTransaction.addToBackStack("myBack");

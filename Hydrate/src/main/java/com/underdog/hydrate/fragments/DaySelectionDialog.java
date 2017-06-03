@@ -1,14 +1,12 @@
 package com.underdog.hydrate.fragments;
 
-import java.util.ArrayList;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,6 +20,8 @@ import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.util.Log;
+
+import java.util.ArrayList;
 
 public class DaySelectionDialog extends DialogFragment {
 

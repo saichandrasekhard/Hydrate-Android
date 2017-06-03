@@ -1,19 +1,19 @@
 package com.underdog.hydrate;
 
-import com.underdog.hydrate.constants.Constants;
-
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+
+import com.underdog.hydrate.constants.Constants;
 
 /**
  * Class that launches a blank screen activity to post a notification to share the daily achievement
  * with others
  */
-public class BlankShareActivity extends Activity {
+public class BlankShareActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

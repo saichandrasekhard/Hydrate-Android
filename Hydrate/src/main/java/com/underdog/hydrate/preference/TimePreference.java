@@ -1,6 +1,5 @@
 package com.underdog.hydrate.preference;
 
-import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 
 import com.underdog.hydrate.R;
@@ -39,12 +39,12 @@ public class TimePreference extends Preference {
 			public boolean onPreferenceClick(Preference preference) {
 				DayScheduleDialog dayScheduleDialog = new DayScheduleDialog();
 				Bundle bundle;
-				Activity activity = (Activity) getContext();
+				AppCompatActivity activity = (AppCompatActivity) getContext();
 
 				bundle = new Bundle();
 				bundle.putString(Constants.JUST_ANOTHER_KEY, key);
 				dayScheduleDialog.setArguments(bundle);
-				dayScheduleDialog.show(activity.getFragmentManager()
+				dayScheduleDialog.show(activity.getSupportFragmentManager()
 						.beginTransaction(), DayScheduleDialog.class
 						.getSimpleName());
 				return false;

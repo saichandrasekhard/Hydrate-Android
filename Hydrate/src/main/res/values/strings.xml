@@ -89,6 +89,7 @@
     <string name="give_5">please give 5 stars</string>
     <string name="share_hydrate">Share Hydrate</string>
     <string name="share_hydrate_message">Share hydrate with your friends</string>
+    <string name="communicate">Communicate</string>
     <string name="feedback">Feedback</string>
     <string name="feedback_message">feature request/suggestions on Hydrate via email</string>
     <string name="bugreport">Bug report</string>
@@ -232,7 +233,7 @@
     <string name="title_activity_summary">Trends</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_edit_cups">Edit Cup Capacities</string>
-    <string name="title_activity_backup">Backup And Restore</string>
+    <string name="title_activity_backup">Backup &amp; Restore</string>
     <string name="title_activity_drive">DriveActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_dnd">Do Not Disturb</string>
@@ -250,6 +251,9 @@
 
     <!-- Default values independent of language -->
     <string name="default_instant_mute">0</string>
-    <string name="version_name">1.5</string>
+    <string name="version_name">2.0</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

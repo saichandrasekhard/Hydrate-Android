@@ -1,8 +1,5 @@
 package com.underdog.hydrate;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import com.underdog.hydrate.async.UpdateUnitsTask;
 import com.underdog.hydrate.database.HydrateDatabase;
@@ -26,7 +26,7 @@ import com.underdog.hydrate.preference.TimePreference;
 import com.underdog.hydrate.receiver.AlarmReceiver;
 import com.underdog.hydrate.util.Log;
 
-public class SettingsActivity extends Activity implements ScheduleUpdated {
+public class SettingsActivity extends AppCompatActivity implements ScheduleUpdated {
 
     private static final String tag = "SettingsActivity";
 
@@ -48,7 +48,7 @@ public class SettingsActivity extends Activity implements ScheduleUpdated {
     @Override
     public void destroyBackStack(String key) {
         // Remove stuff from backstack
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
         if (fragmentManager.findFragmentByTag(DaySelectionDialog.class
