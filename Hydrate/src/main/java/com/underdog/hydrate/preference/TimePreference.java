@@ -18,10 +18,9 @@ import com.underdog.hydrate.fragments.DayScheduleDialog;
 import com.underdog.hydrate.util.Utility;
 
 public class TimePreference extends Preference {
-	private final SharedPreferences preferences = PreferenceManager
+    public final String key = this.getKey();
+    private final SharedPreferences preferences = PreferenceManager
 			.getDefaultSharedPreferences(getContext());
-
-	public final String key = this.getKey();
 
 	public TimePreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -39,13 +38,13 @@ public class TimePreference extends Preference {
 			public boolean onPreferenceClick(Preference preference) {
 				DayScheduleDialog dayScheduleDialog = new DayScheduleDialog();
 				Bundle bundle;
-				AppCompatActivity activity = (AppCompatActivity) getContext();
+                AppCompatActivity activity = (AppCompatActivity) getContext();
 
 				bundle = new Bundle();
 				bundle.putString(Constants.JUST_ANOTHER_KEY, key);
 				dayScheduleDialog.setArguments(bundle);
-				dayScheduleDialog.show(activity.getSupportFragmentManager()
-						.beginTransaction(), DayScheduleDialog.class
+                dayScheduleDialog.show(activity.getSupportFragmentManager()
+                        .beginTransaction(), DayScheduleDialog.class
 						.getSimpleName());
 				return false;
 			}

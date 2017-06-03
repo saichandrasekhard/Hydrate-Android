@@ -53,14 +53,12 @@ public class EditCupsActivity extends AppCompatActivity {
     public static class PlaceholderFragment extends Fragment implements
             LoaderManager.LoaderCallbacks<Cursor> {
 
+        //Unique id for the content loader
+        private static final int CUP_LOADER_ID = 1;
         /**
          * view to show the ad.
          */
         private AdView adView;
-
-        //Unique id for the content loader
-        private static final int CUP_LOADER_ID = 1;
-
         private SimpleCursorAdapter cursorAdapter;
 
         public PlaceholderFragment() {

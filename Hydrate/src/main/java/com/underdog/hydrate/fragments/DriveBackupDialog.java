@@ -49,6 +49,8 @@ public class DriveBackupDialog extends DialogFragment implements
         ConnectionCallbacks, OnConnectionFailedListener {
 
     private static final String TAG = DriveBackupDialog.class.toString();
+    private static final int REQUEST_CODE_RESOLUTION = 3;
+    private int filesBackedUp = 0;
     final private ResultCallback<DriveFileResult> dbBackupCallBack = new ResultCallback<DriveFileResult>() {
         @Override
         public void onResult(DriveFileResult result) {
@@ -61,6 +63,20 @@ public class DriveBackupDialog extends DialogFragment implements
             dismissDialog();
         }
     };
+    final private ResultCallback<DriveFileResult> settingsBackupCallBack = new ResultCallback<DriveFileResult>() {
+        @Override
+        public void onResult(DriveFileResult result) {
+            if (!result.getStatus().isSuccess()) {
+                Log.d(TAG, "Error while trying to create the file");
+                dismissDialog(null);
+                return;
+            }
+
+            dismissDialog();
+        }
+    };
+    private Utility utility;
+    private GoogleApiClient googleApiClient;
     final private ResultCallback<DriveApi.DriveContentsResult> contentsDBCallBack = new ResultCallback<DriveApi.DriveContentsResult>() {
         @Override
         public void onResult(DriveApi.DriveContentsResult result) {
@@ -89,18 +105,6 @@ public class DriveBackupDialog extends DialogFragment implements
             } catch (Exception e) {
                 Log.e(TAG, "Exception occured", e);
             }
-        }
-    };
-    final private ResultCallback<DriveFileResult> settingsBackupCallBack = new ResultCallback<DriveFileResult>() {
-        @Override
-        public void onResult(DriveFileResult result) {
-            if (!result.getStatus().isSuccess()) {
-                Log.d(TAG, "Error while trying to create the file");
-                dismissDialog(null);
-                return;
-            }
-
-            dismissDialog();
         }
     };
     final private ResultCallback<DriveApi.DriveContentsResult> contentsSettingsCallBack = new ResultCallback<DriveApi.DriveContentsResult>() {
@@ -137,10 +141,6 @@ public class DriveBackupDialog extends DialogFragment implements
 
         }
     };
-    private static final int REQUEST_CODE_RESOLUTION = 3;
-    private int filesBackedUp = 0;
-    private Utility utility;
-    private GoogleApiClient googleApiClient;
     private boolean mClearDefaultAccount = false;
 
     public Utility getUtility() {
