@@ -22,8 +22,6 @@ public class DeveloperPreference extends Preference {
     @Override
     protected void onClick() {
         super.onClick();
-        if (hydrateDAO == null)
-            hydrateDAO = new HydrateDAO(getContext());
 
 //        hydrateDAO.
     }

@@ -1,18 +1,9 @@
 package com.underdog.hydrate.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
@@ -20,17 +11,26 @@ import android.widget.TextView;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Utility {
 
-    private static Utility utility=null;
+    private static Utility utility = null;
 
-    private Utility(){
+    private Utility() {
 
     }
 
-    public static Utility getInstance(){
-        if(utility==null)
-            utility=new Utility();
+    public static Utility getInstance() {
+        if (utility == null)
+            utility = new Utility();
         return utility;
     }
 
@@ -202,5 +202,34 @@ public class Utility {
             return true;
         }
         return false;
+    }
+
+    public void launchShareActivity(Context context) {
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(
+                Intent.EXTRA_TEXT,
+                context.getString(R.string.checkout_message)
+                        + "\n"
+                        + context.getString(R.string.checkout));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Hydrate");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            context.startActivity(
+                    Intent.createChooser(intent, context
+                            .getString(R.string.select_app)));
+        } catch (android.content.ActivityNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void launchFeedbackActivity(Context context, String subject) {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                Uri.fromParts("mailto", Constants.DEV_EMAIL, null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(
+                Intent.createChooser(emailIntent, context
+                        .getString(R.string.select_app)));
     }
 }

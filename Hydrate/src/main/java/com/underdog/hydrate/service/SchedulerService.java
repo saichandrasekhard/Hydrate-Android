@@ -45,8 +45,7 @@ public class SchedulerService extends IntentService {
         }
 
         // Add entry for daily target consumption
-        dao = new HydrateDAO(getApplicationContext());
-        dao.updateTargetStatus();
+        HydrateDAO.getHydrateDAO().updateTargetStatus(this);
 
         // Auto backup to SD Card
         autoBackup = preferences.getBoolean(

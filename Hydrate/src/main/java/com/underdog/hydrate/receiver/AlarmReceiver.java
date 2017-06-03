@@ -25,9 +25,8 @@ import java.util.GregorianCalendar;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
-    private AlarmManager alarmManager;
-
     private static final String tag = "AlarmReceiver";
+    private AlarmManager alarmManager;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -195,7 +194,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
                 // IMPLEMENT DND HERE.SET ALARM AT THE TIME RETURNED BY DNDFunc
                 reminderTime = currentTime + reminderInterval;
-                reminderTime = new HydrateDAO(context).checkDnd(reminderTime);
+                reminderTime = HydrateDAO.getHydrateDAO().checkDnd(reminderTime,context);
 
                 Log.d(tag, "Setting alarm after interval");
                 // Start after interval defined
