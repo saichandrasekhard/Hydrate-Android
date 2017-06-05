@@ -1,7 +1,9 @@
 package com.underdog.hydrate;
 
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -58,7 +60,7 @@ public class SetupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                setInterval();
             }
         });
 
@@ -117,6 +119,14 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SetupActivity.this, R.string.interval_in_settings, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button save = (Button) findViewById(R.id.setupSubmit);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new applyChanges().execute();
             }
         });
     }
@@ -193,5 +203,33 @@ public class SetupActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         cupSpinner.setAdapter(adapter);
+    }
+
+    public class applyChanges extends AsyncTask<String, Void, Void> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(SetupActivity.this);
+            progressDialog.show();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

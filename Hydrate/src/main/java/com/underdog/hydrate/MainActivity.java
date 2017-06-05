@@ -88,11 +88,11 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        if (preferences.contains(Constants.FIRST_RUN)) {
-//            startActivity(new Intent(this, SetupActivity.class));
-//            finish();
-//            return;
-//        }
+        if (preferences.contains(Constants.FIRST_RUN)) {
+            startActivity(new Intent(this, SetupActivity.class));
+            finish();
+            return;
+        }
 
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
