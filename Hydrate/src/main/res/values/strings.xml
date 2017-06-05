@@ -69,7 +69,7 @@
     <string name="reminders_enabled">Reminders Enabled</string>
     <string name="reminders_disabled">Reminders Disabled</string>
     <string name="glass_quantity">Default Cup Quantity</string>
-    <string name="user_name">Nickname</string>
+    <string name="user_name">Username</string>
     <string name="user_name_default">User</string>
     <string name="backup">Backup/Restore</string>
     <string name="metric">Unit of Measurement</string>
@@ -77,8 +77,8 @@
     <string name="default_glass_us_oz">8</string>
     <string name="glass_summary_ml">250 ml</string>
     <string name="glass_summary_us_oz">8 oz</string>
-    <string name="targetQuantityTitleOz">Daily Goal (in US Fluid Ounces)</string>
-    <string name="targetQuantityTitleMl">Daily Goal (in Liters)</string>
+    <string name="targetQuantityTitleOz">Daily Goal (US oz)</string>
+    <string name="targetQuantityTitleMl">Daily Goal (Liters)</string>
     <string name="defaultTarget">2.5</string>
     <string name="defaultTargetOz">85</string>
     <string name="customize_cups_title">Customize Cups</string>
@@ -241,8 +241,10 @@
     <!-- Activity titles -->
 
     <!-- Setup Activity -->
-    <string name="setup_tell_us_about_you">To help us serve you better, please fill in the following details. You can change them any time in the future in the settings</string>
+    <string name="setup_tell_us_about_you">To help us serve you better, please fill in the following details. You can change them any time in future from Settings</string>
     <!--<string name=""-->
+    <string name="interval_in_settings">You can customize the interval in Settings after initial setup</string>
+    <string name="interval_set_toast">Interval set to </string>
     <!-- Setup Activity -->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
