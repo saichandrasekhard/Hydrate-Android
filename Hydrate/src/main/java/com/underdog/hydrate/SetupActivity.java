@@ -30,6 +30,8 @@ public class SetupActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private boolean mlSelected = true;
 
+//    private SetupActivity.ApplyChanges applyChanges;
+
     private Button startTime;
     private Button endTime;
     private Spinner cupSpinner;
@@ -126,9 +128,18 @@ public class SetupActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new applyChanges().execute();
+                SetupActivity.ApplyChanges applyChanges = new SetupActivity.ApplyChanges();
+                applyChanges.execute();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+//        if (applyChanges != null && !applyChanges.isCancelled()) {
+//            applyChanges.cancel(true);
+//        }
+        super.onDestroy();
     }
 
     public void onMetricSelected(View view) {
@@ -205,7 +216,7 @@ public class SetupActivity extends AppCompatActivity {
         cupSpinner.setAdapter(adapter);
     }
 
-    public class applyChanges extends AsyncTask<String, Void, Void> {
+    public class ApplyChanges extends AsyncTask<String, Void, Void> {
 
         ProgressDialog progressDialog;
 
