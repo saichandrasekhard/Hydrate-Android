@@ -89,7 +89,8 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppBaseTheme.NoActionBar">>
+            android:theme="@style/AppBaseTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -193,6 +194,9 @@
               android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
           </activity>
         -->
+        <activity
+            android:name=".SetupActivity"
+            android:label="@string/initial_setup"></activity>
     </application>
 
 </manifest>
