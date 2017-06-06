@@ -25,7 +25,7 @@ public class TimePreference extends Preference {
 	public TimePreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		boolean reminders = preferences.getBoolean(
-				getContext().getString(R.string.reminders_status), false);
+				getContext().getString(R.string.reminders_status), true);
 		if (!(key.equals(getContext().getString(R.string.key_lunch)) || key
 				.equals(getContext().getString(R.string.key_dinner)))) {
 			this.setEnabled(reminders);

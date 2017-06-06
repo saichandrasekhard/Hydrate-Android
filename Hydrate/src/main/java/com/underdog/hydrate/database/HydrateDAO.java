@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
 import com.underdog.hydrate.R;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class HydrateDAO {
 
     private static HydrateDAO hydrateDAO;
+    private final String TAG = "HydrateDAO";
 
     private HydrateDAO() {
     }
@@ -226,5 +228,44 @@ public class HydrateDAO {
 
 
         return targets;
+    }
+
+    public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval,boolean isML, Context context) {
+        HydrateDatabase hydrateDatabase;
+        SQLiteDatabase database = null;
+        ContentValues contentValues = null;
+        try {
+            hydrateDatabase = new HydrateDatabase(context);
+            database = hydrateDatabase.getWritableDatabase();
+            database.beginTransaction();
+            contentValues = new ContentValues();
+            contentValues.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, target);
+            contentValues.put(HydrateDatabase.REMINDER_START_TIME, startHour * 60 + startMin);
+            contentValues.put(HydrateDatabase.REMINDER_END_TIME, endHour * 60 + endMin);
+            contentValues.put(HydrateDatabase.REMINDER_INTERVAL, interval);
+            database.update(HydrateContentProvider.HYDRATE_DAILY_SCHEDULE, contentValues, null, null);
+            database.delete(HydrateDatabase.HYDRATE_CUPS, null, null);
+            if(isML) {
+                for (String cup : HydrateDatabase.cups_ml) {
+                    ContentValues values = new ContentValues();
+                    values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
+                    database.insert(HydrateDatabase.HYDRATE_CUPS, null, values);
+                }
+            }else{
+                for (String cup : HydrateDatabase.cups_oz) {
+                    ContentValues values = new ContentValues();
+                    values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
+                    database.insert(HydrateDatabase.HYDRATE_CUPS, null, values);
+                }
+            }
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "Exception - ", e);
+            return false;
+        } finally {
+            if (database != null)
+                database.endTransaction();
+        }
+        return true;
     }
 }

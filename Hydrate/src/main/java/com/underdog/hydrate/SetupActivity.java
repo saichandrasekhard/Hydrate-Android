@@ -2,6 +2,7 @@ package com.underdog.hydrate;
 
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateDAO;
+import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.util.Log;
+import com.underdog.hydrate.util.Utility;
 
 import java.util.Calendar;
 
@@ -37,6 +42,8 @@ public class SetupActivity extends AppCompatActivity {
     private Spinner cupSpinner;
     private Button interval;
     private EditText targetEdit;
+    private EditText username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class SetupActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         hydrateDAO = HydrateDAO.getHydrateDAO();
 
+        username = (EditText) findViewById(R.id.setupUsernameEdit);
         targetEdit = (EditText) findViewById(R.id.setupTargetEdit);
 
 
@@ -72,7 +80,7 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = startTime.getText().toString();
-                int[] hoursMins = getHoursAndMins(value);
+                int[] hoursMins = Utility.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -89,7 +97,7 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = endTime.getText().toString();
-                int[] hoursMins = getHoursAndMins(value);
+                int[] hoursMins = Utility.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -129,14 +137,26 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SetupActivity.ApplyChanges applyChanges = new SetupActivity.ApplyChanges();
-                applyChanges.execute();
+                applyChanges.execute(username.getText().toString(), mlSelected,
+                        targetEdit.getText().toString(),
+                        startTime.getText().toString(), endTime.getText().toString(),
+                        cupSpinner.getSelectedItem().toString(), interval.getText().toString());
             }
         });
+
+//        Button skip = (Button) findViewById(R.id.setupSkip);
+//        skip.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            }
+//        });
     }
 
     @Override
     protected void onDestroy() {
-//        if (applyChanges != null && !applyChanges.isCancelled()) {
+//        if (applyChanges != null) {
 //            applyChanges.cancel(true);
 //        }
         super.onDestroy();
@@ -151,7 +171,6 @@ public class SetupActivity extends AppCompatActivity {
             targetView.setText(R.string.targetQuantityTitleMl);
             targetEdit.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             targetEdit.setText(hydrateDAO.getTodayTarget(getApplicationContext()) / 1000 + "");
-//            Toast.makeText(this, "ML", Toast.LENGTH_SHORT).show();
         } else {
             mlSelected = false;
             targetView.setText(R.string.targetQuantityTitleOz);
@@ -162,16 +181,9 @@ public class SetupActivity extends AppCompatActivity {
         setInterval();
     }
 
-    private int[] getHoursAndMins(String value) {
-        String hourMins[] = value.split(":");
-        int hour = Integer.parseInt(hourMins[0]);
-        int mins = Integer.parseInt(hourMins[1]);
-        return new int[]{hour, mins};
-    }
-
     private void setInterval() {
-        int[] selectedStartTime = getHoursAndMins(startTime.getText().toString());
-        int[] selectedEndTime = getHoursAndMins(endTime.getText().toString());
+        int[] selectedStartTime = Utility.getInstance().getHoursAndMins(startTime.getText().toString());
+        int[] selectedEndTime = Utility.getInstance().getHoursAndMins(endTime.getText().toString());
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, selectedEndTime[0]);
@@ -196,7 +208,7 @@ public class SetupActivity extends AppCompatActivity {
         long intervalInMins = (long) ((timeAlive * (cupSelected) / target) / 60000);
         String toastMessage = getResources().getString(R.string.interval_set_toast);
         String mins = getResources().getString(R.string.mins);
-        Toast.makeText(this, toastMessage + " - " + intervalInMins + " " + mins, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, toastMessage + " - " + intervalInMins + " " + mins, Toast.LENGTH_SHORT).show();
         interval.setText(intervalInMins + " " + mins);
 
     }
@@ -216,7 +228,7 @@ public class SetupActivity extends AppCompatActivity {
         cupSpinner.setAdapter(adapter);
     }
 
-    public class ApplyChanges extends AsyncTask<String, Void, Void> {
+    public class ApplyChanges extends AsyncTask<Object, Void, Void> {
 
         ProgressDialog progressDialog;
 
@@ -231,16 +243,53 @@ public class SetupActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             progressDialog.dismiss();
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         @Override
-        protected Void doInBackground(String... params) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        protected Void doInBackground(Object... params) {
+            Log.i("ApplyChanges", params[0] + ", " + params[1] + ", " + params[2] + ", " + params[3] + ", " + params[4] + ", " + params[5] + ", " + params[6]);
+            String username = params[0].toString();
+            boolean isML = (boolean) params[1];
+            Double target = Double.valueOf(params[2].toString());
+            String startTimeString = params[3].toString();
+            int[] startTime = Utility.getInstance().getHoursAndMins(startTimeString);
+            String endTimeString = params[4].toString();
+            int[] endTime = Utility.getInstance().getHoursAndMins(endTimeString);
+            String cupQuantity = params[5].toString();
+            int interval = Integer.parseInt(params[6].toString().split(" ")[0]);
+            SharedPreferences sharedPreferences;
+
+            if (isCancelled())
+                return null;
+
+            if (isML)
+                target *= 1000;
+
+            if (HydrateDAO.getHydrateDAO().applyInitialSetupChanges(target, startTime[0], startTime[1], endTime[0], endTime[1], interval, isML, getApplicationContext())) {
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean(Constants.FIRST_RUN, false);
+                if (isML)
+                    editor.putString(getResources().getString(R.string.key_metric), getResources().getString(R.string.milliliter));
+                else
+                    editor.putString(getResources().getString(R.string.key_metric), getResources().getString(R.string.us_oz));
+                editor.putString(getResources().getString(R.string.key_glass_quantity), cupQuantity);
+                editor.putString(getResources().getString(R.string.key_user_name), username);
+                editor.apply();
+
+                AlarmReceiver alarmReceiver = new AlarmReceiver();
+                alarmReceiver.setNextAlarm(getApplicationContext());
             }
+
             return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            progressDialog.dismiss();
         }
     }
 }

@@ -3,7 +3,7 @@
 
     <PreferenceCategory android:title="Reminders">
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:disableDependentsState="false"
             android:key="@string/key_reminders_status"
             android:summaryOff="@string/reminders_disabled"
@@ -11,11 +11,11 @@
             android:title="@string/reminders_status" />
 
         <com.underdog.hydrate.preference.TimePreference
-            android:enabled="false"
+            android:enabled="true"
             android:key="@string/key_reminder_start_time"
             android:title="@string/reminder_start_time" />
         <com.underdog.hydrate.preference.TimePreference
-            android:enabled="false"
+            android:enabled="true"
             android:key="@string/key_reminder_end_time"
             android:title="@string/reminder_end_time" />
         <PreferenceScreen
@@ -24,7 +24,7 @@
             android:summary="@string/mute_lunch_dinner"
             android:title="@string/lunch_dinner">
             <CheckBoxPreference
-                android:defaultValue="true"
+                android:defaultValue="false"
                 android:key="@string/key_mute_lunch_dinner"
                 android:summary="@string/mute_lunch_dinner"
                 android:title="@string/mute_reminders" />
@@ -41,13 +41,13 @@
                 android:title="@string/dinner" />
         </PreferenceScreen>
         <com.underdog.hydrate.preference.TimePreference
-            android:enabled="false"
+            android:enabled="true"
             android:key="@string/key_reminder_interval"
             android:title="@string/reminder_interval" />
 
         <com.underdog.hydrate.preference.SummaryListPreference
             android:defaultValue="15"
-            android:enabled="false"
+            android:enabled="true"
             android:entries="@array/snooze_options"
             android:entryValues="@array/snooze_options"
             android:key="@string/key_reminder_snooze_interval"

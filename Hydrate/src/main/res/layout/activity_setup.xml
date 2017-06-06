@@ -11,8 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="left"
         android:lineSpacingExtra="2dp"
@@ -58,6 +60,7 @@
         android:id="@+id/setupStartTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="31dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="31dp"
@@ -114,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:inputType="textPersonName"
         android:maxLength="20"
@@ -126,8 +130,10 @@
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:checkedButton="@+id/radio_ml"
         android:orientation="vertical"
@@ -157,10 +163,10 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="0dp"
-        android:maxLength="8"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:inputType="numberDecimal"
+        android:maxLength="8"
         android:text="@string/defaultTarget"
         app:layout_constraintBaseline_toBaselineOf="@+id/setupTarget"
         app:layout_constraintHorizontal_bias="0.38"
@@ -172,8 +178,10 @@
         style="@android:style/Widget.EditText"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:focusableInTouchMode="false"
         android:gravity="center"
         android:text="8:00"
@@ -199,38 +207,23 @@
         style="@android:style/Widget.EditText"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:focusableInTouchMode="false"
         android:gravity="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/setupInterval"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/setupCupEdit"
-        app:layout_constraintRight_toRightOf="@+id/setupCupEdit"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="0dp" />
-
-    <Button
-        android:id="@+id/setupSubmit"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="375dp"
-        android:background="@color/success"
-        android:text="@string/save"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setupInfo"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintRight_toRightOf="@+id/setupCupEdit" />
 
     <TextView
         android:id="@+id/setupCup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:text="@string/glass_quantity"
         app:layout_constraintHorizontal_bias="0.107"
@@ -242,12 +235,52 @@
         android:id="@+id/setupCupEdit"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/setupEndTimeEdit"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="@+id/setupEndTimeEdit"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/setupEndTimeEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupEndTimeEdit"
         app:layout_constraintTop_toBottomOf="@+id/setupEndTimeEdit" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupInfo"
+        app:layout_constraintVertical_bias="1.0">
+
+        <!--<Button-->
+            <!--android:id="@+id/setupSkip"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_weight="0.3"-->
+            <!--android:background="@color/danger"-->
+            <!--android:text="@string/skip"-->
+            <!--android:textColor="@color/white"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--tools:layout_editor_absoluteY="539dp" />-->
+
+        <Button
+            android:id="@+id/setupSubmit"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:background="@color/success"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="539dp" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
