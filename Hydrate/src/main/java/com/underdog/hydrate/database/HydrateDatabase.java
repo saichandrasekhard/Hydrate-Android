@@ -1,15 +1,15 @@
 package com.underdog.hydrate.database;
 
-import com.underdog.hydrate.R;
-import com.underdog.hydrate.constants.Constants;
-import com.underdog.hydrate.util.Log;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
+
+import com.underdog.hydrate.R;
+import com.underdog.hydrate.constants.Constants;
+import com.underdog.hydrate.util.Log;
 
 public class HydrateDatabase extends SQLiteOpenHelper {
 
@@ -62,7 +62,7 @@ public class HydrateDatabase extends SQLiteOpenHelper {
             "350", "500"};
     public static final String[] cups_oz = new String[]{"6", "8", "12", "16",
             "20"};
-    private static final String HYDRATE_CUPS = "hydrate_cups";
+    public static final String HYDRATE_CUPS = "hydrate_cups";
     private static final String HYDRATE_DAILY_SCHEDULE = "hydrate_daily_schedule";
     private Context context;
 

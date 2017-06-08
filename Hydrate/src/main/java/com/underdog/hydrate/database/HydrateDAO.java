@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
 import com.underdog.hydrate.R;
@@ -15,11 +16,28 @@ import java.util.List;
 import java.util.Map;
 
 public class HydrateDAO {
-    private Context context;
 
-    public HydrateDAO(Context context) {
-        this.context = context;
+    private static HydrateDAO hydrateDAO;
+    private final String TAG = "HydrateDAO";
+
+    private HydrateDAO() {
     }
+
+    private HydrateDAO(Context context) {
+
+    }
+
+    public static HydrateDAO getHydrateDAO() {
+        if (hydrateDAO == null) {
+            synchronized (HydrateDAO.class) {
+                if (hydrateDAO == null) {
+                    hydrateDAO = new HydrateDAO();
+                }
+            }
+        }
+        return hydrateDAO;
+    }
+
 
     /**
      * Log a new entry in database
@@ -27,7 +45,7 @@ public class HydrateDAO {
      * @param timestamp time at which user drank water
      * @param quantity  quantity of water consumed
      */
-    public void addWater(long timestamp, String quantity) {
+    public void addWater(long timestamp, String quantity, Context context) {
         ContentValues values;
         ContentResolver contentResolver = context.getContentResolver();
 
@@ -42,7 +60,7 @@ public class HydrateDAO {
     /**
      * Log a new entry in database with default quantity
      */
-    public void addDefaultWater() {
+    public void addDefaultWater(Context context) {
         ContentValues values;
         SharedPreferences preferences;
         double defaultQuantity;
@@ -72,13 +90,13 @@ public class HydrateDAO {
     /**
      * Method to delete the last logged
      */
-    public void deleteWater() {
+    public void deleteWater(Context context) {
         context.getContentResolver().delete(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_DELETE_LAST, null,
                 null);
     }
 
-    public void deleteWaterById(long rowId) {
+    public void deleteWaterById(long rowId, Context context) {
         context.getContentResolver().delete(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
                 HydrateDatabase.ROW_ID + "=?",
@@ -90,7 +108,7 @@ public class HydrateDAO {
      * @param timeStamp
      * @param quantity
      */
-    public void updateEvent(long rowId, long timeStamp, double quantity) {
+    public void updateEvent(long rowId, long timeStamp, double quantity, Context context) {
         ContentValues values = new ContentValues();
         values.put(HydrateDatabase.COLUMN_QUANTITY, quantity);
         values.put(HydrateDatabase.COLUMN_TIMESTAMP, timeStamp);
@@ -103,7 +121,7 @@ public class HydrateDAO {
     /**
      * Update the target status at the end of the day
      */
-    public void updateTargetStatus() {
+    public void updateTargetStatus(Context context) {
         long timestamp = System.currentTimeMillis();
         String[] selectionArgs;
         double todaysConsumption;
@@ -144,7 +162,7 @@ public class HydrateDAO {
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
     }
 
-    public long checkDnd(long reminderTime) {
+    public long checkDnd(long reminderTime, Context context) {
         long lunchStart;
         long lunchEnd;
         long dinnerStart;
@@ -192,9 +210,10 @@ public class HydrateDAO {
 
     /**
      * Returns today's target
+     *
      * @return
      */
-    public double getTodayTarget(){
+    public double getTodayTarget(Context context) {
         double target;
         Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
@@ -209,5 +228,44 @@ public class HydrateDAO {
 
 
         return targets;
+    }
+
+    public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval,boolean isML, Context context) {
+        HydrateDatabase hydrateDatabase;
+        SQLiteDatabase database = null;
+        ContentValues contentValues = null;
+        try {
+            hydrateDatabase = new HydrateDatabase(context);
+            database = hydrateDatabase.getWritableDatabase();
+            database.beginTransaction();
+            contentValues = new ContentValues();
+            contentValues.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, target);
+            contentValues.put(HydrateDatabase.REMINDER_START_TIME, startHour * 60 + startMin);
+            contentValues.put(HydrateDatabase.REMINDER_END_TIME, endHour * 60 + endMin);
+            contentValues.put(HydrateDatabase.REMINDER_INTERVAL, interval);
+            database.update(HydrateContentProvider.HYDRATE_DAILY_SCHEDULE, contentValues, null, null);
+            database.delete(HydrateDatabase.HYDRATE_CUPS, null, null);
+            if(isML) {
+                for (String cup : HydrateDatabase.cups_ml) {
+                    ContentValues values = new ContentValues();
+                    values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
+                    database.insert(HydrateDatabase.HYDRATE_CUPS, null, values);
+                }
+            }else{
+                for (String cup : HydrateDatabase.cups_oz) {
+                    ContentValues values = new ContentValues();
+                    values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
+                    database.insert(HydrateDatabase.HYDRATE_CUPS, null, values);
+                }
+            }
+            database.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "Exception - ", e);
+            return false;
+        } finally {
+            if (database != null)
+                database.endTransaction();
+        }
+        return true;
     }
 }

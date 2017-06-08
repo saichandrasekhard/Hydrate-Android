@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.widget.Toast;
 
@@ -88,8 +89,8 @@ public class BackupPreference extends Preference {
                     return true;
                 } else if (key.equals(backToGDrive)) {
                     DriveBackupDialog backupDialog = new DriveBackupDialog();
-                    backupDialog.show(((Activity) getContext())
-                                    .getFragmentManager(),
+                    backupDialog.show(((AppCompatActivity) getContext())
+                                    .getSupportFragmentManager(),
                             DriveBackupDialog.class.getSimpleName());
                 } else if (key.equals(restoreFromGDrive)) {
 
@@ -104,8 +105,8 @@ public class BackupPreference extends Preference {
                                                     int which) {
                                     DriveRestoreDialog restoreDialog = new DriveRestoreDialog();
                                     restoreDialog.show(
-                                            ((Activity) getContext())
-                                                    .getFragmentManager()
+                                            ((AppCompatActivity) getContext())
+                                                    .getSupportFragmentManager()
                                             ,
                                             DriveRestoreDialog.class
                                                     .getSimpleName());

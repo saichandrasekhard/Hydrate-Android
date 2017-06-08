@@ -1,10 +1,5 @@
 package com.underdog.hydrate.database;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
-import com.underdog.hydrate.util.Log;
-
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -13,13 +8,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
+import com.underdog.hydrate.util.Log;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class HydrateContentProvider extends ContentProvider {
 
+    public static final String HYDRATE_DAILY_SCHEDULE = "hydrate_daily_schedule";
     private static final String tag = "HydrateContentProvider";
-
     private static final String HYDRATE_LOGS = "hydrate_log";
     private static final String HYDRATE_TARGET = "hydrate_target";
-    private static final String HYDRATE_DAILY_SCHEDULE = "hydrate_daily_schedule";
     private static final String HYDRATE_DND = "hydrate_dnd";
     private static final String HYDRATE_CUPS = "hydrate_cups";
     private static final String HYDRATE_LOGS_UPDATE_UNITS = "hydrate_log_update_units";

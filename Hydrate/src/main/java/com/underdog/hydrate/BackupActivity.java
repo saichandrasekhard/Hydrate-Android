@@ -1,13 +1,13 @@
 package com.underdog.hydrate;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Activity that loads the backup/restore screen
  */
-public class BackupActivity extends Activity {
+public class BackupActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

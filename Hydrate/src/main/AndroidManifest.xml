@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.underdog.hydrate"
-    android:versionCode="16"
-    android:versionName="1.5">
-
+    android:versionCode="17"
+    android:versionName="2.0">
 
     <!-- Normal permissions -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -12,7 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- Normal permissions -->
-    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
+
 
     <!-- Dangerous permissions -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -45,11 +44,9 @@
         <screen
             android:screenDensity="xhdpi"
             android:screenSize="normal" />
-
         <screen
             android:screenDensity="480"
             android:screenSize="normal" />
-
         <screen
             android:screenDensity="640"
             android:screenSize="normal" />
@@ -65,15 +62,14 @@
         <screen
             android:screenDensity="xhdpi"
             android:screenSize="large" />
-
         <screen
             android:screenDensity="480"
             android:screenSize="large" />
-
         <screen
             android:screenDensity="640"
             android:screenSize="large" />
     </compatible-screens>
+    <compatible-screens />
 
     <application
         android:allowBackup="true"
@@ -89,9 +85,12 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
             android:name=".MainActivity"
+            android:hardwareAccelerated="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -177,7 +176,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.underdog.hydrate.SettingsActivity" />
         </activity>
-        <!--  <activity
+        <!--
+          <activity
               android:name="com.yasesprox.android.transcommusdk.TransCommuActivity"
               android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
           </activity>
@@ -192,9 +192,11 @@
           <activity
               android:name="com.yasesprox.android.transcommusdk.TranslateActivity"
               android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
-          </activity>-->
+          </activity>
+        -->
+        <activity
+            android:name=".SetupActivity"
+            android:label="@string/initial_setup"></activity>
     </application>
-
-    <compatible-screens></compatible-screens>
 
 </manifest>

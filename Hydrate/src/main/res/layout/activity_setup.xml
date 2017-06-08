@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.underdog.hydrate.SetupActivity">
+
+    <TextView
+        android:id="@+id/setupInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        android:lineSpacingExtra="2dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/setup_tell_us_about_you"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.016" />
+
+    <TextView
+        android:id="@+id/setupMetric"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="24dp"
+        android:gravity="left"
+        android:text="@string/metric"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupUsername" />
+
+    <TextView
+        android:id="@+id/setupTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="63dp"
+        android:gravity="start"
+        android:text="@string/targetQuantityTitleMl"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupMetric" />
+
+    <TextView
+        android:id="@+id/setupStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="29dp"
+        android:gravity="start"
+        android:text="@string/reminder_start_time"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupTarget" />
+
+    <TextView
+        android:id="@+id/setupEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="26dp"
+        android:text="@string/reminder_end_time"
+        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupStartTime" />
+
+    <TextView
+        android:id="@+id/setupInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="29dp"
+        android:text="@string/reminder_interval"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupCup" />
+
+    <TextView
+        android:id="@+id/setupUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="21dp"
+        android:text="@string/user_name"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupInfo" />
+
+    <EditText
+        android:id="@+id/setupUsernameEdit"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:maxLength="20"
+        android:text="@string/user_name_default"
+        app:layout_constraintBaseline_toBaselineOf="@+id/setupUsername"
+        app:layout_constraintHorizontal_bias="0.688"
+        app:layout_constraintLeft_toRightOf="@+id/setupUsername"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:checkedButton="@+id/radio_ml"
+        android:orientation="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/setupUsernameEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupUsernameEdit"
+        app:layout_constraintTop_toBottomOf="@+id/setupUsernameEdit">
+
+        <RadioButton
+            android:id="@+id/radio_ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMetricSelected"
+            android:text="@string/milliliter" />
+
+        <RadioButton
+            android:id="@+id/radio_oz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMetricSelected"
+            android:text="@string/us_oz" />
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/setupTargetEdit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:inputType="numberDecimal"
+        android:maxLength="8"
+        android:text="@string/defaultTarget"
+        app:layout_constraintBaseline_toBaselineOf="@+id/setupTarget"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintLeft_toLeftOf="@+id/setupUsernameEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupUsernameEdit" />
+
+    <Button
+        android:id="@+id/setupStartTimeEdit"
+        style="@android:style/Widget.EditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        android:text="8:00"
+        app:layout_constraintBaseline_toBaselineOf="@+id/setupStartTime"
+        app:layout_constraintLeft_toLeftOf="@+id/setupTargetEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupTargetEdit" />
+
+    <Button
+        android:id="@+id/setupEndTimeEdit"
+        style="@android:style/Widget.EditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        android:text="21:00"
+        app:layout_constraintBaseline_toBaselineOf="@+id/setupEndTime"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/setupStartTimeEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupStartTimeEdit" />
+
+    <Button
+        android:id="@+id/setupIntervalEdit"
+        style="@android:style/Widget.EditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        app:layout_constraintBaseline_toBaselineOf="@+id/setupInterval"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/setupCupEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupCupEdit" />
+
+    <TextView
+        android:id="@+id/setupCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/glass_quantity"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupEndTime" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/setupCupEdit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/setupEndTimeEdit"
+        app:layout_constraintRight_toRightOf="@+id/setupEndTimeEdit"
+        app:layout_constraintTop_toBottomOf="@+id/setupEndTimeEdit" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setupInfo"
+        app:layout_constraintVertical_bias="1.0">
+
+        <!--<Button-->
+            <!--android:id="@+id/setupSkip"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_weight="0.3"-->
+            <!--android:background="@color/danger"-->
+            <!--android:text="@string/skip"-->
+            <!--android:textColor="@color/white"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--tools:layout_editor_absoluteY="539dp" />-->
+
+        <Button
+            android:id="@+id/setupSubmit"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:background="@color/success"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="539dp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
