@@ -979,6 +979,7 @@ public class MainActivity extends AppCompatActivity
                             new String[]{Utility.getInstance().getToday() + ""}, null);
                     targetCursor.moveToFirst();
                     target = targetCursor.getDouble(0);
+                    targetCursor.close();
                 }
 
             }

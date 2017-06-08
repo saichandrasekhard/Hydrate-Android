@@ -141,12 +141,14 @@ public class HydrateDAO {
 
         cursor.moveToFirst();
         todaysConsumption = cursor.getDouble(0);
+        cursor.close();
         Log.d(this.getClass().toString(), "consumption - " + todaysConsumption);
         Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
                 new String[]{Utility.getInstance().getDay(timestamp) + ""}, null);
         targetCursor.moveToFirst();
         dailyTarget = targetCursor.getDouble(0);
+        targetCursor.close();
 
         values = new ContentValues();
         if (todaysConsumption >= dailyTarget) {
@@ -190,6 +192,7 @@ public class HydrateDAO {
             lunchEnd = cursor.getLong(1);
             dinnerStart = cursor.getLong(2);
             dinnerEnd = cursor.getLong(3);
+            cursor.close();
             lunchStart = utility.subGivenTimeInDay(lunchStart);
             lunchEnd = utility.subGivenTimeInDay(lunchEnd);
             dinnerStart = utility.subGivenTimeInDay(dinnerStart);
@@ -220,6 +223,7 @@ public class HydrateDAO {
                 new String[]{Utility.getInstance().getToday() + ""}, null);
         targetCursor.moveToFirst();
         target = targetCursor.getDouble(0);
+        targetCursor.close();
         return target;
     }
 
@@ -230,7 +234,7 @@ public class HydrateDAO {
         return targets;
     }
 
-    public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval,boolean isML, Context context) {
+    public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval, boolean isML, Context context) {
         HydrateDatabase hydrateDatabase;
         SQLiteDatabase database = null;
         ContentValues contentValues = null;
@@ -245,13 +249,13 @@ public class HydrateDAO {
             contentValues.put(HydrateDatabase.REMINDER_INTERVAL, interval);
             database.update(HydrateContentProvider.HYDRATE_DAILY_SCHEDULE, contentValues, null, null);
             database.delete(HydrateDatabase.HYDRATE_CUPS, null, null);
-            if(isML) {
+            if (isML) {
                 for (String cup : HydrateDatabase.cups_ml) {
                     ContentValues values = new ContentValues();
                     values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
                     database.insert(HydrateDatabase.HYDRATE_CUPS, null, values);
                 }
-            }else{
+            } else {
                 for (String cup : HydrateDatabase.cups_oz) {
                     ContentValues values = new ContentValues();
                     values.put(HydrateDatabase.COLUMN_QUANTITY, cup);
@@ -263,8 +267,10 @@ public class HydrateDAO {
             Log.e(TAG, "Exception - ", e);
             return false;
         } finally {
-            if (database != null)
+            if (database != null) {
                 database.endTransaction();
+                database.close();
+            }
         }
         return true;
     }

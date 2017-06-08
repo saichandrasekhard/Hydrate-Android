@@ -33,7 +33,8 @@ public class TargetAchievedDialog extends DialogFragment {
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
                 new String[]{Utility.getInstance().getToday() + ""}, null);
         targetCursor.moveToFirst();
-        String targetQuantity = targetCursor.getDouble(0) + "";
+        String targetQuantity = (metric.equals(milliliter) ? targetCursor.getDouble(0) / 1000 : targetCursor.getDouble(0)) + "";
+        targetCursor.close();
         String targetReachedMessage = getString(R.string.share_message_target_reached);
         targetReachedMessage = targetReachedMessage.replace("$$",
                 targetQuantity);
