@@ -194,7 +194,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
                 // IMPLEMENT DND HERE.SET ALARM AT THE TIME RETURNED BY DNDFunc
                 reminderTime = currentTime + reminderInterval;
-                reminderTime = HydrateDAO.getHydrateDAO().checkDnd(reminderTime,context);
+                reminderTime = HydrateDAO.getHydrateDAO().checkDnd(reminderTime, context);
 
                 Log.d(tag, "Setting alarm after interval");
                 // Start after interval defined

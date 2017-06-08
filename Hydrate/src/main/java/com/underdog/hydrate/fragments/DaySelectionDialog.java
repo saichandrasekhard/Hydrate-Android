@@ -27,7 +27,7 @@ public class DaySelectionDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new Builder(getActivity(),R.style.customAlert);
+        AlertDialog.Builder builder = new Builder(getActivity(), R.style.customAlert);
         DaySelectionArrayAdapter adapter = new DaySelectionArrayAdapter(
                 getActivity(), R.layout.day_check, new Integer[]{0, 1, 2, 3,
                 4, 5, 6}, getArguments());

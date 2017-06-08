@@ -32,11 +32,11 @@ public class SummaryActivity extends AppCompatActivity {
 	 */
 	public static class SummaryFragment extends Fragment {
 
-		public SummaryFragment() {
-		}
-
 		/** The view to show the ad. */
 		private AdView adView;
+
+        public SummaryFragment() {
+        }
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,

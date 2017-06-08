@@ -36,7 +36,7 @@ public class SummaryListPreference extends ListPreference {
 			// Get value to set summary
 			configuredValue = preferences.getString(snoozeKey, null);
 			reminders = preferences.getBoolean(
-					getContext().getString(R.string.reminders_status), false);
+					getContext().getString(R.string.reminders_status), true);
 			this.setEnabled(reminders);
 		} else if (key.equals(metricKey)) {
 			// Get value to set summary

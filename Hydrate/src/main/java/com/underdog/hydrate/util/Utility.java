@@ -232,4 +232,12 @@ public class Utility {
                 Intent.createChooser(emailIntent, context
                         .getString(R.string.select_app)));
     }
+
+    public int[] getHoursAndMins(String value) {
+        String hourMins[] = value.split(":");
+        int hour = Integer.parseInt(hourMins[0]);
+        int mins = Integer.parseInt(hourMins[1]);
+        return new int[]{hour, mins};
+    }
+
 }
