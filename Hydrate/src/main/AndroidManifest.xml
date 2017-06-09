@@ -196,7 +196,17 @@
         -->
         <activity
             android:name=".SetupActivity"
-            android:label="@string/initial_setup"></activity>
+            android:label="@string/initial_setup" />
+
+        <receiver android:name=".widgets.ProgressWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/progress_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

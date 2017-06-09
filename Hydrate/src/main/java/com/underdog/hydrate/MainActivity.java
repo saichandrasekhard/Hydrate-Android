@@ -1035,7 +1035,6 @@ public class MainActivity extends AppCompatActivity
             } else {
                 color = ContextCompat.getColor(getActivity(), R.color.success);
             }
-//            textView.setTextColor(color);
 
             int lighterColor = Color.argb(Color.alpha(color) / 5, Color.red(color), Color.green(color), Color.blue(color));
 
