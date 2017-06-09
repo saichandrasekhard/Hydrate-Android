@@ -26,10 +26,4 @@
 
     <style name="AppBaseTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="waterProgress" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:scaleY">2</item>
-        <item name="android:paddingStart">8dp</item>
-        <item name="android:paddingEnd">8dp</item>
-    </style>
-
 </resources>
