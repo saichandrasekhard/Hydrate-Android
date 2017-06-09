@@ -391,33 +391,8 @@
                     android:textSize="@dimen/water_unit"
                     android:textStyle="italic" />
             </LinearLayout>
-
-            <!--<ProgressBar-->
-            <!--android:id="@+id/progressBar3"-->
-            <!--style="?android:attr/progressBarStyleHorizontal"-->
-            <!--android:progressTint="@color/danger"-->
-            <!--android:progressBackgroundTint="@color/danger"-->
-            <!--android:scaleY="4"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:progress="15"-->
-
-            <!--/>-->
-
         </RelativeLayout>
 
-        <!--<ProgressBar-->
-        <!--android:id="@+id/waterProgress"-->
-        <!--style="@style/waterProgress"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:progressTint="@color/danger"-->
-        <!--android:progressBackgroundTint="@color/danger"-->
-        <!--android:background="@color/white"-->
-        <!--android:progress="0" />-->
         <me.zhanghai.android.materialprogressbar.MaterialProgressBar
             android:id="@+id/waterProgress"
             style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
@@ -431,6 +406,19 @@
             android:progress="50"
             android:scaleY="2"
             app:mpb_progressStyle="horizontal" />
+
+        <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:rcProgress="50"-->
+        <!--app:rcSecondaryProgress="50"-->
+        <!--app:rcMax="100"-->
+        <!--app:rcRadius="5dp"-->
+        <!--app:rcBackgroundPadding="4dp"-->
+        <!--app:rcReverse="false"-->
+        <!--app:rcProgressColor="@color/safe"-->
+        <!--app:rcSecondaryProgressColor="@color/safe"-->
+        <!--app:rcBackgroundColor="@color/danger" />-->
 
         <TextView
             android:id="@+id/logs"
