@@ -35,6 +35,8 @@
     public static final ** CREATOR;
 }
 
+-printmapping build/outputs/mapping/release/mapping.txt
+
 #Added after updating to 23
 -dontwarn android.support.v4.**
 -dontwarn android.support.v7.**

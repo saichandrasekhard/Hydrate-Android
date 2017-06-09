@@ -10,7 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.underdog.hydrate.animation.ProgressBarAnimation;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDAO;
@@ -65,6 +68,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -934,6 +939,7 @@ public class MainActivity extends AppCompatActivity
             Cursor targetCursor;
             String dailyTarget;
             String milliliter = getActivity().getString(R.string.milliliter);
+            boolean dateChanged = true;
 
             cursor.moveToFirst();
             count = cursor.getInt(0);
@@ -958,6 +964,7 @@ public class MainActivity extends AppCompatActivity
                 targetCursor.moveToFirst();
                 target = targetCursor.getDouble(0);
                 targetCursor.close();
+                dateChanged = false;
             } else {
                 // Get it from database providing the date
                 targetCursor = getActivity()
@@ -1005,11 +1012,11 @@ public class MainActivity extends AppCompatActivity
                 quantityConsumed = Math.round(quantityConsumed);
                 quantityConsumed /= 100;
                 textView.setText(String.valueOf(quantityConsumed));
-                setWaterStatusColor(textView, quantityConsumed, target);
+                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             } else {
                 quantityConsumed = Math.round(quantityConsumed);
                 textView.setText(String.valueOf((int) quantityConsumed));
-                setWaterStatusColor(textView, quantityConsumed, target);
+                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             }
 
             // Set water cup count
@@ -1018,15 +1025,32 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        private void setWaterStatusColor(TextView textView, double consumed,
-                                         double target) {
+        private void setProgressIndicators(TextView textView, double consumed,
+                                           double target, boolean dateChanged) {
+            int color = -1;
             if (consumed < (target * .75)) {
-                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.danger));
+                color = ContextCompat.getColor(getActivity(), R.color.danger);
             } else if (consumed < target) {
-                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.safe));
+                color = ContextCompat.getColor(getActivity(), R.color.safe);
             } else {
-                textView.setTextColor(ContextCompat.getColor(getActivity(), R.color.success));
+                color = ContextCompat.getColor(getActivity(), R.color.success);
             }
+//            textView.setTextColor(color);
+
+            int lighterColor = Color.argb(Color.alpha(color) / 5, Color.red(color), Color.green(color), Color.blue(color));
+
+            int to = (int) ((consumed / target) * 100);
+            MaterialProgressBar progressBar = (MaterialProgressBar) getActivity().findViewById(R.id.waterProgress);
+            int from = progressBar.getProgress();
+            if (dateChanged)
+                from = 0;
+            progressBar.setProgressTintList(ColorStateList.valueOf(color));
+            progressBar.setProgressBackgroundTintList(ColorStateList.valueOf(lighterColor));
+
+
+            ProgressBarAnimation animation = new ProgressBarAnimation(progressBar, from, to);
+            animation.setDuration(300);
+            progressBar.startAnimation(animation);
         }
 
         private void setCups(Cursor cursor) {

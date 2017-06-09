@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_fragment"
     android:layout_width="match_parent"
@@ -238,26 +239,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/list_view_margin"
-            android:layout_marginTop="@dimen/list_view_margin"
+            android:layout_marginTop="8dp"
             android:background="@color/white"
             android:elevation="@dimen/elevate"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/prev"
-                style="?android:attr/buttonBarButtonStyle"
+                style="?android:attr/actionButtonStyle"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="left"
                 android:elevation="@dimen/elevate"
                 android:paddingEnd="0dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
+
                 android:src="@drawable/ic_prev" />
 
             <ImageButton
                 android:id="@+id/next"
-                style="?android:attr/buttonBarButtonStyle"
+                style="?android:attr/actionButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -307,8 +309,7 @@
         <RelativeLayout
             android:id="@+id/mainRelativeWater"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/water_status_layout"
@@ -355,7 +356,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/water_quantity_status"
-                    android:textColor="@color/success"
+                    android:textColor="@color/primary"
                     android:textSize="@dimen/water_status"
                     android:textStyle="bold" />
 
@@ -392,29 +393,44 @@
             </LinearLayout>
 
             <!--<ProgressBar-->
-                <!--android:id="@+id/progressBar3"-->
-                <!--style="?android:attr/progressBarStyleHorizontal"-->
-                <!--android:progressTint="@color/danger"-->
-                <!--android:progressBackgroundTint="@color/danger"-->
-                <!--android:scaleY="4"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:progress="15"-->
+            <!--android:id="@+id/progressBar3"-->
+            <!--style="?android:attr/progressBarStyleHorizontal"-->
+            <!--android:progressTint="@color/danger"-->
+            <!--android:progressBackgroundTint="@color/danger"-->
+            <!--android:scaleY="4"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:progress="15"-->
 
-                <!--/>-->
+            <!--/>-->
 
         </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/progressBar3"
-            style="@style/waterProgress"
+        <!--<ProgressBar-->
+        <!--android:id="@+id/waterProgress"-->
+        <!--style="@style/waterProgress"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:progressTint="@color/danger"-->
+        <!--android:progressBackgroundTint="@color/danger"-->
+        <!--android:background="@color/white"-->
+        <!--android:progress="0" />-->
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:id="@+id/waterProgress"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="16dp"
             android:background="@color/white"
-            android:progress="15" />
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:progress="50"
+            android:scaleY="2"
+            app:mpb_progressStyle="horizontal" />
 
         <TextView
             android:id="@+id/logs"
@@ -430,7 +446,7 @@
             android:id="@+id/dayLog"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/mainRelativeWater"/>
+            android:layout_below="@id/mainRelativeWater" />
     </LinearLayout>
 
 </RelativeLayout>

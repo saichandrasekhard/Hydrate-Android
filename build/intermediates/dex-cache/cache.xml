@@ -3,6 +3,24 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44604e3b841bac21bf4c8dbf74bd1205bb7e9e85">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\ac7ba85ef6411d58a377e2ca6388ff891590c441\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a46c277098d453b4886db28568d627c283e53a04">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4bed2aeff747ce4e109b8f76e6dceb220e45f51d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
@@ -12,12 +30,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\chandrasekhar.dandu\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v3.0.2\5d4eb08a326bdbd7fbbddc769666898c9936b282\MPAndroidChart-v3.0.2.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="8e8b0a591d7ef33f71c9c43cdda74147fc28f298">
-        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
+        sha1="5d4eb08a326bdbd7fbbddc769666898c9936b282">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\MPAndroidChart-v3.0.2_5225f44d8a747a30e95c3115184095906f5bbbc2\classes.dex" />
     </item>
 
 </items>
