@@ -205,7 +205,6 @@
             style="?android:attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_gravity="left"
             android:elevation="@dimen/elevate"
             android:paddingEnd="0dp"
@@ -216,10 +215,7 @@
             android:id="@+id/dateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
-            android:layout_toEndOf="@id/calenderButton"
-            android:layout_toRightOf="@id/calenderButton"
             android:text="Today"
             android:textSize="@dimen/today_label_size" />
 
@@ -228,15 +224,21 @@
             style="?android:attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
             android:elevation="@dimen/elevate"
             android:paddingLeft="0dp"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingStart="0dp"
             android:src="@drawable/ic_next" />
+
+        <ImageButton
+            android:id="@+id/menu_calendar"
+            style="?android:attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_menu_calendar"
+            android:tint="@color/primary" />
     </LinearLayout>
 
     <android.support.v7.widget.CardView
@@ -438,63 +440,6 @@
             android:visibility="visible" />
 
     </RelativeLayout>
-
-    <!--<LinearLayout-->
-    <!--android:id="@+id/adLayoutMain"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:orientation="vertical"-->
-    <!--android:visibility="visible"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/cardView2"-->
-    <!--app:layout_constraintVertical_bias="1.0" />-->
-
-    <!--<android.support.v7.widget.CardView-->
-    <!--android:id="@+id/cardView2"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="256dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/cardView">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/logs"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-    <!--android:paddingRight="0dp"-->
-    <!--android:text="Drink Log" />-->
-
-    <!--<ListView-->
-    <!--android:id="@+id/dayLog"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-    <!--</LinearLayout>-->
-    <!--</android.support.v7.widget.CardView>-->
 
 
 </android.support.constraint.ConstraintLayout>

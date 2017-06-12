@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
+import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -65,6 +66,7 @@ import com.underdog.hydrate.util.Utility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
@@ -200,6 +202,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+//        for (int i = 0; i < menu.size(); i++) {
+//            Drawable drawable = menu.getItem(i).getIcon();
+//            if (drawable != null) {
+//                drawable.mutate();
+//                drawable.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+//            }
+//        }
         return true;
     }
 
@@ -215,10 +225,10 @@ public class MainActivity extends AppCompatActivity
 //            return true;
 //        }
 
-        if(id==R.id.menu_calendar){
-
-            return true;
-        }
+//        if (id == R.id.menu_calendar) {
+//
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -529,53 +539,53 @@ public class MainActivity extends AppCompatActivity
             listView = (ListView) getActivity().findViewById(R.id.dayLog);
             final float listViewX = listView.getX();
 
-//            calendarButton.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    Calendar calendar = Calendar.getInstance();
-//                    datePickerDialog = new DatePickerDialog(getActivity(), R.style.customAlert,
-//                            null, calendar.get(Calendar.YEAR), calendar
-//                            .get(Calendar.MONTH), calendar
-//                            .get(Calendar.DATE));
-//                    datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-//                            getString(R.string.ok),
-//                            new DialogInterface.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(DialogInterface dialog,
-//                                                    int which) {
-//                                    DatePicker datePicker = ((DatePickerDialog) dialog)
-//                                            .getDatePicker();
-//                                    String dateText;
-//                                    TextView dateView = (TextView) getActivity()
-//                                            .findViewById(R.id.dateView);
-//                                    Calendar calendar = Calendar.getInstance();
-//                                    calendar.set(datePicker.getYear(),
-//                                            datePicker.getMonth(),
-//                                            datePicker.getDayOfMonth());
-//                                    dateText = dateFormat.format(calendar
-//                                            .getTime());
-//                                    dateView.setText(dateText);
-//
-//                                    restartLoaders();
-//                                    dialog.dismiss();
-//                                    Log.i(tag, "date set");
-//                                }
-//                            });
-//                    datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-//                            getString(R.string.cancel),
-//                            new DialogInterface.OnClickListener() {
-//
-//                                @Override
-//                                public void onClick(DialogInterface dialog,
-//                                                    int which) {
-//                                    dialog.cancel();
-//                                }
-//                            });
-//                    datePickerDialog.show();
-//                }
-//            });
+            calendarButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Calendar calendar = Calendar.getInstance();
+                    datePickerDialog = new DatePickerDialog(getActivity(), R.style.customAlert,
+                            null, calendar.get(Calendar.YEAR), calendar
+                            .get(Calendar.MONTH), calendar
+                            .get(Calendar.DATE));
+                    datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                            getString(R.string.ok),
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    DatePicker datePicker = ((DatePickerDialog) dialog)
+                                            .getDatePicker();
+                                    String dateText;
+                                    TextView dateView = (TextView) getActivity()
+                                            .findViewById(R.id.dateView);
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(datePicker.getYear(),
+                                            datePicker.getMonth(),
+                                            datePicker.getDayOfMonth());
+                                    dateText = dateFormat.format(calendar
+                                            .getTime());
+                                    dateView.setText(dateText);
+
+                                    restartLoaders();
+                                    dialog.dismiss();
+                                    Log.i(tag, "date set");
+                                }
+                            });
+                    datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
+                            getString(R.string.cancel),
+                            new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    datePickerDialog.show();
+                }
+            });
 
             // Set button listeners for list view previous and next
             previous = (ImageButton) getActivity().findViewById(R.id.prev);
@@ -693,7 +703,6 @@ public class MainActivity extends AppCompatActivity
 
             // Start loading the ad in the background.
             adView.loadAd(adRequest);
-            Toast.makeText(getActivity(), ""+adView.getHeight()+":::"+adView.getY(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
