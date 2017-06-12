@@ -3,11 +3,20 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\a50cbc36a399e0738375e327fd33d61c16f96bdd\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8ccd62eef5c167dd1c95ef1ef2184faeff8ef777\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="20abb60cdb4d68cf40bacf10e0828b4e45da208e">
+        sha1="3e8d2e66dba7c0d93fe2da18e8643469e6cd6d3e">
         <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
     </item>
     <item
@@ -27,15 +36,6 @@
         revision="25.0.3"
         sha1="a46c277098d453b4886db28568d627c283e53a04">
         <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4bed2aeff747ce4e109b8f76e6dceb220e45f51d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\chandrasekhar.dandu\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v3.0.2\5d4eb08a326bdbd7fbbddc769666898c9936b282\MPAndroidChart-v3.0.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="5d4eb08a326bdbd7fbbddc769666898c9936b282">
-        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\MPAndroidChart-v3.0.2_5225f44d8a747a30e95c3115184095906f5bbbc2\classes.dex" />
     </item>
 
 </items>

@@ -39,7 +39,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
-import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -66,7 +65,6 @@ import com.underdog.hydrate.util.Utility;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
@@ -138,12 +136,12 @@ public class MainActivity extends AppCompatActivity
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        userName = preferences.getString(
-                this.getString(R.string.key_user_name), "User");
-
-        welcomeMessage = (TextView) findViewById(R.id.hello_user);
-        welcomeMessage
-                .setText(getString(R.string.hello) + " " + userName + ",");
+//        userName = preferences.getString(
+//                this.getString(R.string.key_user_name), "User");
+//
+//        welcomeMessage = (TextView) findViewById(R.id.hello_user);
+//        welcomeMessage
+//                .setText(getString(R.string.hello) + " " + userName + ",");
 
         metricView = (TextView) findViewById(R.id.water_quantity_unit);
         metric = preferences.getString(this.getString(R.string.key_metric), ml);
@@ -216,6 +214,11 @@ public class MainActivity extends AppCompatActivity
 //        if (id == R.id.action_settings) {
 //            return true;
 //        }
+
+        if(id==R.id.menu_calendar){
+
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -474,7 +477,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
+            View rootView = inflater.inflate(R.layout.fragment_main_constraint, container,
                     false);
             return rootView;
         }
@@ -522,57 +525,57 @@ public class MainActivity extends AppCompatActivity
             final SimpleDateFormat dateFormat = new SimpleDateFormat(
                     Constants.DATE_FORMAT);
             final ImageButton calendarButton = (ImageButton) getActivity()
-                    .findViewById(R.id.calenderButton);
+                    .findViewById(R.id.menu_calendar);
             listView = (ListView) getActivity().findViewById(R.id.dayLog);
             final float listViewX = listView.getX();
 
-            calendarButton.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    Calendar calendar = Calendar.getInstance();
-                    datePickerDialog = new DatePickerDialog(getActivity(), R.style.customAlert,
-                            null, calendar.get(Calendar.YEAR), calendar
-                            .get(Calendar.MONTH), calendar
-                            .get(Calendar.DATE));
-                    datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                            getString(R.string.ok),
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    DatePicker datePicker = ((DatePickerDialog) dialog)
-                                            .getDatePicker();
-                                    String dateText;
-                                    TextView dateView = (TextView) getActivity()
-                                            .findViewById(R.id.dateView);
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(datePicker.getYear(),
-                                            datePicker.getMonth(),
-                                            datePicker.getDayOfMonth());
-                                    dateText = dateFormat.format(calendar
-                                            .getTime());
-                                    dateView.setText(dateText);
-
-                                    restartLoaders();
-                                    dialog.dismiss();
-                                    Log.i(tag, "date set");
-                                }
-                            });
-                    datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                            getString(R.string.cancel),
-                            new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    dialog.cancel();
-                                }
-                            });
-                    datePickerDialog.show();
-                }
-            });
+//            calendarButton.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    Calendar calendar = Calendar.getInstance();
+//                    datePickerDialog = new DatePickerDialog(getActivity(), R.style.customAlert,
+//                            null, calendar.get(Calendar.YEAR), calendar
+//                            .get(Calendar.MONTH), calendar
+//                            .get(Calendar.DATE));
+//                    datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+//                            getString(R.string.ok),
+//                            new DialogInterface.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(DialogInterface dialog,
+//                                                    int which) {
+//                                    DatePicker datePicker = ((DatePickerDialog) dialog)
+//                                            .getDatePicker();
+//                                    String dateText;
+//                                    TextView dateView = (TextView) getActivity()
+//                                            .findViewById(R.id.dateView);
+//                                    Calendar calendar = Calendar.getInstance();
+//                                    calendar.set(datePicker.getYear(),
+//                                            datePicker.getMonth(),
+//                                            datePicker.getDayOfMonth());
+//                                    dateText = dateFormat.format(calendar
+//                                            .getTime());
+//                                    dateView.setText(dateText);
+//
+//                                    restartLoaders();
+//                                    dialog.dismiss();
+//                                    Log.i(tag, "date set");
+//                                }
+//                            });
+//                    datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
+//                            getString(R.string.cancel),
+//                            new DialogInterface.OnClickListener() {
+//
+//                                @Override
+//                                public void onClick(DialogInterface dialog,
+//                                                    int which) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//                    datePickerDialog.show();
+//                }
+//            });
 
             // Set button listeners for list view previous and next
             previous = (ImageButton) getActivity().findViewById(R.id.prev);
@@ -690,7 +693,7 @@ public class MainActivity extends AppCompatActivity
 
             // Start loading the ad in the background.
             adView.loadAd(adRequest);
-
+            Toast.makeText(getActivity(), ""+adView.getHeight()+":::"+adView.getY(), Toast.LENGTH_SHORT).show();
         }
 
         @Override

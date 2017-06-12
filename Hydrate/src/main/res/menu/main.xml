@@ -1,6 +1,15 @@
-<menu xmlns:tools="http://schemas.android.com/tools"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.underdog.hydrate.MainActivity">
 
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/ic_menu_calendar"
+        android:orderInCategory="100"
+
+        android:title="@string/instant_mute"
+        app:showAsAction="always" />
     <!--<item-->
     <!--android:id="@+id/instant_mute"-->
     <!--android:icon="@drawable/ic_action_bell"-->
