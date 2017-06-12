@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String tag = "MainActivity";
-    AlarmReceiver alarmReceiver;
+    private AlarmReceiver alarmReceiver;
+    private NavigationView navigationView;
 
     /**
      * @return the alarmReceiver
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().add(R.id.main_container, new HomeScreenFragment()).commit();
@@ -139,12 +140,12 @@ public class MainActivity extends AppCompatActivity
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        userName = preferences.getString(
-//                this.getString(R.string.key_user_name), "User");
-//
-//        welcomeMessage = (TextView) findViewById(R.id.hello_user);
-//        welcomeMessage
-//                .setText(getString(R.string.hello) + " " + userName + ",");
+        userName = preferences.getString(
+                this.getString(R.string.key_user_name), "User");
+        View headerView = navigationView.getHeaderView(0);
+        welcomeMessage = (TextView) headerView.findViewById(R.id.hello_user);
+        welcomeMessage
+                .setText(userName);
 
         metricView = (TextView) findViewById(R.id.water_quantity_unit);
         metric = preferences.getString(this.getString(R.string.key_metric), ml);
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity
             } else {
 
                 // External storage permissions is already available.
-                Log.i(tag,
+                Log.d(tag,
                         "External storage permission has already been granted.");
                 //Show restore dialog
                 if (Utility.getInstance().isBackupAvailable()) {
