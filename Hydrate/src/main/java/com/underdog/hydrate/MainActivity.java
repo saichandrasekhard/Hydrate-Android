@@ -63,6 +63,7 @@ import com.underdog.hydrate.fragments.TargetAchievedDialog;
 import com.underdog.hydrate.receiver.AlarmReceiver;
 import com.underdog.hydrate.util.Log;
 import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.widgets.OnSwipeTouchListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -480,6 +481,7 @@ public class MainActivity extends AppCompatActivity
          * The view to show the ad.
          */
         private AdView adView;
+
         private DatePickerDialog datePickerDialog;
         private TextView dateView;
         private ListView listView;
@@ -530,8 +532,8 @@ public class MainActivity extends AppCompatActivity
             }
             dateView.setText(date);
 
-            ImageButton previous;
-            ImageButton next;
+            final ImageButton previous;
+            final ImageButton next;
             final SimpleDateFormat dateFormat = new SimpleDateFormat(
                     Constants.DATE_FORMAT);
             final ImageButton calendarButton = (ImageButton) getActivity()
@@ -703,6 +705,21 @@ public class MainActivity extends AppCompatActivity
 
             // Start loading the ad in the background.
             adView.loadAd(adRequest);
+
+            View view = getActivity().findViewById(R.id.main_fragment);
+            OnSwipeTouchListener swipeTouchListener = new OnSwipeTouchListener(getContext()) {
+                @Override
+                public void onSwipeLeft() {
+                    next.callOnClick();
+                }
+
+                @Override
+                public void onSwipeRight() {
+                    previous.callOnClick();
+                }
+            };
+            view.setOnTouchListener(swipeTouchListener);
+            listView.setOnTouchListener(swipeTouchListener);
         }
 
         @Override
