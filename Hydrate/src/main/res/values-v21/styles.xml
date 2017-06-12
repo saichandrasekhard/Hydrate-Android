@@ -24,12 +24,29 @@
         <item name="android:textColorSecondary">@color/primary</item>
     </style>
 
-    <!--<style name="MyActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">-->
-    <!--<item name="android:background">@color/primary</item>-->
-    <!--</style>-->
-
     <style name="MyActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
         <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="ThreeButtonDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/NeutralButtonStyle</item>
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="NeutralButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/danger</item>
     </style>
 
     <color name="grey">#F2F2F2</color>

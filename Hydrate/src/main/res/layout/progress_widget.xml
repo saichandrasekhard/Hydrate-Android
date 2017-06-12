@@ -1,0 +1,153 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/grey"
+    android:columnCount="5"
+    android:orientation="horizontal"
+    android:padding="@dimen/widget_margin"
+    android:rowCount="1">
+
+    <ImageButton
+        android:id="@+id/appCompatImageButton"
+        style="@style/Base.Widget.AppCompat.ImageButton"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_row="0"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_columnSpan="3"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_row="0"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/mainRelativeWater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/water_status_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/water_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/water_status"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/water_status"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/water_glass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/drink_summary_horizontal_dim_units"
+                    android:layout_marginStart="@dimen/drink_summary_horizontal_dim_units"
+                    android:text="@string/water_glasses"
+                    android:textSize="@dimen/water_unit"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/water_quantity_status_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/water_status_layout"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/water_quantity_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/water_quantity_status"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/water_status"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/slash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/drink_summary_horizontal_dim_units"
+                    android:layout_marginLeft="@dimen/drink_summary_horizontal_dim_units"
+                    android:layout_marginRight="@dimen/drink_summary_horizontal_dim_units"
+                    android:layout_marginStart="@dimen/drink_summary_horizontal_dim_units"
+                    android:text="/"
+                    android:textSize="@dimen/water_status"
+                    android:textStyle="italic|bold" />
+
+                <TextView
+                    android:id="@+id/water_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/water_quantity_status"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/water_status"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/water_quantity_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/drink_summary_horizontal_dim_units"
+                    android:layout_marginStart="@dimen/drink_summary_horizontal_dim_units"
+                    android:text="@string/water_units"
+                    android:textSize="@dimen/water_unit"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/widgetWaterProgress"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal.NoPadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:progress="50"
+            android:progressTint="@color/primary"
+            android:scaleY="2" />
+    </LinearLayout>
+
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_column="4"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_row="0"
+        android:background="@null"
+        android:elevation="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_menu_home_glass_1" />
+
+</GridLayout>

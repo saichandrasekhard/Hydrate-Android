@@ -43,10 +43,11 @@ public class SetupActivity extends AppCompatActivity {
     private Button interval;
     private EditText targetEdit;
     private EditText username;
+    private Button save;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -54,6 +55,7 @@ public class SetupActivity extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.setupUsernameEdit);
         targetEdit = (EditText) findViewById(R.id.setupTargetEdit);
+        save = (Button) findViewById(R.id.setupSubmit);
 
 
         targetEdit.setText(hydrateDAO.getTodayTarget(getApplicationContext()) / 1000 + "");
@@ -70,13 +72,24 @@ public class SetupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                setInterval();
+                if (s.toString() == null || s.toString().isEmpty()) {
+                    save.setEnabled(false);
+                    save.animate().alpha(0.6f);
+                } else {
+                    save.setEnabled(true);
+                    save.animate().alpha(1f);
+                    setInterval();
+                }
             }
         });
 
 
-        startTime = (Button) findViewById(R.id.setupStartTimeEdit);
-        startTime.setOnClickListener(new View.OnClickListener() {
+        startTime = (Button)
+
+                findViewById(R.id.setupStartTimeEdit);
+        startTime.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 String value = startTime.getText().toString();
@@ -92,8 +105,12 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        endTime = (Button) findViewById(R.id.setupEndTimeEdit);
-        endTime.setOnClickListener(new View.OnClickListener() {
+        endTime = (Button)
+
+                findViewById(R.id.setupEndTimeEdit);
+        endTime.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 String value = endTime.getText().toString();
@@ -109,12 +126,18 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        cupSpinner = (Spinner) findViewById(R.id.setupCupEdit);
+        cupSpinner = (Spinner)
+
+                findViewById(R.id.setupCupEdit);
+
         setCupOptions();
         cupSpinner.setSelection(3);
-        cupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        cupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+
+        {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                       long id) {
                 setInterval();
             }
 
@@ -124,16 +147,21 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        interval = (Button) findViewById(R.id.setupIntervalEdit);
-        interval.setOnClickListener(new View.OnClickListener() {
+        interval = (Button)
+
+                findViewById(R.id.setupIntervalEdit);
+        interval.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SetupActivity.this, R.string.interval_in_settings, Toast.LENGTH_SHORT).show();
             }
         });
 
-        Button save = (Button) findViewById(R.id.setupSubmit);
-        save.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View v) {
                 SetupActivity.ApplyChanges applyChanges = new SetupActivity.ApplyChanges();

@@ -45,7 +45,7 @@ public class ListViewEditDialog extends DialogFragment {
         final Calendar calendar;
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat(
                 Constants.DATE_TIME_FORMAT);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.customAlert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.ThreeButtonDialog);
         final View view = getActivity().getLayoutInflater().inflate(
                 R.layout.edit_dialog, null);
         inputExtras = getArguments();
@@ -152,5 +152,12 @@ public class ListViewEditDialog extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        Button positive= ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
+//        positive.setTextColor(ContextCompat.getColor(getContext(),R.color.success));
     }
 }
