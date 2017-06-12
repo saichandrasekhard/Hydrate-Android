@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="20abb60cdb4d68cf40bacf10e0828b4e45da208e">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="12920f9016b8b05acbc2af7cdc13cef6946fe7d3">
         <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_52e4a26bf6d192947af419110209133b01297800\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="2cb64fbce9a8993f36685ae3b9adf5ad107be32a">
-        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
     </item>
     <item
         is-multidex="true"
