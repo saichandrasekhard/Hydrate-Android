@@ -51,6 +51,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.kobakei.ratethisapp.RateThisApp;
 import com.underdog.hydrate.animation.ProgressBarAnimation;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
@@ -124,6 +125,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().add(R.id.main_container, new HomeScreenFragment()).commit();
+
+        // Monitor launch times and interval from installation
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this);
     }
 
     protected void onStart() {

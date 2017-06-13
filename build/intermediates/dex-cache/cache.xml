@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="cde5d985dafc76bf999cc878c4657df4ee18b400">
+        sha1="2586d5d374e7378d0094e617dcd0a7549dffcc7c">
         <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_84124232ded4ffa355c8a32369b0d574bdf06c2b\classes.dex" />
     </item>
     <item
@@ -117,6 +117,15 @@
         revision="25.0.3"
         sha1="a46c277098d453b4886db28568d627c283e53a04">
         <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4bed2aeff747ce4e109b8f76e6dceb220e45f51d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\chandrasekhar.dandu\.android\build-cache\dbbf62f9bf10abcb3d4f4822dc5c6c2d69a079ad\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="680a7f9951d205d710bb1b119011fa03ddf7a914">
+        <dex dex="C:\Users\chandrasekhar.dandu\Desktop\AndroidStudioProjects\Hydrate-Android\Hydrate\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3168672274d8964a7e50aa02c4f69612061483be\classes.dex" />
     </item>
 
 </items>
