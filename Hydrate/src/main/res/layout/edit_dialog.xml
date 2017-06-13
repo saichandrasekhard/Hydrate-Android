@@ -1,96 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <NumberPicker
+        android:id="@+id/editQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+    </NumberPicker>
+
+    <!--<EditText-->
+        <!--android:id="@+id/editQuantity"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="10dp"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:inputType="number"-->
+        <!--android:text="250"-->
+        <!--android:textColor="@color/primary"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--tools:layout_constraintRight_creator="1"-->
+        <!--tools:layout_constraintTop_creator="1"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--app:layout_constraintHorizontal_bias="0.501">-->
+        <!--<requestFocus />-->
+    <!--</EditText>-->
+
+    <TextView
+        android:id="@+id/editUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:text="ml"
+        android:textSize="@dimen/water_unit"
+        app:layout_constraintBottom_toBottomOf="@+id/editQuantity"
+        app:layout_constraintLeft_toRightOf="@+id/editQuantity"
+        app:layout_constraintTop_toTopOf="@+id/editQuantity" />
+
+    <TimePicker
+        android:id="@+id/editTime"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/grey"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/editQuantityLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/quantity"-->
-                <!--android:text="@string/quantity"-->
-                <!--android:textSize="@dimen/water_unit" />-->
-
-                <EditText
-                    android:id="@+id/editQuantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="250"
-                    android:textColor="@color/primary"
-                    android:textStyle="bold">
-
-                    <requestFocus />
-                </EditText>
-
-                <TextView
-                    android:id="@+id/editUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ml"
-                    android:textSize="@dimen/water_unit" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/editTimeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editQuantityLayout"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editQuantity"
+        app:layout_constraintVertical_bias="0.0" />
 
 
-            <TimePicker
-                android:id="@+id/editTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/grey"-->
+    <!--android:orientation="vertical">-->
 
-        </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:id="@+id/editQuantityLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:orientation="vertical">-->
 
-        <TextView
-            android:id="@+id/quantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@color/white"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/quantity"
-            android:textSize="@dimen/water_unit" />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal">-->
 
-        <TextView
-            android:id="@+id/editTimeLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/editTimeLayout"
-            android:background="@color/white"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:text="@string/time"
-            android:textSize="@dimen/water_unit" />
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/quantity"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="@string/quantity"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:textSize="@dimen/water_unit" />&ndash;&gt;-->
 
-    </RelativeLayout>
-</ScrollView>
+    <!--<EditText-->
+    <!--android:id="@+id/editQuantity"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:inputType="number"-->
+    <!--android:text="250"-->
+    <!--android:textColor="@color/primary"-->
+    <!--android:textStyle="bold">-->
+
+    <!--<requestFocus />-->
+    <!--</EditText>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/editUnit"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="ml"-->
+    <!--android:textSize="@dimen/water_unit" />-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/editTimeLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_below="@+id/editQuantityLayout"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:orientation="vertical">-->
+
+
+    <!--<TimePicker-->
+    <!--android:id="@+id/editTime"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/quantity"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@color/white"-->
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:text="@string/quantity"-->
+    <!--android:textSize="@dimen/water_unit" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/editTimeLabel"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignTop="@+id/editTimeLayout"-->
+    <!--android:background="@color/white"-->
+    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+    <!--android:text="@string/time"-->
+    <!--android:textSize="@dimen/water_unit" />-->
+
+    <!--</RelativeLayout>-->
+</android.support.constraint.ConstraintLayout>

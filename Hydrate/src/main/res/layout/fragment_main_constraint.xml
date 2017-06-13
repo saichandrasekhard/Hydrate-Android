@@ -195,6 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:elevation="2dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -209,8 +210,19 @@
             android:layout_gravity="left"
             android:elevation="@dimen/elevate"
             android:paddingEnd="0dp"
+            android:src="@drawable/ic_prev"
 
-            android:src="@drawable/ic_prev" />
+            android:tint="@color/primary" />
+
+        <ImageButton
+            android:id="@+id/menu_calendar"
+            style="?android:attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_menu_calendar"
+            android:tint="@color/primary" />
 
         <TextView
             android:id="@+id/dateView"
@@ -229,17 +241,10 @@
             android:paddingLeft="0dp"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingStart="0dp"
-            android:src="@drawable/ic_next" />
-
-        <ImageButton
-            android:id="@+id/menu_calendar"
-            style="?android:attr/actionButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:src="@drawable/ic_menu_calendar"
+            android:src="@drawable/ic_next"
             android:tint="@color/primary" />
+
+
     </LinearLayout>
 
     <android.support.v7.widget.CardView
