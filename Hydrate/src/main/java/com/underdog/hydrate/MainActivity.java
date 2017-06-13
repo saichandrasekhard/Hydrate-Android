@@ -366,8 +366,10 @@ public class MainActivity extends AppCompatActivity
                 (TextView) findViewById(R.id.water_target), quantity,
                 getApplicationContext());
 
+        TextView dateView = (TextView) findViewById(R.id.dateView);
+
         // Save the water in DB
-        HydrateDAO.getHydrateDAO().addWater(System.currentTimeMillis(), quantity, this);
+        HydrateDAO.getHydrateDAO().addWater(Utility.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {

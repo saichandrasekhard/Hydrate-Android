@@ -75,7 +75,23 @@ public class Utility {
             e.printStackTrace();
         }
         return dateObj.getTime();
+    }
 
+    public long getThisTimeThatDay(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                Constants.DATE_FORMAT);
+        Date dateObj = null;
+        try {
+            dateObj = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+        calendar.setTime(dateObj);
+        calendar.set(Calendar.HOUR_OF_DAY, today.get(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, today.get(Calendar.MINUTE));
+        return calendar.getTimeInMillis();
     }
 
     public String getSqliteDate(long timestamp) {
