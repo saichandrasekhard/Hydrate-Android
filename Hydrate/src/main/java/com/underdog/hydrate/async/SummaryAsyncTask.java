@@ -12,6 +12,7 @@ import com.underdog.hydrate.R;
 import com.underdog.hydrate.adapter.SummaryArrayAdapter;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
+import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.util.DateUtil;
 
@@ -39,6 +40,9 @@ public class SummaryAsyncTask extends AsyncTask<String, String, Object[]> {
         int sinceFirstUse;
         int divider;
         Cursor cursor;
+
+        //First make missing entries in database based on last date entry.
+        HydrateDAO.getInstance().syncTargets(context);
 
         ContentResolver contentResolver = context.getContentResolver();
 

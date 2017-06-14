@@ -57,9 +57,34 @@ public class DateUtil {
         return selectionArgs;
     }
 
-    public long getTimeInMillis(String date) {
+    public String getDate(long timestamp) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 Constants.DATE_FORMAT);
+        return dateFormat.format(new Date(timestamp));
+    }
+
+    public long getTimeFromDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                Constants.DATE_FORMAT);
+        Date dateObj = null;
+        try {
+            dateObj = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateObj.getTime();
+    }
+
+    public String getSqliteDate(long timestamp) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_SQLITE);
+        Date date = new Date(timestamp);
+        Log.d(this.getClass().toString(), "date - " + dateFormat.format(date));
+        return dateFormat.format(date);
+    }
+
+    public long getTimeFromSqliteDate(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                Constants.DATE_FORMAT_SQLITE);
         Date dateObj = null;
         try {
             dateObj = dateFormat.parse(date);
@@ -84,19 +109,6 @@ public class DateUtil {
         calendar.set(Calendar.HOUR_OF_DAY, today.get(Calendar.HOUR_OF_DAY));
         calendar.set(Calendar.MINUTE, today.get(Calendar.MINUTE));
         return calendar.getTimeInMillis();
-    }
-
-    public String getSqliteDate(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(timestamp);
-        Log.d(this.getClass().toString(), "date - " + dateFormat.format(date));
-        return dateFormat.format(date);
-    }
-
-    public String getDate(long timestamp) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                Constants.DATE_FORMAT);
-        return dateFormat.format(new Date(timestamp));
     }
 
     public int getDaysSince(long timestamp) {

@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 
 import com.underdog.hydrate.R;
+import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 
@@ -207,7 +209,7 @@ public class HydrateDAO {
      * @return
      */
     public double getTodayTarget(Context context) {
-        return getTargetForDay(context, System.currentTimeMillis());
+        return getTargetFromDS(context, System.currentTimeMillis());
     }
 
 
@@ -255,6 +257,36 @@ public class HydrateDAO {
                 DateUtil.getInstance().getSqliteDate(timestamp));
         context.getContentResolver().insert(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
+    }
+
+    public void syncTargets(Context context) {
+        String lastEntryDate = getLastTargetTableEntry(context);
+        String todaysDate = DateUtil.getInstance().getSqliteDate(System.currentTimeMillis());
+
+        if (lastEntryDate.equals(todaysDate)) {
+            // Already entry made, just update consumed status for today
+        } else {
+            // Starting from the lastEntryDate, keep making entries in target table for each day until today
+            long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
+            long todayDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(todaysDate);
+            long startAt = lastEntryDateInMillis;
+            while (startAt < todayDateInMillis) {
+
+                Log.i(TAG, "startAt - " + startAt + ":::" + todayDateInMillis);
+                startAt += Constants.DAY_HOURS_LONG;
+            }
+        }
+    }
+
+    public String getLastTargetTableEntry(Context context) {
+        String date = null;
+        Uri uri = HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET.buildUpon().appendQueryParameter(HydrateDatabase.LIMIT, "1").build();
+        Cursor cursor = context.getContentResolver().query(uri, new String[]{HydrateDatabase.COLUMN_DATE}, null, null, " target_id DESC ");
+        cursor.moveToFirst();
+        date = cursor.getString(0);
+        Log.d(TAG, "date - " + date);
+        cursor.close();
+        return date;
     }
 
     public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval, boolean isML, Context context) {

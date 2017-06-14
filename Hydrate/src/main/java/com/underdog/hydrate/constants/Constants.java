@@ -7,7 +7,7 @@ public class Constants {
     /**
      * Logs enabled or not
      */
-    public static final boolean debugLogs = false;
+    public static final boolean debugLogs = true;
     public static final String PACKAGE = "com.underdog.hydrate";
     public static final String CURRENT_DB_PATH = File.separator + "data"
             + File.separator + PACKAGE + File.separator + "databases"
@@ -18,6 +18,7 @@ public class Constants {
     public static final long DAY_HOURS_LONG = 86400000;
     public static final String TIME = "time";
     public static final String DATE_FORMAT = "dd-MMM-yyyy";
+    public static final String DATE_FORMAT_SQLITE = "yyyy-MM-dd";
     public static final String TIME_FORMAT = "h:mm a";
     public static final String DATE_TIME_FORMAT = new StringBuffer(DATE_FORMAT)
             .append(" ").append(TIME_FORMAT).toString();

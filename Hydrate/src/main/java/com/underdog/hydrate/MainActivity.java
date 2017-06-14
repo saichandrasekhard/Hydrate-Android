@@ -1005,9 +1005,11 @@ public class MainActivity extends AppCompatActivity
             // Get today's date
             String currentDate = DateUtil.getInstance()
                     .getDate(System.currentTimeMillis());
-            target=HydrateDAO.getInstance().getTargetForDay(getContext(),System.currentTimeMillis());
             if (date.equals(currentDate)) {
+                target = HydrateDAO.getInstance().getTodayTarget(getContext());
                 dateChanged = false;
+            } else {
+                target = HydrateDAO.getInstance().getTargetForDay(getContext(), System.currentTimeMillis());
             }
 
             if (metric.equals(milliliter)) {

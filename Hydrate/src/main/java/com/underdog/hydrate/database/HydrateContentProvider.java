@@ -111,7 +111,7 @@ public class HydrateContentProvider extends ContentProvider {
             Log.d(tag, "Enter hydrate_target cp");
             sqlDB = database.getWritableDatabase();
             cursor = sqlDB.query(HYDRATE_TARGET, projection, selection,
-                    selectionArgs, null, null, sortOrder);
+                    selectionArgs, null, null, sortOrder,uri.getQueryParameter(HydrateDatabase.LIMIT));
             cursor.setNotificationUri(getContext().getContentResolver(),
                     CONTENT_URI_HYDRATE_TARGET);
             return cursor;
