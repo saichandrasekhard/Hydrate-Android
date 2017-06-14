@@ -693,6 +693,21 @@ public class MainActivity extends AppCompatActivity
             // Set today's drink events in list view
             setDrinkEvents();
 
+            View view = getActivity().findViewById(R.id.main_fragment);
+            OnSwipeTouchListener swipeTouchListener = new OnSwipeTouchListener(getContext()) {
+                @Override
+                public void onSwipeLeft() {
+                    next.callOnClick();
+                }
+
+                @Override
+                public void onSwipeRight() {
+                    previous.callOnClick();
+                }
+            };
+            view.setOnTouchListener(swipeTouchListener);
+            listView.setOnTouchListener(swipeTouchListener);
+
             // Create an ad.
             adView = new AdView(this.getActivity());
             adView.setAdSize(AdSize.BANNER);
@@ -708,27 +723,21 @@ public class MainActivity extends AppCompatActivity
             // Create an ad request. Check logcat output for the hashed device
             // ID to
             // get test ads on a physical device.
-            AdRequest adRequest = new AdRequest.Builder()
+            final AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     .addTestDevice("B0E58BFA678C367F782946106E3FDB62").build();
 
             // Start loading the ad in the background.
-            adView.loadAd(adRequest);
+//            adView.loadAd(adRequest);
 
-            View view = getActivity().findViewById(R.id.main_fragment);
-            OnSwipeTouchListener swipeTouchListener = new OnSwipeTouchListener(getContext()) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
                 @Override
-                public void onSwipeLeft() {
-                    next.callOnClick();
+                public void run() {
+                    adView.loadAd(adRequest);
+//                    adView.bringToFront();
                 }
-
-                @Override
-                public void onSwipeRight() {
-                    previous.callOnClick();
-                }
-            };
-            view.setOnTouchListener(swipeTouchListener);
-            listView.setOnTouchListener(swipeTouchListener);
+            }, 2000);
         }
 
         @Override
