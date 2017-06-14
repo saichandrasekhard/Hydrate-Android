@@ -12,9 +12,6 @@ import com.underdog.hydrate.R;
 import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 
-import java.util.List;
-import java.util.Map;
-
 public class HydrateDAO {
 
     private static HydrateDAO hydrateDAO;
@@ -118,52 +115,6 @@ public class HydrateDAO {
                 new String[]{String.valueOf(rowId)});
     }
 
-    /**
-     * Update the target status at the end of the day
-     */
-    public void updateTargetStatus(Context context) {
-        long timestamp = System.currentTimeMillis();
-        String[] selectionArgs;
-        double todaysConsumption;
-        double dailyTarget;
-
-        ContentValues values;
-
-        // Subtract 24hours to make sure we are calculating for the same day
-        // since this method gets called at 11:59:59 PM in inexact fashion
-        timestamp -= 86400000l;
-        selectionArgs = DateUtil.getInstance().getSelectionArgsForDay(timestamp);
-
-        Cursor cursor = context.getContentResolver().query(
-                HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
-                new String[]{"sum(quantity) AS sum"},
-                HydrateDatabase.FROM_TO_TIME, selectionArgs, null);
-
-        cursor.moveToFirst();
-        todaysConsumption = cursor.getDouble(0);
-        cursor.close();
-        Log.d(this.getClass().toString(), "consumption - " + todaysConsumption);
-        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{DateUtil.getInstance().getDay(timestamp) + ""}, null);
-        targetCursor.moveToFirst();
-        dailyTarget = targetCursor.getDouble(0);
-        targetCursor.close();
-
-        values = new ContentValues();
-        if (todaysConsumption >= dailyTarget) {
-            values.put(HydrateDatabase.COLUMN_REACHED, 1);
-        } else {
-            values.put(HydrateDatabase.COLUMN_REACHED, 0);
-        }
-        values.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, dailyTarget);
-        values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, todaysConsumption);
-        values.put(HydrateDatabase.COLUMN_DATE,
-                DateUtil.getInstance().getSqliteDate(timestamp));
-        context.getContentResolver().insert(
-                HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
-    }
-
     public long checkDnd(long reminderTime, Context context) {
         long lunchStart;
         long lunchEnd;
@@ -211,27 +162,99 @@ public class HydrateDAO {
         return reminderTime;
     }
 
+    public double getTargetFromTargetTable(Context context, long timeInMillis) {
+        double target = -1;
+        Cursor targetCursor = context
+                .getContentResolver()
+                .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
+                        new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
+                        HydrateDatabase.COLUMN_DATE + "=?",
+                        new String[]{DateUtil.getInstance().getSqliteDate(
+                                timeInMillis)},
+                        null);
+        if (targetCursor != null && targetCursor.getCount() > 0) {
+            targetCursor.moveToFirst();
+            target = targetCursor.getDouble(0);
+            targetCursor.close();
+        }
+        return target;
+    }
+
+    public double getTargetFromDS(Context context, long timeInMillis) {
+        double target = -1;
+        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
+                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
+                new String[]{DateUtil.getInstance().getDay(timeInMillis) + ""}, null);
+        if (targetCursor != null && targetCursor.getCount() > 0) {
+            targetCursor.moveToFirst();
+            target = targetCursor.getDouble(0);
+            targetCursor.close();
+        }
+        return target;
+    }
+
+    public double getTargetForDay(Context context, long timeInMillis) {
+        double target = getTargetFromTargetTable(context, timeInMillis);
+        if (target == -1) {
+            target = getTargetFromDS(context, timeInMillis);
+        }
+        return target;
+    }
+
     /**
      * Returns today's target
      *
      * @return
      */
     public double getTodayTarget(Context context) {
-        double target;
-        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{DateUtil.getInstance().getToday() + ""}, null);
-        targetCursor.moveToFirst();
-        target = targetCursor.getDouble(0);
-        targetCursor.close();
-        return target;
+        return getTargetForDay(context, System.currentTimeMillis());
     }
 
-    public List<Map<String, String>> getTargetStatus(int noOfDays) {
-        List<Map<String, String>> targets = null;
 
+    /**
+     * Update the target status at the end of the day
+     */
+    public void updateTargetStatus(Context context) {
+        long timestamp = System.currentTimeMillis();
+        String[] selectionArgs;
+        double todaysConsumption;
+        double dailyTarget;
 
-        return targets;
+        ContentValues values;
+
+        // Subtract 24hours to make sure we are calculating for the same day
+        // since this method gets called at 11:59:59 PM in inexact fashion
+        timestamp -= 86400000l;
+        selectionArgs = DateUtil.getInstance().getSelectionArgsForDay(timestamp);
+
+        Cursor cursor = context.getContentResolver().query(
+                HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
+                new String[]{"sum(quantity) AS sum"},
+                HydrateDatabase.FROM_TO_TIME, selectionArgs, null);
+
+        cursor.moveToFirst();
+        todaysConsumption = cursor.getDouble(0);
+        cursor.close();
+        Log.d(this.getClass().toString(), "consumption - " + todaysConsumption);
+        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
+                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
+                new String[]{DateUtil.getInstance().getDay(timestamp) + ""}, null);
+        targetCursor.moveToFirst();
+        dailyTarget = targetCursor.getDouble(0);
+        targetCursor.close();
+
+        values = new ContentValues();
+        if (todaysConsumption >= dailyTarget) {
+            values.put(HydrateDatabase.COLUMN_REACHED, 1);
+        } else {
+            values.put(HydrateDatabase.COLUMN_REACHED, 0);
+        }
+        values.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, dailyTarget);
+        values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, todaysConsumption);
+        values.put(HydrateDatabase.COLUMN_DATE,
+                DateUtil.getInstance().getSqliteDate(timestamp));
+        context.getContentResolver().insert(
+                HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
     }
 
     public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval, boolean isML, Context context) {
@@ -273,44 +296,5 @@ public class HydrateDAO {
             }
         }
         return true;
-    }
-
-    public double getTargetFromTargetTable(Context context, long timeInMillis) {
-        double target = -1;
-        Cursor targetCursor = context
-                .getContentResolver()
-                .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
-                        new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
-                        HydrateDatabase.COLUMN_DATE + "=?",
-                        new String[]{DateUtil.getInstance().getSqliteDate(
-                                timeInMillis)},
-                        null);
-        if (targetCursor != null && targetCursor.getCount() > 0) {
-            targetCursor.moveToFirst();
-            target = targetCursor.getDouble(0);
-            targetCursor.close();
-        }
-        return target;
-    }
-
-    public double getTargetFromDS(Context context, long timeInMillis) {
-        double target = -1;
-        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{DateUtil.getInstance().getDay(timeInMillis) + ""}, null);
-        if (targetCursor != null && targetCursor.getCount() > 0) {
-            targetCursor.moveToFirst();
-            target = targetCursor.getDouble(0);
-            targetCursor.close();
-        }
-        return target;
-    }
-
-    public double getTargetForDay(Context context, long timeInMillis) {
-        double target = getTargetFromTargetTable(context, timeInMillis);
-        if (target == -1) {
-            target = getTargetFromDS(context, timeInMillis);
-        }
-        return target;
     }
 }

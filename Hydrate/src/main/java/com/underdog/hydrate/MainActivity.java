@@ -1031,20 +1031,18 @@ public class MainActivity extends AppCompatActivity
                 quantityConsumed = Math.round(quantityConsumed);
                 quantityConsumed /= 100;
                 textView.setText(String.valueOf(quantityConsumed));
-                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             } else {
                 quantityConsumed = Math.round(quantityConsumed);
                 textView.setText(String.valueOf((int) quantityConsumed));
-                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             }
 
+            setProgressIndicators(quantityConsumed, target, dateChanged);
             // Set water cup count
             textView = (TextView) getActivity().findViewById(R.id.water_status);
             textView.setText(String.valueOf(count));
-
         }
 
-        private void setProgressIndicators(TextView textView, double consumed,
+        private void setProgressIndicators(double consumed,
                                            double target, boolean dateChanged) {
             int color = -1;
             if (consumed < (target * .75)) {
