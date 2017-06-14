@@ -13,7 +13,7 @@ import android.support.v4.app.DialogFragment;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
-import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.util.DateUtil;
 
 public class TargetAchievedDialog extends DialogFragment {
 
@@ -31,7 +31,7 @@ public class TargetAchievedDialog extends DialogFragment {
                 getString(R.string.key_user_name), null);
         Cursor targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{Utility.getInstance().getToday() + ""}, null);
+                new String[]{DateUtil.getInstance().getToday() + ""}, null);
         targetCursor.moveToFirst();
         String targetQuantity = (metric.equals(milliliter) ? targetCursor.getDouble(0) / 1000 : targetCursor.getDouble(0)) + "";
         targetCursor.close();

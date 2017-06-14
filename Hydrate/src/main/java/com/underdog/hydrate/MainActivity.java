@@ -62,6 +62,7 @@ import com.underdog.hydrate.fragments.ListViewEditDialog;
 import com.underdog.hydrate.fragments.RestoreDialog;
 import com.underdog.hydrate.fragments.TargetAchievedDialog;
 import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 import com.underdog.hydrate.util.Utility;
 import com.underdog.hydrate.widgets.OnSwipeTouchListener;
@@ -369,7 +370,7 @@ public class MainActivity extends AppCompatActivity
         TextView dateView = (TextView) findViewById(R.id.dateView);
 
         // Save the water in DB
-        HydrateDAO.getHydrateDAO().addWater(Utility.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
+        HydrateDAO.getHydrateDAO().addWater(DateUtil.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {
@@ -536,7 +537,7 @@ public class MainActivity extends AppCompatActivity
             if (savedInstanceState != null) {
                 date = savedInstanceState.getString(Constants.DATE);
             } else {
-                date = Utility.getInstance().getDate(
+                date = DateUtil.getInstance().getDate(
                         System.currentTimeMillis());
             }
             dateView.setText(date);
@@ -899,7 +900,7 @@ public class MainActivity extends AppCompatActivity
                 case LIST_VIEW_LOADER_ID:
                     // Form the start and end time for results
                     try {
-                        selectionArgs = Utility.getInstance()
+                        selectionArgs = DateUtil.getInstance()
                                 .getSelectionArgsForDay(dateFormat.parse(
                                         dateView.getText().toString()).getTime());
                     } catch (ParseException e) {
@@ -912,7 +913,7 @@ public class MainActivity extends AppCompatActivity
                 case DRINK_SUMMARY_LOADER_ID:
                     // Form the start and end time for results
                     try {
-                        selectionArgs = Utility.getInstance()
+                        selectionArgs = DateUtil.getInstance()
                                 .getSelectionArgsForDay(dateFormat.parse(
                                         dateView.getText().toString()).getTime());
                     } catch (ParseException e) {
@@ -1002,12 +1003,12 @@ public class MainActivity extends AppCompatActivity
                     R.id.water_target);
 
             // Get today's date
-            String currentDate = Utility.getInstance()
+            String currentDate = DateUtil.getInstance()
                     .getDate(System.currentTimeMillis());
             if (date.equals(currentDate)) {
                 targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                         new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                        new String[]{Utility.getInstance().getToday() + ""}, null);
+                        new String[]{DateUtil.getInstance().getToday() + ""}, null);
                 targetCursor.moveToFirst();
                 target = targetCursor.getDouble(0);
                 targetCursor.close();
@@ -1019,8 +1020,8 @@ public class MainActivity extends AppCompatActivity
                         .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
                                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
                                 HydrateDatabase.COLUMN_DATE + "=?",
-                                new String[]{Utility.getInstance().getSqliteDate(
-                                        Utility.getInstance()
+                                new String[]{DateUtil.getInstance().getSqliteDate(
+                                        DateUtil.getInstance()
                                                 .getTimeInMillis(date))},
                                 null);
                 if (targetCursor.getCount() > 0) {
@@ -1030,7 +1031,7 @@ public class MainActivity extends AppCompatActivity
                 } else {
                     targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                             new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                            new String[]{Utility.getInstance().getToday() + ""}, null);
+                            new String[]{DateUtil.getInstance().getToday() + ""}, null);
                     targetCursor.moveToFirst();
                     target = targetCursor.getDouble(0);
                     targetCursor.close();

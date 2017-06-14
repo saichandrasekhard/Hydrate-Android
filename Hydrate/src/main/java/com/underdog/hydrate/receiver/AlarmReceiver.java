@@ -16,8 +16,8 @@ import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.service.NotificationService;
 import com.underdog.hydrate.service.SchedulerService;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
-import com.underdog.hydrate.util.Utility;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -290,7 +290,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                                 HydrateDatabase.REMINDER_END_TIME,
                                 HydrateDatabase.REMINDER_INTERVAL},
                         HydrateDatabase.DAY + "=?",
-                        new String[]{String.valueOf(Utility.getInstance().getToday())},
+                        new String[]{String.valueOf(DateUtil.getInstance().getToday())},
                         null);
         cursor.moveToFirst();
         startTime = cursor.getLong(0);

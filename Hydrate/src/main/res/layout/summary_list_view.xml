@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/last"
@@ -29,7 +29,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginTop="14dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/averageCupsLayout"
@@ -38,7 +38,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:gravity="left"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/cup"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="left"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/averageQuantityTitle"
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:gravity="left"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/targetReachedTitle"

@@ -1,8 +1,5 @@
 package com.underdog.hydrate.async;
 
-import java.util.Calendar;
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
@@ -16,7 +13,10 @@ import com.underdog.hydrate.adapter.SummaryArrayAdapter;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
-import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.util.DateUtil;
+
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class SummaryAsyncTask extends AsyncTask<String, String, Object[]> {
     private Activity context;
@@ -46,7 +46,7 @@ public class SummaryAsyncTask extends AsyncTask<String, String, Object[]> {
                 HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
                 new String[]{"min(timestamp) as min"}, null, null, null);
         cursor.moveToFirst();
-        sinceFirstUse = Utility.getInstance().getDaysSince(cursor.getLong(cursor
+        sinceFirstUse = DateUtil.getInstance().getDaysSince(cursor.getLong(cursor
                 .getColumnIndex("min")));
         cursor.close();
 
@@ -287,7 +287,7 @@ public class SummaryAsyncTask extends AsyncTask<String, String, Object[]> {
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
                 new String[]{"count(*) AS count"},
                 "date >= ? and reached=1",
-                new String[]{Utility.getInstance().getSqliteDate(getFromTime(period,
+                new String[]{DateUtil.getInstance().getSqliteDate(getFromTime(period,
                         System.currentTimeMillis()))}, null);
 
         cursor.moveToFirst();

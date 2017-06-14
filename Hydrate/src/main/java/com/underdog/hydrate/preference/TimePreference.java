@@ -15,7 +15,7 @@ import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.fragments.DayScheduleDialog;
-import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.util.DateUtil;
 
 public class TimePreference extends Preference {
     public final String key = this.getKey();
@@ -65,7 +65,7 @@ public class TimePreference extends Preference {
 					HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
 					new String[] { HydrateDatabase.REMINDER_START_TIME },
 					HydrateDatabase.DAY + "=?",
-					new String[] { String.valueOf(Utility.getInstance().getToday()) },
+					new String[] { String.valueOf(DateUtil.getInstance().getToday()) },
 					null);
 			cursor.moveToFirst();
 			time = cursor.getLong(0);
@@ -79,7 +79,7 @@ public class TimePreference extends Preference {
 					HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
 					new String[] { HydrateDatabase.REMINDER_END_TIME },
 					HydrateDatabase.DAY + "=?",
-					new String[] { String.valueOf(Utility.getInstance().getToday()) },
+					new String[] { String.valueOf(DateUtil.getInstance().getToday()) },
 					null);
 			cursor.moveToFirst();
 			time = cursor.getLong(0);
@@ -93,7 +93,7 @@ public class TimePreference extends Preference {
 					HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
 					new String[] { HydrateDatabase.REMINDER_INTERVAL },
 					HydrateDatabase.DAY + "=?",
-					new String[] { String.valueOf(Utility.getInstance().getToday()) },
+					new String[] { String.valueOf(DateUtil.getInstance().getToday()) },
 					null);
 			cursor.moveToFirst();
 			time = cursor.getLong(0);
@@ -105,7 +105,7 @@ public class TimePreference extends Preference {
 					new String[] { HydrateDatabase.LUNCH_START,
 							HydrateDatabase.LUNCH_END }, HydrateDatabase.DAY
 							+ "=?",
-					new String[] { String.valueOf(Utility.getInstance().getToday()) },
+					new String[] { String.valueOf(DateUtil.getInstance().getToday()) },
 					null);
 			cursor.moveToFirst();
 			time = cursor.getLong(0);
@@ -125,7 +125,7 @@ public class TimePreference extends Preference {
 					new String[] { HydrateDatabase.DINNER_START,
 							HydrateDatabase.DINNER_END }, HydrateDatabase.DAY
 							+ "=?",
-					new String[] { String.valueOf(Utility.getInstance().getToday()) },
+					new String[] { String.valueOf(DateUtil.getInstance().getToday()) },
 					null);
 			cursor.moveToFirst();
 			time = cursor.getLong(0);

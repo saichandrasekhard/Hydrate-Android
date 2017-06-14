@@ -143,6 +143,7 @@ public class SettingsActivity extends AppCompatActivity implements ScheduleUpdat
 
         /**
          * Method that listens to preference changes in the settings screen
+         *
          * @param preferences
          * @param key
          */

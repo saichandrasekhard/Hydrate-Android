@@ -24,8 +24,8 @@ import android.widget.Toast;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
-import com.underdog.hydrate.util.Utility;
 
 import java.util.Calendar;
 
@@ -93,7 +93,7 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = startTime.getText().toString();
-                int[] hoursMins = Utility.getInstance().getHoursAndMins(value);
+                int[] hoursMins = DateUtil.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -114,7 +114,7 @@ public class SetupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = endTime.getText().toString();
-                int[] hoursMins = Utility.getInstance().getHoursAndMins(value);
+                int[] hoursMins = DateUtil.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -210,8 +210,8 @@ public class SetupActivity extends AppCompatActivity {
     }
 
     private void setInterval() {
-        int[] selectedStartTime = Utility.getInstance().getHoursAndMins(startTime.getText().toString());
-        int[] selectedEndTime = Utility.getInstance().getHoursAndMins(endTime.getText().toString());
+        int[] selectedStartTime = DateUtil.getInstance().getHoursAndMins(startTime.getText().toString());
+        int[] selectedEndTime = DateUtil.getInstance().getHoursAndMins(endTime.getText().toString());
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, selectedEndTime[0]);
@@ -282,9 +282,9 @@ public class SetupActivity extends AppCompatActivity {
             boolean isML = (boolean) params[1];
             Double target = Double.valueOf(params[2].toString());
             String startTimeString = params[3].toString();
-            int[] startTime = Utility.getInstance().getHoursAndMins(startTimeString);
+            int[] startTime = DateUtil.getInstance().getHoursAndMins(startTimeString);
             String endTimeString = params[4].toString();
-            int[] endTime = Utility.getInstance().getHoursAndMins(endTimeString);
+            int[] endTime = DateUtil.getInstance().getHoursAndMins(endTimeString);
             String cupQuantity = params[5].toString();
             int interval = Integer.parseInt(params[6].toString().split(" ")[0]);
             SharedPreferences sharedPreferences;

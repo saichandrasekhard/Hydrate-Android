@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
 import com.underdog.hydrate.R;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
-import com.underdog.hydrate.util.Utility;
 
 import java.util.List;
 import java.util.Map;
@@ -132,7 +132,7 @@ public class HydrateDAO {
         // Subtract 24hours to make sure we are calculating for the same day
         // since this method gets called at 11:59:59 PM in inexact fashion
         timestamp -= 86400000l;
-        selectionArgs = Utility.getInstance().getSelectionArgsForDay(timestamp);
+        selectionArgs = DateUtil.getInstance().getSelectionArgsForDay(timestamp);
 
         Cursor cursor = context.getContentResolver().query(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
@@ -145,7 +145,7 @@ public class HydrateDAO {
         Log.d(this.getClass().toString(), "consumption - " + todaysConsumption);
         Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{Utility.getInstance().getDay(timestamp) + ""}, null);
+                new String[]{DateUtil.getInstance().getDay(timestamp) + ""}, null);
         targetCursor.moveToFirst();
         dailyTarget = targetCursor.getDouble(0);
         targetCursor.close();
@@ -159,7 +159,7 @@ public class HydrateDAO {
         values.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, dailyTarget);
         values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, todaysConsumption);
         values.put(HydrateDatabase.COLUMN_DATE,
-                Utility.getInstance().getSqliteDate(timestamp));
+                DateUtil.getInstance().getSqliteDate(timestamp));
         context.getContentResolver().insert(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
     }
@@ -175,10 +175,10 @@ public class HydrateDAO {
                 .getDefaultSharedPreferences(context);
         boolean lunchAndDinner = preferences.getBoolean(
                 context.getString(R.string.key_mute_lunch_dinner), true);
-        Utility utility;
+        DateUtil utility;
 
         if (lunchAndDinner) {
-            utility = Utility.getInstance();
+            utility = DateUtil.getInstance();
             cursor = context.getContentResolver().query(
                     HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                     new String[]{HydrateDatabase.LUNCH_START,
@@ -220,7 +220,7 @@ public class HydrateDAO {
         double target;
         Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{Utility.getInstance().getToday() + ""}, null);
+                new String[]{DateUtil.getInstance().getToday() + ""}, null);
         targetCursor.moveToFirst();
         target = targetCursor.getDouble(0);
         targetCursor.close();
