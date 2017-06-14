@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity
         TextView dateView = (TextView) findViewById(R.id.dateView);
 
         // Save the water in DB
-        HydrateDAO.getHydrateDAO().addWater(DateUtil.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
+        HydrateDAO.getInstance().addWater(DateUtil.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {
@@ -398,7 +398,7 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void decreaseWater(View view) {
-        HydrateDAO.getHydrateDAO().deleteWater(this);
+        HydrateDAO.getInstance().deleteWater(this);
     }
 
 
@@ -1005,39 +1005,11 @@ public class MainActivity extends AppCompatActivity
             // Get today's date
             String currentDate = DateUtil.getInstance()
                     .getDate(System.currentTimeMillis());
+            target=HydrateDAO.getInstance().getTargetForDay(getContext(),System.currentTimeMillis());
             if (date.equals(currentDate)) {
-                targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                        new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                        new String[]{DateUtil.getInstance().getToday() + ""}, null);
-                targetCursor.moveToFirst();
-                target = targetCursor.getDouble(0);
-                targetCursor.close();
                 dateChanged = false;
-            } else {
-                // Get it from database providing the date
-                targetCursor = getActivity()
-                        .getContentResolver()
-                        .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
-                                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
-                                HydrateDatabase.COLUMN_DATE + "=?",
-                                new String[]{DateUtil.getInstance().getSqliteDate(
-                                        DateUtil.getInstance()
-                                                .getTimeInMillis(date))},
-                                null);
-                if (targetCursor.getCount() > 0) {
-                    targetCursor.moveToFirst();
-                    target = targetCursor.getDouble(0);
-
-                } else {
-                    targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                            new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                            new String[]{DateUtil.getInstance().getToday() + ""}, null);
-                    targetCursor.moveToFirst();
-                    target = targetCursor.getDouble(0);
-                    targetCursor.close();
-                }
-
             }
+
             if (metric.equals(milliliter)) {
                 target /= 1000;
                 target *= 100;
@@ -1047,7 +1019,6 @@ public class MainActivity extends AppCompatActivity
             } else {
                 target = Math.round(target);
                 dailyTarget = String.valueOf((int) target);
-
             }
             targetTextView.setText(dailyTarget);
 

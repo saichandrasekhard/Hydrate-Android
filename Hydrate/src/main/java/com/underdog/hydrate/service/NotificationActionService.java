@@ -68,7 +68,7 @@ public class NotificationActionService extends IntentService {
                         getString(R.string.key_glass_quantity),
                         getString(R.string.default_glass_us_oz)));
             }
-            HydrateDAO.getHydrateDAO().addDefaultWater(this);
+            HydrateDAO.getInstance().addDefaultWater(this);
             Cursor targetCursor = getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                     new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
                     new String[]{DateUtil.getInstance().getToday() + ""}, null);

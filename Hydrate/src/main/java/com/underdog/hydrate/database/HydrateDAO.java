@@ -27,7 +27,7 @@ public class HydrateDAO {
 
     }
 
-    public static HydrateDAO getHydrateDAO() {
+    public static HydrateDAO getInstance() {
         if (hydrateDAO == null) {
             synchronized (HydrateDAO.class) {
                 if (hydrateDAO == null) {
@@ -273,5 +273,44 @@ public class HydrateDAO {
             }
         }
         return true;
+    }
+
+    public double getTargetFromTargetTable(Context context, long timeInMillis) {
+        double target = -1;
+        Cursor targetCursor = context
+                .getContentResolver()
+                .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
+                        new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
+                        HydrateDatabase.COLUMN_DATE + "=?",
+                        new String[]{DateUtil.getInstance().getSqliteDate(
+                                timeInMillis)},
+                        null);
+        if (targetCursor != null && targetCursor.getCount() > 0) {
+            targetCursor.moveToFirst();
+            target = targetCursor.getDouble(0);
+            targetCursor.close();
+        }
+        return target;
+    }
+
+    public double getTargetFromDS(Context context, long timeInMillis) {
+        double target = -1;
+        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
+                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
+                new String[]{DateUtil.getInstance().getDay(timeInMillis) + ""}, null);
+        if (targetCursor != null && targetCursor.getCount() > 0) {
+            targetCursor.moveToFirst();
+            target = targetCursor.getDouble(0);
+            targetCursor.close();
+        }
+        return target;
+    }
+
+    public double getTargetForDay(Context context, long timeInMillis) {
+        double target = getTargetFromTargetTable(context, timeInMillis);
+        if (target == -1) {
+            target = getTargetFromDS(context, timeInMillis);
+        }
+        return target;
     }
 }

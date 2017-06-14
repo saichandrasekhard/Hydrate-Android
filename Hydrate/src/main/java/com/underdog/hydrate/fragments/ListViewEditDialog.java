@@ -110,7 +110,7 @@ public class ListViewEditDialog extends DialogFragment {
 
                         // Use the calendar object as input along with
                         // quantity to update the DB
-                        HydrateDAO.getHydrateDAO().updateEvent(rowId,
+                        HydrateDAO.getInstance().updateEvent(rowId,
                                 calendar.getTimeInMillis(), quantity, getContext());
 
                         dialogInterface.dismiss();
@@ -139,7 +139,7 @@ public class ListViewEditDialog extends DialogFragment {
                         // Get rowId
                         rowId = inputExtras.getLong(HydrateDatabase.ROW_ID);
 
-                        HydrateDAO.getHydrateDAO().deleteWaterById(rowId, getContext());
+                        HydrateDAO.getInstance().deleteWaterById(rowId, getContext());
                         dialogInterface.dismiss();
                     }
                 });

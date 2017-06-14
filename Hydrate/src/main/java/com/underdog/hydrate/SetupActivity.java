@@ -51,7 +51,7 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        hydrateDAO = HydrateDAO.getHydrateDAO();
+        hydrateDAO = HydrateDAO.getInstance();
 
         username = (EditText) findViewById(R.id.setupUsernameEdit);
         targetEdit = (EditText) findViewById(R.id.setupTargetEdit);
@@ -295,7 +295,7 @@ public class SetupActivity extends AppCompatActivity {
             if (isML)
                 target *= 1000;
 
-            if (HydrateDAO.getHydrateDAO().applyInitialSetupChanges(target, startTime[0], startTime[1], endTime[0], endTime[1], interval, isML, getApplicationContext())) {
+            if (HydrateDAO.getInstance().applyInitialSetupChanges(target, startTime[0], startTime[1], endTime[0], endTime[1], interval, isML, getApplicationContext())) {
                 sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean(Constants.FIRST_RUN, false);

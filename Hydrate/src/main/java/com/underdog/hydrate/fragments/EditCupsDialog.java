@@ -93,7 +93,7 @@ public class EditCupsDialog extends DialogFragment {
                 }
                 newQuantity = Double.valueOf((editCupText));
 
-                if (newQuantity > HydrateDAO.getHydrateDAO().getTodayTarget(getContext())) {
+                if (newQuantity > HydrateDAO.getInstance().getTodayTarget(getContext())) {
                     Toast.makeText(getActivity(),
                             getActivity().getString(R.string.validQuantity),
                             Toast.LENGTH_SHORT).show();
