@@ -1009,7 +1009,7 @@ public class MainActivity extends AppCompatActivity
                 target = HydrateDAO.getInstance().getTodayTarget(getContext());
                 dateChanged = false;
             } else {
-                target = HydrateDAO.getInstance().getTargetForDay(getContext(), System.currentTimeMillis());
+                target = HydrateDAO.getInstance().getTargetForDay(getContext(), DateUtil.getInstance().getTimeFromDate(date));
             }
 
             if (metric.equals(milliliter)) {
