@@ -530,6 +530,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
+            loadAd();
             Log.i(tag, "On ActivityCreated - " + getActivity().getExternalFilesDir(null));
             String date;
             dateView = (TextView) getActivity().findViewById(
@@ -708,7 +709,9 @@ public class MainActivity extends AppCompatActivity
             };
             view.setOnTouchListener(swipeTouchListener);
             listView.setOnTouchListener(swipeTouchListener);
+        }
 
+        void loadAd() {
             // Create an ad.
             adView = new AdView(this.getActivity());
             adView.setAdSize(AdSize.BANNER);
@@ -729,16 +732,16 @@ public class MainActivity extends AppCompatActivity
                     .addTestDevice("B0E58BFA678C367F782946106E3FDB62").build();
 
             // Start loading the ad in the background.
-//            adView.loadAd(adRequest);
+            adView.loadAd(adRequest);
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    adView.loadAd(adRequest);
-//                    adView.bringToFront();
-                }
-            }, 2000);
+//            final Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    adView.loadAd(adRequest);
+////                    adView.bringToFront();
+//                }
+//            }, 2000);
         }
 
         @Override
