@@ -243,6 +243,7 @@ public class SummaryAsyncTask extends AsyncTask<String, String, Object[]> {
         summaryListView = (ListView) activity
                 .findViewById(R.id.summaryListView);
         summaryListView.setClickable(false);
+        summaryListView.setDivider(null);
 
         summaryArrayAdapter = new SummaryArrayAdapter(activity,
                 R.layout.summary_list_view, result, preferences.getString(

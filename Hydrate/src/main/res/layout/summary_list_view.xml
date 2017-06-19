@@ -1,129 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/summaryListViewLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/last"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="0dp"
-        android:text="@string/lastWeek"
-        android:textColor="@color/primary"
-        android:textStyle="bold"
-        android:elevation="@dimen/elevate" />
-
-    <RelativeLayout
-        android:id="@+id/averageConsumptionLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/last"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="14dp"
-        android:orientation="horizontal">
-
+        android:layout_height="match_parent"
+        app:cardUseCompatPadding="true">
         <RelativeLayout
-            android:id="@+id/averageCupsLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:gravity="left"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/cup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/noOfCups" />
-
-            <TextView
-                android:id="@+id/averageCupCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/summary_values_left_margin"
-                android:text="@string/water_status"
-                android:textColor="@color/primary"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/averageQuantityLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:gravity="left"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/averageQuantityTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/quantityConsumed" />
-
-            <TextView
-                android:id="@+id/averageQuantityConsumed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/summary_values_left_margin"
-                android:text="@string/water_quantity_status"
-                android:textColor="@color/primary"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/averageQuantityUnits"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/drink_summary_horizontal_dim_units"
-                android:layout_toRightOf="@id/averageQuantityConsumed"
-                android:text="@string/water_units"
-                android:textStyle="italic" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/regularityLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/targetReachedTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/last"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/targetAchieved" />
-
-            <TextView
-                android:id="@+id/regulaityPercentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/summary_values_left_margin"
-                android:text="0"
-                android:textColor="@android:color/holo_green_dark"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="0dp"
+                android:text="@string/lastWeek"
+                android:textColor="@color/primary"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/percentageSymbol"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/averageConsumptionLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/regulaityPercentage"
-                android:text="%"
-                android:textStyle="italic" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/last"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
 
-</RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/averageCupsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/noOfCups" />
+
+                    <TextView
+                        android:id="@+id/averageCupCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/summary_values_left_margin"
+                        android:text="@string/water_status"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/averageQuantityLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/averageQuantityTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/quantityConsumed" />
+
+                    <TextView
+                        android:id="@+id/averageQuantityConsumed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="@dimen/summary_values_left_margin"
+                        android:text="@string/water_quantity_status"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/averageQuantityUnits"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="@dimen/drink_summary_horizontal_dim_units"
+                        android:layout_toRightOf="@id/averageQuantityConsumed"
+                        android:text="@string/water_units"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/regularityLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/targetReachedTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/targetAchieved" />
+
+                    <TextView
+                        android:id="@+id/regulaityPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/summary_values_left_margin"
+                        android:text="0"
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/percentageSymbol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/regulaityPercentage"
+                        android:text="%"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>
