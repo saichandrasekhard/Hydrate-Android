@@ -214,65 +214,81 @@ public class HydrateDAO {
 
 
     /**
-     * Update the target status at the end of the day
+     * Insert the target status
      */
-    public void updateTargetStatus(Context context) {
-        long timestamp = System.currentTimeMillis();
-        String[] selectionArgs;
-        double todaysConsumption;
+    public void insertTargetStatus(Context context, long timestamp) {
+//        long timestamp = System.currentTimeMillis();
+        double daysConsumption;
         double dailyTarget;
 
         ContentValues values;
 
         // Subtract 24hours to make sure we are calculating for the same day
         // since this method gets called at 11:59:59 PM in inexact fashion
-        timestamp -= 86400000l;
-        selectionArgs = DateUtil.getInstance().getSelectionArgsForDay(timestamp);
+//        timestamp -= 86400000l;
+        daysConsumption = getDaysConstumption(context, timestamp);
+        Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
-        Cursor cursor = context.getContentResolver().query(
-                HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
-                new String[]{"sum(quantity) AS sum"},
-                HydrateDatabase.FROM_TO_TIME, selectionArgs, null);
-
-        cursor.moveToFirst();
-        todaysConsumption = cursor.getDouble(0);
-        cursor.close();
-        Log.d(this.getClass().toString(), "consumption - " + todaysConsumption);
-        Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{DateUtil.getInstance().getDay(timestamp) + ""}, null);
-        targetCursor.moveToFirst();
-        dailyTarget = targetCursor.getDouble(0);
-        targetCursor.close();
+        dailyTarget = getTargetForDay(context, timestamp);
 
         values = new ContentValues();
-        if (todaysConsumption >= dailyTarget) {
+        if (daysConsumption >= dailyTarget) {
             values.put(HydrateDatabase.COLUMN_REACHED, 1);
         } else {
             values.put(HydrateDatabase.COLUMN_REACHED, 0);
         }
         values.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, dailyTarget);
-        values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, todaysConsumption);
+        values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, daysConsumption);
         values.put(HydrateDatabase.COLUMN_DATE,
                 DateUtil.getInstance().getSqliteDate(timestamp));
         context.getContentResolver().insert(
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
     }
 
+    public void updateTargetStatus(Context context, long timestamp) {
+        double daysConsumption;
+        double dailyTarget;
+
+        ContentValues values;
+
+        daysConsumption = getDaysConstumption(context, timestamp);
+        Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
+
+        dailyTarget = getTargetForDay(context, timestamp);
+
+        values = new ContentValues();
+        if (daysConsumption >= dailyTarget) {
+            values.put(HydrateDatabase.COLUMN_REACHED, 1);
+        } else {
+            values.put(HydrateDatabase.COLUMN_REACHED, 0);
+        }
+        values.put(HydrateDatabase.COLUMN_TARGET_QUANTITY, dailyTarget);
+        values.put(HydrateDatabase.COLUMN_CONSUMED_QUANTITY, daysConsumption);
+
+        String date = DateUtil.getInstance().getSqliteDate(timestamp);
+        context.getContentResolver().update(
+                HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values, Constants.DATE + " = ?", new String[]{date});
+    }
+
     public void syncTargets(Context context) {
         String lastEntryDate = getLastTargetTableEntry(context);
         String todaysDate = DateUtil.getInstance().getSqliteDate(System.currentTimeMillis());
 
+        long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
+        long todayDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(todaysDate);
         if (lastEntryDate.equals(todaysDate)) {
             // Already entry made, just update consumed status for today
+            updateTargetStatus(context, todayDateInMillis);
         } else {
-            // Starting from the lastEntryDate, keep making entries in target table for each day until today
-            long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
-            long todayDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(todaysDate);
+            // Starting from the lastEntryDate+1, keep making entries in target table for each day until today
             long startAt = lastEntryDateInMillis;
-            while (startAt < todayDateInMillis) {
+            //Always update the entry of lastEntryDate
+            updateTargetStatus(context, startAt);
 
+            startAt += Constants.DAY_HOURS_LONG;
+            while (startAt <= todayDateInMillis) {
                 Log.i(TAG, "startAt - " + startAt + ":::" + todayDateInMillis);
+                insertTargetStatus(context, startAt);
                 startAt += Constants.DAY_HOURS_LONG;
             }
         }
@@ -287,6 +303,20 @@ public class HydrateDAO {
         Log.d(TAG, "date - " + date);
         cursor.close();
         return date;
+    }
+
+    public double getDaysConstumption(Context context, long timestamp) {
+        String[] selectionArgs = DateUtil.getInstance().getSelectionArgsForDay(timestamp);
+
+        Cursor cursor = context.getContentResolver().query(
+                HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
+                new String[]{"sum(quantity) AS sum"},
+                HydrateDatabase.FROM_TO_TIME, selectionArgs, null);
+
+        cursor.moveToFirst();
+        double daysConsumption = cursor.getDouble(0);
+        cursor.close();
+        return daysConsumption;
     }
 
     public boolean applyInitialSetupChanges(double target, int startHour, int startMin, int endHour, int endMin, int interval, boolean isML, Context context) {

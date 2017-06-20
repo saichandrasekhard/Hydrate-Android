@@ -12,8 +12,8 @@ import android.widget.TimePicker;
 
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
-import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
+import com.underdog.hydrate.service.WaterService;
 import com.underdog.hydrate.util.Log;
 
 import java.text.ParseException;
@@ -52,7 +52,7 @@ public class ListViewEditDialog extends DialogFragment {
         String tokens[] = quantity.split("\\s+");
         StringBuffer unit = new StringBuffer();
         String time = inputExtras.getString(Constants.TIME);
-        String date = inputExtras.getString(Constants.DATE);
+        final String date = inputExtras.getString(Constants.DATE);
 
         // Set the dialog title
         builder.setTitle(R.string.edit);
@@ -110,8 +110,7 @@ public class ListViewEditDialog extends DialogFragment {
 
                         // Use the calendar object as input along with
                         // quantity to update the DB
-                        HydrateDAO.getInstance().updateEvent(rowId,
-                                calendar.getTimeInMillis(), quantity, getContext());
+                        WaterService.getInstance().updateWaterById(getContext(), rowId, calendar.getTimeInMillis(), quantity, date);
 
                         dialogInterface.dismiss();
 
@@ -139,7 +138,7 @@ public class ListViewEditDialog extends DialogFragment {
                         // Get rowId
                         rowId = inputExtras.getLong(HydrateDatabase.ROW_ID);
 
-                        HydrateDAO.getInstance().deleteWaterById(rowId, getContext());
+                        WaterService.getInstance().deleteWaterById(getContext(), rowId, date);
                         dialogInterface.dismiss();
                     }
                 });

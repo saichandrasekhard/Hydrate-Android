@@ -62,6 +62,7 @@ import com.underdog.hydrate.fragments.ListViewEditDialog;
 import com.underdog.hydrate.fragments.RestoreDialog;
 import com.underdog.hydrate.fragments.TargetAchievedDialog;
 import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.service.WaterService;
 import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 import com.underdog.hydrate.util.Utility;
@@ -368,9 +369,10 @@ public class MainActivity extends AppCompatActivity
                 getApplicationContext());
 
         TextView dateView = (TextView) findViewById(R.id.dateView);
+        String date = dateView.getText().toString();
 
-        // Save the water in DB
-        HydrateDAO.getInstance().addWater(DateUtil.getInstance().getThisTimeThatDay(dateView.getText().toString()), quantity, this);
+        WaterService.getInstance().addWater(this, date, quantity);
+
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {

@@ -152,4 +152,14 @@ public class DateUtil {
         return new int[]{hour, mins};
     }
 
+    public boolean isToday(long timestamp) {
+        String date = getDate(timestamp);
+        return isToday(date);
+    }
+
+    public boolean isToday(String date) {
+        String today = getDate(System.currentTimeMillis());
+        return today.equals(date);
+    }
+
 }

@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 
 import com.underdog.hydrate.R;
-import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.receiver.AlarmReceiver;
 import com.underdog.hydrate.util.BackupAndRestore;
 import com.underdog.hydrate.util.Log;
@@ -27,7 +26,6 @@ public class SchedulerService extends IntentService {
         SharedPreferences preferences;
         AlarmReceiver alarmReceiver;
         boolean reminders;
-        HydrateDAO dao;
         boolean autoBackup;
         BackupAndRestore backupAndRestore;
 
@@ -45,7 +43,7 @@ public class SchedulerService extends IntentService {
         }
 
         // Add entry for daily target consumption
-        HydrateDAO.getInstance().updateTargetStatus(this);
+//        HydrateDAO.getInstance().insertTargetStatus(this, System.currentTimeMillis()- Constants.DAY_HOURS_LONG);
 
         // Auto backup to SD Card
         autoBackup = preferences.getBoolean(
