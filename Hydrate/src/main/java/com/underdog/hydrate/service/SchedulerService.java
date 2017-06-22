@@ -27,7 +27,6 @@ public class SchedulerService extends IntentService {
         SharedPreferences preferences;
         AlarmReceiver alarmReceiver;
         boolean reminders;
-        HydrateDAO dao;
         boolean autoBackup;
         BackupAndRestore backupAndRestore;
 
@@ -45,7 +44,7 @@ public class SchedulerService extends IntentService {
         }
 
         // Add entry for daily target consumption
-        HydrateDAO.getHydrateDAO().updateTargetStatus(this);
+        HydrateDAO.getInstance().syncTargets(getApplicationContext());
 
         // Auto backup to SD Card
         autoBackup = preferences.getBoolean(

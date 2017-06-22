@@ -17,7 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDatabase;
-import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.util.DateUtil;
 
 import java.util.Calendar;
 
@@ -42,7 +42,7 @@ public class ProgressWidget extends AppWidgetProvider implements
                 context.getString(R.string.milliliter));
         String milliliter = context.getString(R.string.milliliter);
 
-        String[] selectionArgs = Utility.getInstance()
+        String[] selectionArgs = DateUtil.getInstance()
                 .getSelectionArgsForDay(Calendar.getInstance().getTimeInMillis());
 
         Cursor consumedCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
@@ -56,7 +56,7 @@ public class ProgressWidget extends AppWidgetProvider implements
 
         Cursor targetCursor = context.getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                 new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                new String[]{Utility.getInstance().getToday() + ""}, null);
+                new String[]{DateUtil.getInstance().getToday() + ""}, null);
         targetCursor.moveToFirst();
         double target = targetCursor.getDouble(0);
         targetCursor.close();

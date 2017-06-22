@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="2"
-    android:rowCount="1" >
+    android:rowCount="1">
 
     <TextView
         android:id="@+id/day_name"

@@ -18,6 +18,7 @@ public class Constants {
     public static final long DAY_HOURS_LONG = 86400000;
     public static final String TIME = "time";
     public static final String DATE_FORMAT = "dd-MMM-yyyy";
+    public static final String DATE_FORMAT_SQLITE = "yyyy-MM-dd";
     public static final String TIME_FORMAT = "h:mm a";
     public static final String DATE_TIME_FORMAT = new StringBuffer(DATE_FORMAT)
             .append(" ").append(TIME_FORMAT).toString();

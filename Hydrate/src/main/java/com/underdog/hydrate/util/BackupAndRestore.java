@@ -1,5 +1,16 @@
 package com.underdog.hydrate.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Environment;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.underdog.hydrate.R;
+import com.underdog.hydrate.constants.Constants;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,20 +20,6 @@ import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import android.Manifest;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.underdog.hydrate.R;
-import com.underdog.hydrate.constants.Constants;
 
 public class BackupAndRestore {
     /**
@@ -71,7 +68,6 @@ public class BackupAndRestore {
                             context.getString(R.string.db_backed_upto)
                                     + backupDB.getCanonicalPath(),
                             Toast.LENGTH_SHORT).show();
-                    ;
                 }
                 Log.d(this.getClass().toString(), "After writing");
             }

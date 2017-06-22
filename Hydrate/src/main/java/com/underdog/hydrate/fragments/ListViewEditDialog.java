@@ -6,15 +6,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
-import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
+import com.underdog.hydrate.service.WaterService;
 import com.underdog.hydrate.util.Log;
 
 import java.text.ParseException;
@@ -39,7 +38,7 @@ public class ListViewEditDialog extends DialogFragment {
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final EditText editQuantity;
+        final NumberPicker editQuantity;
         final TextView unitView;
         final TimePicker timePicker;
         final Calendar calendar;
@@ -53,15 +52,17 @@ public class ListViewEditDialog extends DialogFragment {
         String tokens[] = quantity.split("\\s+");
         StringBuffer unit = new StringBuffer();
         String time = inputExtras.getString(Constants.TIME);
-        String date = inputExtras.getString(Constants.DATE);
+        final String date = inputExtras.getString(Constants.DATE);
 
         // Set the dialog title
         builder.setTitle(R.string.edit);
         builder.setView(view);
 
         // Set the quantity
-        editQuantity = (EditText) view.findViewById(R.id.editQuantity);
-        editQuantity.setText(tokens[0]);
+        editQuantity = (NumberPicker) view.findViewById(R.id.editQuantity);
+        editQuantity.setMinValue(1);
+        editQuantity.setMaxValue(2000);
+        editQuantity.setValue(Integer.parseInt(tokens[0]));
 
         // Set the units
         unitView = (TextView) view.findViewById(R.id.editUnit);
@@ -99,16 +100,7 @@ public class ListViewEditDialog extends DialogFragment {
                         rowId = inputExtras.getLong(HydrateDatabase.ROW_ID);
 
                         // Get the updated quantity
-                        String editable = editQuantity.getText().toString();
-                        if (editable == null || editable.equals("")) {
-                            Toast.makeText(
-                                    getActivity(),
-                                    getActivity().getString(
-                                            R.string.validQuantity),
-                                    Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        quantity = Double.valueOf(editable);
+                        quantity = editQuantity.getValue();
 
                         // Get the updated Time
                         calendar.set(Calendar.HOUR_OF_DAY,
@@ -118,8 +110,7 @@ public class ListViewEditDialog extends DialogFragment {
 
                         // Use the calendar object as input along with
                         // quantity to update the DB
-                        HydrateDAO.getHydrateDAO().updateEvent(rowId,
-                                calendar.getTimeInMillis(), quantity, getContext());
+                        WaterService.getInstance().updateWaterById(getContext(), rowId, calendar.getTimeInMillis(), quantity, date);
 
                         dialogInterface.dismiss();
 
@@ -147,7 +138,7 @@ public class ListViewEditDialog extends DialogFragment {
                         // Get rowId
                         rowId = inputExtras.getLong(HydrateDatabase.ROW_ID);
 
-                        HydrateDAO.getHydrateDAO().deleteWaterById(rowId, getContext());
+                        WaterService.getInstance().deleteWaterById(getContext(), rowId, date);
                         dialogInterface.dismiss();
                     }
                 });

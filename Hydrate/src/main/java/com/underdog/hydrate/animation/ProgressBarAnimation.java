@@ -26,5 +26,4 @@ public class ProgressBarAnimation extends Animation {
         float value = from + (to - from) * interpolatedTime;
         progressBar.setProgress((int) value);
     }
-
 }

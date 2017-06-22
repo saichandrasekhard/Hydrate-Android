@@ -2,14 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical" >
+    android:scrollbars="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
         android:orientation="vertical"
-        android:scrollbars="vertical" >
+        android:scrollbars="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -36,8 +36,7 @@
             android:paddingRight="0dp"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:text="@string/end_time"
-            android:textStyle="bold" >
-        </TextView>
+            android:textStyle="bold"></TextView>
 
         <TimePicker
             android:id="@+id/endTime"

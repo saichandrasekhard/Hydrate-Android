@@ -51,6 +51,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.kobakei.ratethisapp.RateThisApp;
 import com.underdog.hydrate.animation.ProgressBarAnimation;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
@@ -61,8 +62,11 @@ import com.underdog.hydrate.fragments.ListViewEditDialog;
 import com.underdog.hydrate.fragments.RestoreDialog;
 import com.underdog.hydrate.fragments.TargetAchievedDialog;
 import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.service.WaterService;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 import com.underdog.hydrate.util.Utility;
+import com.underdog.hydrate.widgets.OnSwipeTouchListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,7 +79,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String tag = "MainActivity";
-    AlarmReceiver alarmReceiver;
+    private AlarmReceiver alarmReceiver;
+    private NavigationView navigationView;
 
     /**
      * @return the alarmReceiver
@@ -118,10 +123,15 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().add(R.id.main_container, new HomeScreenFragment()).commit();
+
+        // Monitor launch times and interval from installation
+        RateThisApp.onCreate(this);
+        // If the condition is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this);
     }
 
     protected void onStart() {
@@ -140,10 +150,10 @@ public class MainActivity extends AppCompatActivity
 
         userName = preferences.getString(
                 this.getString(R.string.key_user_name), "User");
-
-        welcomeMessage = (TextView) findViewById(R.id.hello_user);
+        View headerView = navigationView.getHeaderView(0);
+        welcomeMessage = (TextView) headerView.findViewById(R.id.hello_user);
         welcomeMessage
-                .setText(getString(R.string.hello) + " " + userName + ",");
+                .setText(userName);
 
         metricView = (TextView) findViewById(R.id.water_quantity_unit);
         metric = preferences.getString(this.getString(R.string.key_metric), ml);
@@ -172,7 +182,7 @@ public class MainActivity extends AppCompatActivity
             } else {
 
                 // External storage permissions is already available.
-                Log.i(tag,
+                Log.d(tag,
                         "External storage permission has already been granted.");
                 //Show restore dialog
                 if (Utility.getInstance().isBackupAvailable()) {
@@ -202,6 +212,14 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+//        for (int i = 0; i < menu.size(); i++) {
+//            Drawable drawable = menu.getItem(i).getIcon();
+//            if (drawable != null) {
+//                drawable.mutate();
+//                drawable.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+//            }
+//        }
         return true;
     }
 
@@ -214,6 +232,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+//        if (id == R.id.menu_calendar) {
+//
 //            return true;
 //        }
 
@@ -345,8 +368,11 @@ public class MainActivity extends AppCompatActivity
                 (TextView) findViewById(R.id.water_target), quantity,
                 getApplicationContext());
 
-        // Save the water in DB
-        HydrateDAO.getHydrateDAO().addWater(System.currentTimeMillis(), quantity, this);
+        TextView dateView = (TextView) findViewById(R.id.dateView);
+        String date = dateView.getText().toString();
+
+        WaterService.getInstance().addWater(this, date, quantity);
+
         notificationManager.cancel(Constants.NOTIFICATION_ID);
 
         if (targetAchieved) {
@@ -374,7 +400,7 @@ public class MainActivity extends AppCompatActivity
      * @param view
      */
     public void decreaseWater(View view) {
-        HydrateDAO.getHydrateDAO().deleteWater(this);
+        HydrateDAO.getInstance().deleteWater(this);
     }
 
 
@@ -467,6 +493,7 @@ public class MainActivity extends AppCompatActivity
          * The view to show the ad.
          */
         private AdView adView;
+
         private DatePickerDialog datePickerDialog;
         private TextView dateView;
         private ListView listView;
@@ -474,7 +501,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container,
+            View rootView = inflater.inflate(R.layout.fragment_main_constraint, container,
                     false);
             return rootView;
         }
@@ -505,6 +532,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
+            loadAd();
             Log.i(tag, "On ActivityCreated - " + getActivity().getExternalFilesDir(null));
             String date;
             dateView = (TextView) getActivity().findViewById(
@@ -512,17 +540,17 @@ public class MainActivity extends AppCompatActivity
             if (savedInstanceState != null) {
                 date = savedInstanceState.getString(Constants.DATE);
             } else {
-                date = Utility.getInstance().getDate(
+                date = DateUtil.getInstance().getDate(
                         System.currentTimeMillis());
             }
             dateView.setText(date);
 
-            ImageButton previous;
-            ImageButton next;
+            final ImageButton previous;
+            final ImageButton next;
             final SimpleDateFormat dateFormat = new SimpleDateFormat(
                     Constants.DATE_FORMAT);
             final ImageButton calendarButton = (ImageButton) getActivity()
-                    .findViewById(R.id.calenderButton);
+                    .findViewById(R.id.menu_calendar);
             listView = (ListView) getActivity().findViewById(R.id.dayLog);
             final float listViewX = listView.getX();
 
@@ -669,6 +697,23 @@ public class MainActivity extends AppCompatActivity
             // Set today's drink events in list view
             setDrinkEvents();
 
+            View view = getActivity().findViewById(R.id.main_fragment);
+            OnSwipeTouchListener swipeTouchListener = new OnSwipeTouchListener(getContext()) {
+                @Override
+                public void onSwipeLeft() {
+                    next.callOnClick();
+                }
+
+                @Override
+                public void onSwipeRight() {
+                    previous.callOnClick();
+                }
+            };
+            view.setOnTouchListener(swipeTouchListener);
+            listView.setOnTouchListener(swipeTouchListener);
+        }
+
+        void loadAd() {
             // Create an ad.
             adView = new AdView(this.getActivity());
             adView.setAdSize(AdSize.BANNER);
@@ -684,13 +729,21 @@ public class MainActivity extends AppCompatActivity
             // Create an ad request. Check logcat output for the hashed device
             // ID to
             // get test ads on a physical device.
-            AdRequest adRequest = new AdRequest.Builder()
+            final AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                     .addTestDevice("B0E58BFA678C367F782946106E3FDB62").build();
 
             // Start loading the ad in the background.
             adView.loadAd(adRequest);
 
+//            final Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    adView.loadAd(adRequest);
+////                    adView.bringToFront();
+//                }
+//            }, 2000);
         }
 
         @Override
@@ -852,7 +905,7 @@ public class MainActivity extends AppCompatActivity
                 case LIST_VIEW_LOADER_ID:
                     // Form the start and end time for results
                     try {
-                        selectionArgs = Utility.getInstance()
+                        selectionArgs = DateUtil.getInstance()
                                 .getSelectionArgsForDay(dateFormat.parse(
                                         dateView.getText().toString()).getTime());
                     } catch (ParseException e) {
@@ -865,7 +918,7 @@ public class MainActivity extends AppCompatActivity
                 case DRINK_SUMMARY_LOADER_ID:
                     // Form the start and end time for results
                     try {
-                        selectionArgs = Utility.getInstance()
+                        selectionArgs = DateUtil.getInstance()
                                 .getSelectionArgsForDay(dateFormat.parse(
                                         dateView.getText().toString()).getTime());
                     } catch (ParseException e) {
@@ -955,41 +1008,15 @@ public class MainActivity extends AppCompatActivity
                     R.id.water_target);
 
             // Get today's date
-            String currentDate = Utility.getInstance()
+            String currentDate = DateUtil.getInstance()
                     .getDate(System.currentTimeMillis());
             if (date.equals(currentDate)) {
-                targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                        new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                        new String[]{Utility.getInstance().getToday() + ""}, null);
-                targetCursor.moveToFirst();
-                target = targetCursor.getDouble(0);
-                targetCursor.close();
+                target = HydrateDAO.getInstance().getTodayTarget(getContext());
                 dateChanged = false;
             } else {
-                // Get it from database providing the date
-                targetCursor = getActivity()
-                        .getContentResolver()
-                        .query(HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET,
-                                new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY},
-                                HydrateDatabase.COLUMN_DATE + "=?",
-                                new String[]{Utility.getInstance().getSqliteDate(
-                                        Utility.getInstance()
-                                                .getTimeInMillis(date))},
-                                null);
-                if (targetCursor.getCount() > 0) {
-                    targetCursor.moveToFirst();
-                    target = targetCursor.getDouble(0);
-
-                } else {
-                    targetCursor = getActivity().getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
-                            new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                            new String[]{Utility.getInstance().getToday() + ""}, null);
-                    targetCursor.moveToFirst();
-                    target = targetCursor.getDouble(0);
-                    targetCursor.close();
-                }
-
+                target = HydrateDAO.getInstance().getTargetForDay(getContext(), DateUtil.getInstance().getTimeFromDate(date));
             }
+
             if (metric.equals(milliliter)) {
                 target /= 1000;
                 target *= 100;
@@ -999,7 +1026,6 @@ public class MainActivity extends AppCompatActivity
             } else {
                 target = Math.round(target);
                 dailyTarget = String.valueOf((int) target);
-
             }
             targetTextView.setText(dailyTarget);
 
@@ -1012,20 +1038,18 @@ public class MainActivity extends AppCompatActivity
                 quantityConsumed = Math.round(quantityConsumed);
                 quantityConsumed /= 100;
                 textView.setText(String.valueOf(quantityConsumed));
-                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             } else {
                 quantityConsumed = Math.round(quantityConsumed);
                 textView.setText(String.valueOf((int) quantityConsumed));
-                setProgressIndicators(textView, quantityConsumed, target, dateChanged);
             }
 
+            setProgressIndicators(quantityConsumed, target, dateChanged);
             // Set water cup count
             textView = (TextView) getActivity().findViewById(R.id.water_status);
             textView.setText(String.valueOf(count));
-
         }
 
-        private void setProgressIndicators(TextView textView, double consumed,
+        private void setProgressIndicators(double consumed,
                                            double target, boolean dateChanged) {
             int color = -1;
             if (consumed < (target * .75)) {

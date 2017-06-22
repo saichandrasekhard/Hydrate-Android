@@ -13,8 +13,8 @@ import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.receiver.AlarmReceiver;
+import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
-import com.underdog.hydrate.util.Utility;
 
 public class NotificationActionService extends IntentService {
 
@@ -47,7 +47,7 @@ public class NotificationActionService extends IntentService {
                     HydrateContentProvider.CONTENT_URI_HYDRATE_LOGS,
                     new String[]{HydrateDatabase.SUM_QUANTITY},
                     HydrateDatabase.FROM_TO_TIME,
-                    Utility.getInstance().getSelectionArgsForDay(System
+                    DateUtil.getInstance().getSelectionArgsForDay(System
                             .currentTimeMillis()), null);
 
             if (cursor.getCount() > 0) {
@@ -68,10 +68,10 @@ public class NotificationActionService extends IntentService {
                         getString(R.string.key_glass_quantity),
                         getString(R.string.default_glass_us_oz)));
             }
-            HydrateDAO.getHydrateDAO().addDefaultWater(this);
+            HydrateDAO.getInstance().addDefaultWater(this);
             Cursor targetCursor = getContentResolver().query(HydrateContentProvider.CONTENT_URI_HYDRATE_DAILY_SCHEDULE,
                     new String[]{HydrateDatabase.COLUMN_TARGET_QUANTITY}, HydrateDatabase.DAY + "=?",
-                    new String[]{Utility.getInstance().getToday() + ""}, null);
+                    new String[]{DateUtil.getInstance().getToday() + ""}, null);
             targetCursor.moveToFirst();
             target = targetCursor.getDouble(0);
 

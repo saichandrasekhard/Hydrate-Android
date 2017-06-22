@@ -13,8 +13,8 @@ import com.underdog.hydrate.util.Log;
 
 public class HydrateDatabase extends SQLiteOpenHelper {
 
+    public static final String LIMIT="limit";
     // Columns
-
     public static final String COLUMN_TIMESTAMP = "timestamp";
     public static final String COLUMN_QUANTITY = "quantity";
     // Columns for List View population
