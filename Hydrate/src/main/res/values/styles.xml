@@ -1,20 +1,12 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
-
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="colorPrimaryDark">@color/secondary</item>
+        <item name="android:textColorSecondary">@color/primary</item>
     </style>
 
     <style name="AppBaseTheme.NoActionBar">
@@ -25,5 +17,62 @@
     <style name="AppBaseTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppBaseTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="customAlert" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="settingsScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/secondary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:textColorSecondary">@color/primary</item>
+    </style>
+
+    <style name="MyActionBar" parent="@android:style/Widget.Material.Light.ActionBar.Solid">
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="ThreeButtonDialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/NeutralButtonStyle</item>
+        <!--<item name="android:windowAnimationStyle">@style/DialogAnimation</item>-->
+        <item name="android:colorAccent">@color/primary</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="NeutralButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/danger</item>
+    </style>
+
+    <color name="grey">#F2F2F2</color>
+    <color name="white">#ffff</color>
+    <color name="primary">#0e8bd3</color>
+    <!--<color name="primary">#3684e2</color>-->
+    <color name="secondary">#0e8bd3</color>
+    <!--<color name="secondary">#3684e2</color>-->
+
+    <color name="success">#74c90d</color>
+    <color name="safe">#f78025</color>
+    <color name="danger">#e5471b</color>
 
 </resources>

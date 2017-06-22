@@ -217,15 +217,11 @@ public class HydrateDAO {
      * Insert the target status
      */
     public void insertTargetStatus(Context context, long timestamp) {
-//        long timestamp = System.currentTimeMillis();
         double daysConsumption;
         double dailyTarget;
 
         ContentValues values;
 
-        // Subtract 24hours to make sure we are calculating for the same day
-        // since this method gets called at 11:59:59 PM in inexact fashion
-//        timestamp -= 86400000l;
         daysConsumption = getDaysConstumption(context, timestamp);
         Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
