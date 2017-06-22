@@ -163,31 +163,6 @@
                 android:text="Sample" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/editCups"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@android:drawable/ic_menu_edit"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/sub_water"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="decreaseWater"
-            android:text="@string/sub_water"
-            android:textColor="@android:color/primary_text_light"
-            android:textSize="@dimen/add_water_button_dim"
-            android:visibility="gone" />
-
-        <Button
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_drink_water"
-            android:text="Sample"
-            android:textColor="@color/white"
-            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

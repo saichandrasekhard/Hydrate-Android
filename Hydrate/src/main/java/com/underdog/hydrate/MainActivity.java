@@ -394,17 +394,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Decrease the count of water based on button click.
-     * Not used
-     *
-     * @param view
-     */
-    public void decreaseWater(View view) {
-        HydrateDAO.getInstance().deleteWater(this);
-    }
-
-
-    /**
      * Requests the storage permission.
      * If the permission has been denied previously, a SnackBar will prompt the user to grant the
      * permission, otherwise it is requested directly.
