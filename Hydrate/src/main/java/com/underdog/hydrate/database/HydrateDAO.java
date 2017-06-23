@@ -217,15 +217,11 @@ public class HydrateDAO {
      * Insert the target status
      */
     public void insertTargetStatus(Context context, long timestamp) {
-//        long timestamp = System.currentTimeMillis();
         double daysConsumption;
         double dailyTarget;
 
         ContentValues values;
 
-        // Subtract 24hours to make sure we are calculating for the same day
-        // since this method gets called at 11:59:59 PM in inexact fashion
-//        timestamp -= 86400000l;
         daysConsumption = getDaysConstumption(context, timestamp);
         Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
@@ -273,9 +269,12 @@ public class HydrateDAO {
     public void syncTargets(Context context) {
         String lastEntryDate = getLastTargetTableEntry(context);
         String todaysDate = DateUtil.getInstance().getSqliteDate(System.currentTimeMillis());
-
-        long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
         long todayDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(todaysDate);
+        if (lastEntryDate == null) {
+            insertTargetStatus(context, todayDateInMillis);
+            lastEntryDate=todaysDate;
+        }
+        long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
         if (lastEntryDate.equals(todaysDate)) {
             // Already entry made, just update consumed status for today
             updateTargetStatus(context, todayDateInMillis);
@@ -298,10 +297,11 @@ public class HydrateDAO {
         String date = null;
         Uri uri = HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET.buildUpon().appendQueryParameter(HydrateDatabase.LIMIT, "1").build();
         Cursor cursor = context.getContentResolver().query(uri, new String[]{HydrateDatabase.COLUMN_DATE}, null, null, " target_id DESC ");
-        cursor.moveToFirst();
-        date = cursor.getString(0);
-        Log.d(TAG, "date - " + date);
-        cursor.close();
+        if (cursor.moveToFirst()) {
+            date = cursor.getString(0);
+            Log.d(TAG, "date - " + date);
+            cursor.close();
+        }
         return date;
     }
 
