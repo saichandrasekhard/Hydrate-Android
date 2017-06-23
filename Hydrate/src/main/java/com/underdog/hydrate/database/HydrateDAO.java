@@ -295,6 +295,7 @@ public class HydrateDAO {
         Uri uri = HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET.buildUpon().appendQueryParameter(HydrateDatabase.LIMIT, "1").build();
         Cursor cursor = context.getContentResolver().query(uri, new String[]{HydrateDatabase.COLUMN_DATE}, null, null, " target_id DESC ");
         cursor.moveToFirst();
+        Log.i(TAG,"cursor - "+cursor.getCount()+":::"+cursor.getColumnCount());
         date = cursor.getString(0);
         Log.d(TAG, "date - " + date);
         cursor.close();

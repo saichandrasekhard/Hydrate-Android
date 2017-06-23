@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+
 public class ChartsActivity extends AppCompatActivity {
 
     @Override
@@ -30,6 +33,9 @@ public class ChartsActivity extends AppCompatActivity {
         public void onActivityCreated(@Nullable Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
+            BarChart barChart = (BarChart) getActivity().findViewById(R.id.barChart);
+            BarData barData=new BarData();
+            barChart.setData(null);
         }
     }
 }
