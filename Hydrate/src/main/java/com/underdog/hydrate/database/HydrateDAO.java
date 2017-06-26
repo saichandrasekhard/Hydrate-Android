@@ -217,11 +217,15 @@ public class HydrateDAO {
      * Insert the target status
      */
     public void insertTargetStatus(Context context, long timestamp) {
+//        long timestamp = System.currentTimeMillis();
         double daysConsumption;
         double dailyTarget;
 
         ContentValues values;
 
+        // Subtract 24hours to make sure we are calculating for the same day
+        // since this method gets called at 11:59:59 PM in inexact fashion
+//        timestamp -= 86400000l;
         daysConsumption = getDaysConstumption(context, timestamp);
         Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
@@ -294,11 +298,11 @@ public class HydrateDAO {
         String date = null;
         Uri uri = HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET.buildUpon().appendQueryParameter(HydrateDatabase.LIMIT, "1").build();
         Cursor cursor = context.getContentResolver().query(uri, new String[]{HydrateDatabase.COLUMN_DATE}, null, null, " target_id DESC ");
-        cursor.moveToFirst();
-        Log.i(TAG,"cursor - "+cursor.getCount()+":::"+cursor.getColumnCount());
-        date = cursor.getString(0);
-        Log.d(TAG, "date - " + date);
-        cursor.close();
+        if (cursor.moveToFirst()) {
+            date = cursor.getString(0);
+            Log.d(TAG, "date - " + date);
+            cursor.close();
+        }
         return date;
     }
 
