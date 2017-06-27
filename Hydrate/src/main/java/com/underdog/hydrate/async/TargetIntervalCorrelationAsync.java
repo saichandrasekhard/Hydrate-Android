@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.SettingsActivity;
 import com.underdog.hydrate.database.HydrateContentProvider;
+import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
 import com.underdog.hydrate.preference.TargetQuantityEditTextPreference;
 import com.underdog.hydrate.preference.TimePreference;
@@ -105,7 +106,7 @@ public class TargetIntervalCorrelationAsync extends AsyncTask {
                 }
             });
         }
-
+        HydrateDAO.getInstance().syncTargets(activity);
         return null;
     }
 

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.underdog.hydrate"
     android:versionCode="21"
-    android:versionName="2.3">
+    android:versionName="2.2.1">
 
     <!-- Normal permissions -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
