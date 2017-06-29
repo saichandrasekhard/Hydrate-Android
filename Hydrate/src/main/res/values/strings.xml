@@ -259,7 +259,7 @@
 
     <!-- Default values independent of language -->
     <string name="default_instant_mute">0</string>
-    <string name="version_name">2.2.1</string>
+    <string name="version_name">2.2.2</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
