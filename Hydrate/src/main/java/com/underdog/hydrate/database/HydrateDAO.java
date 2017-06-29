@@ -225,7 +225,7 @@ public class HydrateDAO {
         daysConsumption = getDaysConstumption(context, timestamp);
         Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
-        dailyTarget = getTargetForDay(context, timestamp);
+        dailyTarget = getTargetFromDS(context, timestamp);
 
         values = new ContentValues();
         if (daysConsumption >= dailyTarget) {
@@ -241,7 +241,7 @@ public class HydrateDAO {
                 HydrateContentProvider.CONTENT_URI_HYDRATE_TARGET, values);
     }
 
-    public void updateTargetStatus(Context context, long timestamp) {
+    public void updateTargetStatus(Context context, long timestamp, boolean targetFromDS) {
         double daysConsumption;
         double dailyTarget;
 
@@ -250,7 +250,10 @@ public class HydrateDAO {
         daysConsumption = getDaysConstumption(context, timestamp);
         Log.d(this.getClass().toString(), "consumption - " + daysConsumption);
 
-        dailyTarget = getTargetForDay(context, timestamp);
+        if (targetFromDS)
+            dailyTarget = getTargetFromDS(context, timestamp);
+        else
+            dailyTarget = getTargetFromTargetTable(context, timestamp);
 
         values = new ContentValues();
         if (daysConsumption >= dailyTarget) {
@@ -272,17 +275,17 @@ public class HydrateDAO {
         long todayDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(todaysDate);
         if (lastEntryDate == null) {
             insertTargetStatus(context, todayDateInMillis);
-            lastEntryDate=todaysDate;
+            lastEntryDate = todaysDate;
         }
         long lastEntryDateInMillis = DateUtil.getInstance().getTimeFromSqliteDate(lastEntryDate);
         if (lastEntryDate.equals(todaysDate)) {
             // Already entry made, just update consumed status for today
-            updateTargetStatus(context, todayDateInMillis);
+            updateTargetStatus(context, todayDateInMillis, true);
         } else {
             // Starting from the lastEntryDate+1, keep making entries in target table for each day until today
             long startAt = lastEntryDateInMillis;
-            //Always update the entry of lastEntryDate
-            updateTargetStatus(context, startAt);
+            // Always update the entry of lastEntryDate
+            updateTargetStatus(context, startAt, false);
 
             startAt += Constants.DAY_HOURS_LONG;
             while (startAt <= todayDateInMillis) {

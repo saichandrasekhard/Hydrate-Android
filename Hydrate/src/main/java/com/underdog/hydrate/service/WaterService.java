@@ -35,7 +35,7 @@ public class WaterService {
             HydrateDAO.getInstance().addWater(DateUtil.getInstance().getThisTimeThatDay(date), quantity, context);
 
             //Update Target table if water is added to past dates
-            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date));
+            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date),false);
         }
     }
 
@@ -45,7 +45,7 @@ public class WaterService {
                 timestamp, quantity, context);
         if (!DateUtil.getInstance().isToday(date)) {
             //Update Target table if water is modified in past dates
-            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date));
+            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date),false);
         }
     }
 
@@ -53,7 +53,7 @@ public class WaterService {
         HydrateDAO.getInstance().deleteWaterById(rowId, context);
         if (!DateUtil.getInstance().isToday(date)) {
             //Update Target table if water is deleted in past dates
-            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date));
+            HydrateDAO.getInstance().updateTargetStatus(context, DateUtil.getInstance().getTimeFromDate(date),false);
         }
     }
 

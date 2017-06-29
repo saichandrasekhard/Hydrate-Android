@@ -282,7 +282,11 @@ public class MainActivity extends AppCompatActivity
                 } else if (id == R.id.nav_settings) {
                     intent = new Intent(getApplicationContext(), SettingsActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_love) {
+//                } else if (id == R.id.nav_charts) {
+//                    intent = new Intent(getApplicationContext(), ChartsActivity.class);
+//                    startActivity(intent);
+                }
+                else if (id == R.id.nav_love) {
                     intent = new Intent(Intent.ACTION_VIEW, Uri
                             .parse("https://play.google.com/store/apps/details?id="
                                     + getPackageName()));
@@ -392,17 +396,6 @@ public class MainActivity extends AppCompatActivity
             getAlarmReceiver().setNextAlarm(this);
         }
     }
-
-    /**
-     * Decrease the count of water based on button click.
-     * Not used
-     *
-     * @param view
-     */
-    public void decreaseWater(View view) {
-        HydrateDAO.getInstance().deleteWater(this);
-    }
-
 
     /**
      * Requests the storage permission.
