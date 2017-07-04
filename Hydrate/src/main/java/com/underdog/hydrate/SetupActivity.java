@@ -72,7 +72,7 @@ public class SetupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString() == null || s.toString().isEmpty()) {
+                if (s.toString().isEmpty()) {
                     save.setEnabled(false);
                     save.animate().alpha(0.6f);
                 } else {
@@ -84,20 +84,23 @@ public class SetupActivity extends AppCompatActivity {
         });
 
 
-        startTime = (Button)
-
-                findViewById(R.id.setupStartTimeEdit);
+        startTime = (Button) findViewById(R.id.setupStartTimeEdit);
         startTime.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
             public void onClick(View v) {
+                String target = targetEdit.getText().toString();
+                if (target.isEmpty()) {
+                    Toast.makeText(SetupActivity.this, R.string.target_not_null, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String value = startTime.getText().toString();
                 int[] hoursMins = DateUtil.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        startTime.setText(hourOfDay + ":" + minute);
+                        startTime.setText((hourOfDay > 9 ? hourOfDay : ("0" + hourOfDay)) + ":" + (minute > 9 ? minute : ("0" + minute)));
                         setInterval();
                     }
                 }, hoursMins[0], hoursMins[1], true);
@@ -105,20 +108,23 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        endTime = (Button)
-
-                findViewById(R.id.setupEndTimeEdit);
+        endTime = (Button) findViewById(R.id.setupEndTimeEdit);
         endTime.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
             public void onClick(View v) {
+                String target = targetEdit.getText().toString();
+                if (target.isEmpty()) {
+                    Toast.makeText(SetupActivity.this, R.string.target_not_null, Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String value = endTime.getText().toString();
                 int[] hoursMins = DateUtil.getInstance().getHoursAndMins(value);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(SetupActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        endTime.setText(hourOfDay + ":" + minute);
+                        endTime.setText((hourOfDay > 9 ? hourOfDay : ("0" + hourOfDay)) + ":" + (minute > 9 ? minute : ("0" + minute)));
                         setInterval();
                     }
                 }, hoursMins[0], hoursMins[1], true);

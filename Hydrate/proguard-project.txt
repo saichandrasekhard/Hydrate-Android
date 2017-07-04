@@ -35,6 +35,9 @@
     public static final ** CREATOR;
 }
 
+-renamesourcefileattribute MyApplication
+-keepattributes SourceFile,LineNumberTable
+
 -printmapping build/outputs/mapping/release/mapping.txt
 
 #Added after updating to 23
