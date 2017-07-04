@@ -242,7 +242,7 @@
 
     <!-- Setup Activity -->
     <string name="setup_tell_us_about_you">To help us serve you better, please fill in the following details. You can change them any time in future from Settings</string>
-    <!--<string name=""-->
+    <string name="target_not_null">Target can\'t be empty</string>
     <string name="interval_in_settings">You can customize the interval in Settings after initial setup</string>
     <string name="interval_set_toast">Interval set to </string>
     <string name="skip">Skip</string>
