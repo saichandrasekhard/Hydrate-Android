@@ -118,11 +118,11 @@ public class Utility {
                         + "\n"
                         + context.getString(R.string.checkout));
         intent.putExtra(Intent.EXTRA_SUBJECT, "Hydrate");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             context.startActivity(
                     Intent.createChooser(intent, context
-                            .getString(R.string.select_app)));
+                            .getString(R.string.select_app)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         } catch (android.content.ActivityNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -135,6 +135,6 @@ public class Utility {
         emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(
                 Intent.createChooser(emailIntent, context
-                        .getString(R.string.select_app)));
+                        .getString(R.string.select_app)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
