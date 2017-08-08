@@ -246,7 +246,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(final MenuItem item) {
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
@@ -285,8 +284,7 @@ public class MainActivity extends AppCompatActivity
 //                } else if (id == R.id.nav_charts) {
 //                    intent = new Intent(getApplicationContext(), ChartsActivity.class);
 //                    startActivity(intent);
-                }
-                else if (id == R.id.nav_love) {
+                } else if (id == R.id.nav_love) {
                     intent = new Intent(Intent.ACTION_VIEW, Uri
                             .parse("https://play.google.com/store/apps/details?id="
                                     + getPackageName()));
@@ -323,6 +321,12 @@ public class MainActivity extends AppCompatActivity
 
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.waterdrop);
         mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
+        });
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
