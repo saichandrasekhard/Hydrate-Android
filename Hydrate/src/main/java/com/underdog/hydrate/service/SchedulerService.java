@@ -56,8 +56,8 @@ public class SchedulerService extends IntentService {
             backupAndRestore.backupDBToSD();
         }
 
-        // Release the wake lock provided by the BroadcastReceiver.
-        AlarmReceiver.completeWakefulIntent(intent);
+//        // Release the wake lock provided by the BroadcastReceiver.
+//        AlarmReceiver.completeWakefulIntent(intent);
     }
 
 }

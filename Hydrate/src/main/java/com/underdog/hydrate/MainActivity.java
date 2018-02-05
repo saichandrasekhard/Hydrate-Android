@@ -1,10 +1,12 @@
 package com.underdog.hydrate;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,8 +15,10 @@ import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -92,6 +96,23 @@ public class MainActivity extends AppCompatActivity
         return alarmReceiver;
     }
 
+    @TargetApi(26)
+    private void createNotificationChannel(SharedPreferences preferences) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationChannel notificationChannel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL_ID,
+                getString(R.string.notification_channel_name), NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.setDescription(getString(R.string.notification_channel_description));
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.BLUE);
+
+        Uri ringtoneUri = Uri.parse(preferences.getString(getString(R.string.key_notification_sound), getString(R.string.default_notification_sound)));
+        notificationChannel.setSound(ringtoneUri, new AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                .build());
+        notificationManager.createNotificationChannel(notificationChannel);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +124,9 @@ public class MainActivity extends AppCompatActivity
             finish();
             return;
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            createNotificationChannel(preferences);
 
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

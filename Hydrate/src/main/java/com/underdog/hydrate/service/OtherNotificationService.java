@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.underdog.hydrate.BlankShareActivity;
 import com.underdog.hydrate.MainActivity;
@@ -57,11 +58,11 @@ public class OtherNotificationService extends IntentService {
 
             Uri ringtoneUri = Uri.parse(preferences.getString(getString(R.string.key_notification_sound), getString(R.string.default_notification_sound)));
 
-            builder = new NotificationCompat.Builder(this)
+            builder = new NotificationCompat.Builder(this, Constants.NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_stat_notify_goal)
                     .setContentTitle(getString(R.string.app_name))
                     .setContentText(notificationMessage)
-                    .setColor(getResources().getColor(R.color.white))
+                    .setColor(ContextCompat.getColor(getApplicationContext(), R.color.white))
                     .setAutoCancel(true)
                     .setSound(ringtoneUri)
                     .setContentIntent(mainActivityPendingIntent)

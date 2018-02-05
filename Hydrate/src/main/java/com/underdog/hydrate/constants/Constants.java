@@ -7,7 +7,7 @@ public class Constants {
     /**
      * Logs enabled or not
      */
-    public static final boolean debugLogs = false;
+    public static final boolean debugLogs = true;
     public static final String PACKAGE = "com.underdog.hydrate";
     public static final String CURRENT_DB_PATH = File.separator + "data"
             + File.separator + PACKAGE + File.separator + "databases"
@@ -98,4 +98,6 @@ public class Constants {
     public static final int REQUEST_WRITE_EXTERNAL_STARTUP = 0;
     public static final int REQUEST_WRITE_EXTERNAL_OVERFLOW = 1;
 
+    // Notification Channel related values
+    public static final String NOTIFICATION_CHANNEL_ID="hydrate_drink_notifications";
 }

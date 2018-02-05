@@ -1,21 +1,29 @@
 package com.underdog.hydrate.receiver;
 
+import android.Manifest;
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.support.v4.content.WakefulBroadcastReceiver;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 
+import com.underdog.hydrate.MainActivity;
 import com.underdog.hydrate.R;
 import com.underdog.hydrate.constants.Constants;
 import com.underdog.hydrate.database.HydrateContentProvider;
 import com.underdog.hydrate.database.HydrateDAO;
 import com.underdog.hydrate.database.HydrateDatabase;
-import com.underdog.hydrate.service.NotificationService;
-import com.underdog.hydrate.service.SchedulerService;
+import com.underdog.hydrate.service.NotificationActionService;
+import com.underdog.hydrate.util.BackupAndRestore;
 import com.underdog.hydrate.util.DateUtil;
 import com.underdog.hydrate.util.Log;
 
@@ -23,7 +31,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class AlarmReceiver extends WakefulBroadcastReceiver {
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String tag = "AlarmReceiver";
     private AlarmManager alarmManager;
@@ -45,20 +55,126 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                             context.getString(R.string.key_instant_mute), 0);
 
             if (instantMute < System.currentTimeMillis()) {
-
-                // Start a different wakeful service to trigger notifications
-                Intent notificationService = new Intent(context,
-                        NotificationService.class);
-                startWakefulService(context, notificationService);
+                serveNotification(context, intent);
             }
             setNextAlarm(context);
         } else {
-            Intent schedulerService = new Intent(context,
-                    SchedulerService.class);
+            performEodOperations(context);
+        }
+    }
 
-            // Start the service, keeping the device awake while it is
-            // launching.
-            startWakefulService(context, schedulerService);
+    private void serveNotification(Context context, Intent intent) {
+        Log.d(tag, "Serving notification");
+
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr;
+        String notificationMessage = context.getString(R.string.default_notification_message);
+        String userName;
+        SharedPreferences preferences;
+        String defaultUserName = context.getString(R.string.user_name_default);
+        Intent resultIntent;
+        PendingIntent pendingIntent;
+        Intent drinkIntent;
+        Intent snoozeIntent;
+        String quantity;
+        String metric;
+        String milliliter;
+
+        preferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        milliliter = context.getString(R.string.milliliter);
+        userName = preferences.getString(context.getString(R.string.key_user_name),
+                null);
+        metric = preferences.getString(context.getString(R.string.key_metric),
+                milliliter);
+
+        if (metric.equals(milliliter)) {
+            quantity = preferences.getString(
+                    context.getString(R.string.key_glass_quantity), "250")
+                    + " "
+                    + context.getString(R.string.ml);
+        } else {
+            quantity = preferences.getString(
+                    context.getString(R.string.key_glass_quantity), "8.45")
+                    + " "
+                    + context.getString(R.string.oz);
+
+        }
+
+        if (userName != null) {
+            notificationMessage = notificationMessage.replace(defaultUserName,
+                    userName);
+        }
+
+        resultIntent = new Intent(context, MainActivity.class);
+        pendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Set up snooze and drink events
+        drinkIntent = new Intent(context, NotificationActionService.class);
+        drinkIntent.setAction(Constants.NOTIFICATION_ACTION_DRINK);
+        PendingIntent piDismiss = PendingIntent.getService(context, 0,
+                drinkIntent, 0);
+
+        snoozeIntent = new Intent(context, NotificationActionService.class);
+        snoozeIntent.setAction(Constants.NOTIFICATION_ACTION_SNOOZE);
+        PendingIntent piSnooze = PendingIntent.getService(context, 0,
+                snoozeIntent, 0);
+
+        Uri ringtoneUri = Uri.parse(preferences.getString(context.getString(R.string.key_notification_sound), context.getString(R.string.default_notification_sound)));
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                context, Constants.NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_notify_glass)
+                .setColor(ContextCompat.getColor(context, R.color.primary))
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(notificationMessage)
+                .setAutoCancel(true)
+                .setSound(ringtoneUri)
+                .addAction(R.drawable.ic_stat_notify_glass,
+                        quantity, piDismiss)
+                .addAction(R.drawable.ic_statusbar_remind_later,
+                        context.getString(R.string.remind_later), piSnooze);
+        mBuilder.setContentIntent(pendingIntent);
+
+        // Gets an instance of the NotificationManager service
+        mNotifyMgr = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(Constants.NOTIFICATION_ID, mBuilder.build());
+    }
+
+    private void performEodOperations(Context context) {
+        SharedPreferences preferences;
+        AlarmReceiver alarmReceiver;
+        boolean reminders;
+        boolean autoBackup;
+        BackupAndRestore backupAndRestore;
+
+        Log.d(tag, "Serving the reset intent");
+
+        // 1.Reset reminder alarm to start time
+        preferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        reminders = preferences.getBoolean(
+                context.getString(R.string.key_reminders_status), false);
+        if (reminders) {
+            alarmReceiver = new AlarmReceiver();
+            alarmReceiver.setNextAlarm(context);
+        }
+
+        // Add entry for daily target consumption
+        HydrateDAO.getInstance().syncTargets(context);
+
+        // Auto backup to SD Card
+        autoBackup = preferences.getBoolean(
+                context.getString(R.string.key_auto_backup), false);
+        if (autoBackup && ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+            backupAndRestore = new BackupAndRestore(context);
+            backupAndRestore.backUpSettingsToSD();
+            backupAndRestore.backupDBToSD();
         }
     }
 
