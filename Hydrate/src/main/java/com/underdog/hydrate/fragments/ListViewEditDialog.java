@@ -3,6 +3,7 @@ package com.underdog.hydrate.fragments;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
@@ -84,8 +85,13 @@ public class ListViewEditDialog extends DialogFragment {
 
         // Set time
         timePicker = (TimePicker) view.findViewById(R.id.editTime);
-        timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-        timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            timePicker.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+            timePicker.setMinute(calendar.get(Calendar.MINUTE));
+        } else {
+            timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+            timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+        }
 
         builder.setPositiveButton(R.string.update,
                 new DialogInterface.OnClickListener() {
@@ -103,10 +109,17 @@ public class ListViewEditDialog extends DialogFragment {
                         quantity = editQuantity.getValue();
 
                         // Get the updated Time
-                        calendar.set(Calendar.HOUR_OF_DAY,
-                                timePicker.getCurrentHour());
-                        calendar.set(Calendar.MINUTE,
-                                timePicker.getCurrentMinute());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            calendar.set(Calendar.HOUR_OF_DAY,
+                                    timePicker.getHour());
+                            calendar.set(Calendar.MINUTE,
+                                    timePicker.getMinute());
+                        } else {
+                            calendar.set(Calendar.HOUR_OF_DAY,
+                                    timePicker.getCurrentHour());
+                            calendar.set(Calendar.MINUTE,
+                                    timePicker.getCurrentMinute());
+                        }
 
                         // Use the calendar object as input along with
                         // quantity to update the DB
@@ -117,15 +130,15 @@ public class ListViewEditDialog extends DialogFragment {
                     }
                 });
 
-        builder.setNegativeButton(R.string.cancel,
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface,
-                                        int arg1) {
-                        dialogInterface.cancel();
-                    }
-                });
+//        builder.setNegativeButton(R.string.cancel,
+//                new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface,
+//                                        int arg1) {
+//                        dialogInterface.cancel();
+//                    }
+//                });
 
         builder.setNeutralButton(R.string.delete,
                 new DialogInterface.OnClickListener() {
