@@ -1,0 +1,58 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_love_primary"
+        android:shortcutDisabledMessage="@string/rate_us"
+        android:shortcutId="RateUs"
+        android:shortcutLongLabel="@string/rate_us"
+        android:shortcutShortLabel="@string/rate_us"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://play.google.com/store/apps/details?id=com.underdog.hydrate" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_settings_primary"
+        android:shortcutDisabledMessage="@string/title_activity_settings"
+        android:shortcutId="Settings"
+        android:shortcutLongLabel="@string/title_activity_settings"
+        android:shortcutShortLabel="@string/title_activity_settings"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.underdog.hydrate.MainActivity"
+            android:targetPackage="com.underdog.hydrate" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.underdog.hydrate.SettingsActivity"
+            android:targetPackage="com.underdog.hydrate" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_graph_primary"
+        android:shortcutDisabledMessage="@string/title_activity_summary"
+        android:shortcutId="Trends"
+        android:shortcutLongLabel="@string/title_activity_summary"
+        android:shortcutShortLabel="@string/title_activity_summary"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.underdog.hydrate.MainActivity"
+            android:targetPackage="com.underdog.hydrate" />
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.underdog.hydrate.SummaryActivity"
+            android:targetPackage="com.underdog.hydrate" />
+        <!-- If your shortcut is associated with multiple intents, include them
+             here. The last intent in the list determines what the user sees when
+             they launch this shortcut. -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
